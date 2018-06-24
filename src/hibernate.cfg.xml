@@ -1,0 +1,30 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	
+	<session-factory name="foo">
+		
+		
+	<!-- 1.数据库的连接属性 -->
+		<!-- 数据库驱动 -->
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<!-- 数据库的url -->
+		<property name="hibernate.connection.url">jdbc:mysql:///db_bbs?useUnicode=true&amp;characterEncoding=utf8</property>
+		<!-- 数据库用户名 -->
+		<property name="hibernate.connection.username">root</property>
+		<!-- 数据库的密码 -->
+		<property name="hibernate.connection.password">7758258</property>
+		
+	<!-- 2.数据库的方言：hibernate会把hql语句翻译成指定数据库支持的sql语句 -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+	
+	<!-- 自动创建表 -->	
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		
+		<property name="show_sql">true</property>
+		
+
+	</session-factory>
+</hibernate-configuration>
