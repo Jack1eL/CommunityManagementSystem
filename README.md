@@ -1,39 +1,91 @@
 # 社团管理系统
 
 #### 项目介绍
-{**以下是码云平台说明，您可以替换为您的项目简介**
-码云是开源中国推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用码云实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+本系统是针对大学生社团群体组织活动的管理系统，适用于各大高校的社团组织。
 
-#### 软件架构
-软件架构说明
+#### 需求说明
+##### 1.管理员操作:  
+（1）增加社团：增加社团时需指定社长和副社长。  
+（2）删除社团：删除社团时级联删除关联的内容。  
+（3）修改社团：修改社团的社长。  
+（4）查看所有社团：需要分页、模糊查询功能。  
+（5）查看审核列表：需要分页。  
+（6）审核申请社团：通过后进入增加社团页面，增加这个社团。  
+（7）查询所有用户：针对不同的社团可进行模糊查询。  
+
+##### 2.社长操作:  
+（1）发布社团活动：在相应的社团发布社团活动。（我们在申请一个社团的时候，可以设一个值，首先我们0为未经过审核的）  
+（2）添加组。  
+（3）修改社团内每组成员上限：例如把某组的人员上限从10改为15。  
+（4）调度社团成员到不同组：例如把某社团成员的组号从1组改为2组。  
+（5）任命组长。  
+（6）个人信息  
+
+##### 3.组长操作：  
+（1）发布活动签到表  
+（2）个人信息  
+
+##### 4.普通学生操作:  
+（1）参加社团活动  
+（2）签到  
+（3）请假  
+（4）个人信息  
 
 
-#### 安装教程
+#### 数据表设计
+##### 管理员表(admin)
+|adminId(PK)|username|password|
+|:---:|:---:|:---:|
+|1|admin|admin|
 
-1. xxxx
-2. xxxx
-3. xxxx
+##### 学生表(student)
+|studentId(PK)|username|password|positionId(FK)|associationId(FK)|
+|:---:|:---:|:---:|:---:|:---:|
+|1|T2016209101|123456|1|1|
+|2|T2016209102|123456|1|2|
 
-#### 使用说明
+##### 社团职位表(association-position)
+|positionId(PK)|positionName|
+|:---:|:---:|
+|1|社长|
+|2|副社长|
+|3|组长|
+|4|普通成员|
 
-1. xxxx
-2. xxxx
-3. xxxx
+##### 学生信息表(student-info)
+|studentId(FK)|name|sex|borndate|address|phone|classid(FK)|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|1|XXX|男|1999-09-09|江西省XX市XX县|139XXXXXXXX|1|
+|2|XXX|男|1999-09-09|江西省XX市XX县|137XXXXXXXX|1|
 
-#### 参与贡献
+##### 系表(department)
+|deptId(PK)|deptName|
+|:-:|:-:|
+|1|信息工程系|
+|2|机电工程系|
 
-1. Fork 本项目
-2. 新建 Feat_xxx 分支
-3. 提交代码
-4. 新建 Pull Request
+##### 专业表(major)
+|majorId(PK)|majorName|deptId(FK)|
+|:-:|:-:|:-:|
+|1|软件技术|1|
+|2|物联网应用技术|1|
+
+##### 班级表(class)
+|classId(PK)|classNumber|grade|majorId(FK)|
+|:-:|:-:|:-:|:-:|
+|1|1|2016|1|
+|2|2|2016|1|
+
+##### 社团表(association)
+|associationId(PK)|name|
+|:-:|:-:|
+|1|篮球社|
+|2|足球社|
+
+##### 社团活动表(association-activity)
+|activityId(PK)|activityName|activityDate|associationId(FK)|
+|:-:|:-:|:-:|:-:|
+|1|篮球基本功训练|2018-06-24 18:30:00|1|
+|2|足球基本功训练|2018-07-22 19:00:00|2|
 
 
-#### 码云特技
-
-1. 使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2. 码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3. 你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4. [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5. 码云官方提供的使用手册 [http://git.mydoc.io/](http://git.mydoc.io/)
-6. 码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
