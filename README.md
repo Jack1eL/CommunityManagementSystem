@@ -45,18 +45,18 @@
 #### 数据表设计
 ##### 管理员表(admin)
 |adminId(PK)|username|password|
-|:---:|:---:|:---:|
+|:-:|:-:|:-:|
 |1|admin|admin|
 
 ##### 学生表(student)
 |studentId(PK)|username|password|positionId(FK)|associationId(FK)|
-|:---:|:---:|:---:|:---:|:---:|
+|:-:|:-:|:-:|:-:|:-:|
 |1|T2016209101|123456|1|1|
 |2|T2016209102|123456|1|2|
 
 ##### 社团职位表(association-position)
 |positionId(PK)|positionName|
-|:---:|:---:|
+|:-:|:-:|
 |1|社长|
 |2|副社长|
 |3|组长|
@@ -93,9 +93,9 @@
 |2|足球社|足球社是你最想要的运动天地！|
 
 ##### 社团篮子(association-basket)
-|workId(PK)|associationId(FK)|title|explain|||
+|workId(PK)|associationId(FK)|title|explain|sourceFile|studentId(FK)|
 |:-:|:-:|:-:|:-:|:-:|:-:|
-|||||||
+|1|1|2018-9-15一组VS二组篮球赛|这场比赛非常精彩|video/XXX.mp4|1|
 
 
 ##### 社团活动表(association-activity)
