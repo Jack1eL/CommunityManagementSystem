@@ -49,10 +49,10 @@
 |1|admin|admin|
 
 ##### 学生表(student)
-|studentId(PK)|username|password|positionId(FK)|associationId(FK)|
-|:-:|:-:|:-:|:-:|:-:|
-|1|T2016209101|123456|1|1|
-|2|T2016209102|123456|1|2|
+|studentId(PK)|username|password|positionId(FK)|associationId(FK)|groupId(FK)|
+|:-:|:-:|:-:|:-:|:-:|:-:|
+|1|T2016209101|123456|1|1|1|
+|2|T2016209102|123456|1|2|3|
 
 ##### 社团职位表(association-position)
 |positionId(PK)|positionName|
@@ -91,6 +91,14 @@
 |:-:|:-:|:-:|
 |1|篮球社|欢迎来到篮球社这个大家庭！|
 |2|足球社|足球社是你最想要的运动天地！|
+
+##### 社团分组表(association-group)
+|groupId(PK)|associationId(FK)|groupNumber|
+|:-:|:-:|:-:|
+|1|1|1|
+|2|1|1|
+|3|2|1|
+
 
 ##### 社团篮子(association-basket)
 |workId(PK)|associationId(FK)|title|explain|sourceFile|studentId(FK)|
