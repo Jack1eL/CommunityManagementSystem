@@ -1,4 +1,4 @@
-package com.peterpig.bean;
+package com.peterpig.cms.bean;
 /**
  * 审核状态
  * @author Evan

@@ -1,4 +1,4 @@
-package com.peterpig.bean;
+package com.peterpig.cms.bean;
 /**
  * 社团篮子
  * @author Evan

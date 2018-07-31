@@ -1,4 +1,4 @@
-package com.peterpig.testini;
+package com.peterpig.cms.testini;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -6,11 +6,11 @@ import java.text.SimpleDateFormat;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.peterpig.bean.AssociationActivity;
-import com.peterpig.bean.SignIn;
-import com.peterpig.bean.SignInType;
-import com.peterpig.bean.Student;
-import com.peterpig.util.HibernateUtils;
+import com.peterpig.cms.bean.AssociationActivity;
+import com.peterpig.cms.bean.SignIn;
+import com.peterpig.cms.bean.SignInType;
+import com.peterpig.cms.bean.Student;
+import com.peterpig.cms.util.HibernateUtils;
 
 public class TT {
 	public static void main(String[] args) {

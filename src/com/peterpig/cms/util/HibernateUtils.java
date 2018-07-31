@@ -1,4 +1,4 @@
-package com.peterpig.util;
+package com.peterpig.cms.util;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

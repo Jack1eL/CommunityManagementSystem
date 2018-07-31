@@ -1,4 +1,4 @@
-package com.peterpig.bean;
+package com.peterpig.cms.bean;
 
 import java.util.HashSet;
 import java.util.Set;
