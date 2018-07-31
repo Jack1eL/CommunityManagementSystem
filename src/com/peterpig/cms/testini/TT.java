@@ -1,15 +1,11 @@
 package com.peterpig.cms.testini;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.peterpig.cms.bean.AssociationActivity;
-import com.peterpig.cms.bean.SignIn;
-import com.peterpig.cms.bean.SignInType;
-import com.peterpig.cms.bean.Student;
+import com.peterpig.cms.bean.Classes;
+import com.peterpig.cms.bean.Department;
+import com.peterpig.cms.bean.Major;
 import com.peterpig.cms.util.HibernateUtils;
 
 public class TT {
@@ -17,13 +13,13 @@ public class TT {
 		Session session=HibernateUtils.openSession();
 		Transaction ts=session.beginTransaction();
 		try {
-//			Department d=(Department) session.get(Department.class, 1);
-//			
-//			for(Major m:d.getMajors()){
-//				for(Classes c:m.getClasses()){
-//					System.out.println(m.getGrade()+"级"+m.getMajorName()+c.getClassNumber()+"班");
-//				}
-//			}
+			Department d=(Department) session.get(Department.class, 1);
+			
+			for(Major m:d.getMajors()){
+				for(Classes c:m.getClasses()){
+					System.out.println(m.getGrade()+"级"+m.getMajorName()+c.getClassNumber()+"班");
+				}
+			}
 			
 //			Association a=(Association) session.get(Association.class, 1);
 //			AuditStatus status=(AuditStatus) session.get(AuditStatus.class, 1);
