@@ -1,4 +1,6 @@
 <?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!--
   ~ Hibernate, Relational Persistence for Idiomatic Java
   ~
@@ -22,22 +24,18 @@
   ~ 51 Franklin Street, Fifth Floor
   ~ Boston, MA  02110-1301  USA
   -->
-<!DOCTYPE hibernate-mapping PUBLIC
-	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-
-<hibernate-mapping package="com.peterpig.bean">
-	
-	<class name="AssociationBasket" table="association_basket">
-		<id name="workId" column="work_id">
-			<generator class="native"/>
-		</id>
-		<many-to-one name="association" column="association_id" class="Association" />
-		<property name="title" column="title" type="string" length="20" />
-		<property name="explains" column="explains" type="string" length="200" />
-		<property name="sourceFile" column="source_file" type="string" length="200" />
-		<many-to-one name="student" column="student_id" class="Student" />
-	</class>
-
-
+<hibernate-mapping package="com.peterpig.cms.bean">
+ <class name="AssociationBasket" table="association_basket">
+  <id column="work_id" name="workId">
+   <generator class="native"/>
+  </id>
+  <many-to-one class="Association" column="association_id" name="association"/>
+  <property column="title" generated="never" lazy="false" length="20"
+   name="title" type="string"/>
+  <property column="explains" generated="never" lazy="false"
+   length="200" name="explains" type="string"/>
+  <property column="source_file" generated="never" lazy="false"
+   length="200" name="sourceFile" type="string"/>
+  <many-to-one class="Student" column="student_id" name="student"/>
+ </class>
 </hibernate-mapping>

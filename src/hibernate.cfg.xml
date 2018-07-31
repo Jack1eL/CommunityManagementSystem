@@ -25,20 +25,20 @@
 		
 		<property name="show_sql">true</property>
 		
-		<mapping resource="com/peterpig/bean/Admin.hbm.xml" />
-		<mapping resource="com/peterpig/bean/Association.hbm.xml" />
-		<mapping resource="com/peterpig/bean/AssociationActivity.hbm.xml" />
-		<mapping resource="com/peterpig/bean/AssociationBasket.hbm.xml" />
-		<mapping resource="com/peterpig/bean/AssociationGroup.hbm.xml" />
-		<mapping resource="com/peterpig/bean/AssociationPosition.hbm.xml" />
-		<mapping resource="com/peterpig/bean/AuditStatus.hbm.xml" />
-		<mapping resource="com/peterpig/bean/Classes.hbm.xml" />
-		<mapping resource="com/peterpig/bean/Department.hbm.xml" />
-		<mapping resource="com/peterpig/bean/Major.hbm.xml" />
-		<mapping resource="com/peterpig/bean/SignIn.hbm.xml" />
-		<mapping resource="com/peterpig/bean/SignInType.hbm.xml" />
-		<mapping resource="com/peterpig/bean/Student.hbm.xml" />
-		<mapping resource="com/peterpig/bean/StudentInfo.hbm.xml" />
+		<mapping resource="com/peterpig/bean/cms/Admin.hbm.xml" />
+		<mapping resource="com/peterpig/bean/cms/Association.hbm.xml" />
+		<mapping resource="com/peterpig/bean/cms/AssociationActivity.hbm.xml" />
+		<mapping resource="com/peterpig/bean/cms/AssociationBasket.hbm.xml" />
+		<mapping resource="com/peterpig/bean/cms/AssociationGroup.hbm.xml" />
+		<mapping resource="com/peterpig/bean/cms/AssociationPosition.hbm.xml" />
+		<mapping resource="com/peterpig/bean/cms/AuditStatus.hbm.xml" />
+		<mapping resource="com/peterpig/bean/cms/Classes.hbm.xml" />
+		<mapping resource="com/peterpig/bean/cms/Department.hbm.xml" />
+		<mapping resource="com/peterpig/bean/cms/Major.hbm.xml" />
+		<mapping resource="com/peterpig/bean/cms/SignIn.hbm.xml" />
+		<mapping resource="com/peterpig/bean/cms/SignInType.hbm.xml" />
+		<mapping resource="com/peterpig/bean/cms/Student.hbm.xml" />
+		<mapping resource="com/peterpig/bean/cms/StudentInfo.hbm.xml" />
 
 	</session-factory>
 </hibernate-configuration>

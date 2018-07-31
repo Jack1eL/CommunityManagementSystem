@@ -26,7 +26,7 @@
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="com.peterpig.bean">
+<hibernate-mapping package="com.peterpig.cms.bean">
 	
 	<class name="AuditStatus" table="audit_status">
 		<id name="statusId" column="status_id">
