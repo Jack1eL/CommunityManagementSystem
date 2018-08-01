@@ -39,10 +39,10 @@ public interface baseDAO<T, K> {
 	 * @param curPage 每页的数据量
 	 * @param pageSize 页数
 	 * @param orderType 排序是为升序还是降序
-	 * @param sortType 根据此参数排序
+	 * @param orderField 根据此字段排序
 	 * @return 返回列表
 	 */
-	public List<T> pageSelAll(String keyWord,K curPage,K pageSize,String orderType,String orderFile);
+	public List<T> pageSelAll(String keyWord,K curPage,K pageSize,String orderType,String orderField);
 	
 	/**
 	 * 根据id查询数据
