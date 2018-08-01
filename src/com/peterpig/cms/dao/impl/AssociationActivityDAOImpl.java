@@ -90,12 +90,6 @@ public class AssociationActivityDAOImpl extends OpenTransactionUtils implements
 	}
 
 	@Override
-	public AssociationActivity mapToBean(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public AssociationActivity findByBean(AssociationActivity bean) {
 		// TODO Auto-generated method stub
 		return null;
