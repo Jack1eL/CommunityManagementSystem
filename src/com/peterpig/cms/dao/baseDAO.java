@@ -58,12 +58,6 @@ public interface baseDAO<T, K> {
 	 */
 	public Long getAllCount(String keyWord);
 	
-	/**
-	 * 将map集合中保存的数据内容保存到对象中
-	 * @param map map集合
-	 * @return 返回对象类型
-	 */
-	public T mapToBean(Map<String,Object> map);
 	
 	/**
 	 * 根据用户提供的信息精准查询
