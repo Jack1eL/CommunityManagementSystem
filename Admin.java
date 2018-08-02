@@ -12,8 +12,6 @@ public class Admin {
 	/** 管理员密码 */
 	private String password;
 	
-	private String test;
-	
 	/*----------------------------------GETTER AND SETTER------------------------------------------*/
 	
 	public Integer getAdminId() {
