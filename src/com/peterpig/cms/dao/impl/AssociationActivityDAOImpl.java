@@ -10,7 +10,11 @@ import org.junit.Test;
 import com.peterpig.cms.bean.AssociationActivity;
 import com.peterpig.cms.dao.AssociationActivityDAO;
 import com.peterpig.cms.util.OpenTransactionUtils;
-
+/**
+ * 社团活动数据连接层实现类
+ * @author Evan
+ *
+ */
 public class AssociationActivityDAOImpl extends OpenTransactionUtils implements
 		AssociationActivityDAO {
 
@@ -90,27 +94,87 @@ public class AssociationActivityDAOImpl extends OpenTransactionUtils implements
 		}
 		return activityList;
 	}
-/*	@Test
-	public void t(){
-		pageSelAll("",1,2,"asc","activityName");
-	}*/
 
 	@Override
 	public AssociationActivity findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		AssociationActivity aa=null;
+		super.openTransaction();
+		try {
+			//通过活动ID查询社团活动
+			String hql="from AssociationActivity where activityId=?";
+			Query query=session.createQuery(hql);
+			query.setInteger(0, id);
+			
+			//执行查询并且保存
+			aa=(AssociationActivity) query.uniqueResult();
+			
+			//System.out.println(aa.getActivityName()+aa.getAssociation().getExplains());
+			transaction.commit();
+		} catch (Exception e) {
+			System.out.println("--------daoimpl出现异常---------");
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		return aa;
 	}
 
 	@Override
 	public Long getAllCount(String keyWord) {
-		// TODO Auto-generated method stub
-		return null;
+		Long count=0l;
+		super.openTransaction();
+		try{
+			//查找社团活动表中的所有记录条数
+			String hql="select count(id) from AssociationActivity where activityName like ?";
+			Query query=session.createQuery(hql);
+			query.setString(0, "%"+keyWord+"%");
+			count=(Long)query.uniqueResult();
+			
+			//System.out.println(count);
+			transaction.commit();
+		}catch(Exception e){
+			System.out.println("提交数据发生未知错误!");
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		return count;
 	}
 
 	@Override
 	public AssociationActivity findByBean(AssociationActivity bean) {
-		// TODO Auto-generated method stub
-		return null;
+		AssociationActivity aa=null;
+		super.openTransaction();
+		try {
+			//通过社团活动的字段查询社团活动
+			String hql="from AssociationActivity where activityName=? and explains=? and activityBegin=? and activityEnd=?";
+			Query query=session.createQuery(hql);
+			query.setString(0, bean.getActivityName());
+			query.setString(1, bean.getExplains());
+			query.setDate(2, bean.getActivityBegin());
+			query.setDate(3, bean.getActivityEnd());
+			
+			//执行查询并且保存
+			aa=(AssociationActivity) query.uniqueResult();
+			
+			System.out.println(aa);
+			transaction.commit();
+		} catch (Exception e) {
+			System.out.println("--------daoimpl出现异常---------");
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		return aa;
 	}
 
+	/**
+	 * 测试
+	 */
+	@Test
+	public void t(){
+		//pageSelAll("",1,2,"asc","activityName");
+		//findById(1);
+		//getAllCount("");
+		//AssociationActivity aa=new AssociationActivity();
+		//aa.setActivityName("篮球社常规训练");
+		//findByBean(aa);
+	}
 }
