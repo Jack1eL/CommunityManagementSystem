@@ -1,4 +1,8 @@
 package com.peterpig.cms.bean;
+
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 社团分组
  * @author Evan
@@ -11,6 +15,8 @@ public class AssociationGroup {
 	private Association association;
 	/** 组号 */
 	private Integer groupNumber;
+	/** 一个组里面有多个学生 */
+	private Set<Student> students=new HashSet<Student>();
 	
 	/*----------------------------------GETTER AND SETTER------------------------------------------*/
 	
@@ -32,4 +38,11 @@ public class AssociationGroup {
 	public void setGroupNumber(Integer groupNumber) {
 		this.groupNumber = groupNumber;
 	}
+	public Set<Student> getStudents() {
+		return students;
+	}
+	public void setStudents(Set<Student> students) {
+		this.students = students;
+	}
+		
 }

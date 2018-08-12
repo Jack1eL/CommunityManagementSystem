@@ -38,6 +38,10 @@
 			<key column="association_id" />
 			<one-to-many class="Student" />
 		</set>
+		<set name="associationGroup" table="association_group" cascade="all">
+			<key column="association_id" />
+			<one-to-many class="AssociationGroup" />
+		</set>
 		<many-to-one name="status" column="status_id" class="AuditStatus" />
 	</class>
 

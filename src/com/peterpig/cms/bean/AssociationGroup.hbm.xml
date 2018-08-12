@@ -32,6 +32,10 @@
 		<id name="groupId" column="group_id">
 			<generator class="native"/>
 		</id>
+		<set name="students" table="student">
+			<key column="group_id" />
+			<one-to-many class="Student" />
+		</set>
 		<many-to-one name="association" column="association_id" class="Association" />
 		<property name="groupNumber" column="group_number" type="integer" />
 	</class>
