@@ -9,6 +9,8 @@ import java.util.Date;
 public class SignIn {
 	/** 签到编号 */
 	private Integer signinId;
+	/** 签到标题 */
+	private String title;
 	/** 签到的社团活动 */
 	private AssociationActivity activity;
 	/** 签到的学生 */
@@ -25,6 +27,12 @@ public class SignIn {
 	}
 	public void setSigninId(Integer signinId) {
 		this.signinId = signinId;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public AssociationActivity getActivity() {
 		return activity;

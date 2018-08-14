@@ -32,6 +32,7 @@
 		<id name="signinId" column="signin_id">
 			<generator class="native"/>
 		</id>
+		<property name="title" column="title" type="string" />
 		<many-to-one name="activity" column="activity_id" class="AssociationActivity" />
 		<many-to-one name="student" column="student_id" class="Student" />
 		<many-to-one name="type" column="type_id" class="SignInType" />
