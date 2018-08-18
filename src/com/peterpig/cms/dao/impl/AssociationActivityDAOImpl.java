@@ -124,7 +124,7 @@ public class AssociationActivityDAOImpl extends OpenTransactionUtils implements
 		super.openTransaction();
 		try{
 			//查找社团活动表中的所有记录条数
-			String hql="select count(id) from AssociationActivity where activityName like ?";
+			String hql="select count(activityId) from AssociationActivity where activityName like ?";
 			Query query=session.createQuery(hql);
 			query.setString(0, "%"+keyWord+"%");
 			count=(Long)query.uniqueResult();
@@ -132,7 +132,7 @@ public class AssociationActivityDAOImpl extends OpenTransactionUtils implements
 			//System.out.println(count);
 			transaction.commit();
 		}catch(Exception e){
-			System.out.println("提交数据发生未知错误!");
+			System.out.println("--------daoimpl出现异常---------");
 			transaction.rollback();
 			e.printStackTrace();
 		}

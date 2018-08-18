@@ -84,9 +84,9 @@ public class SignInDAOImpl extends OpenTransactionUtils implements SignInDAO {
 			
 			//执行查询并且保存到列表
 			signinList=query.list();
-			for(SignIn s:signinList){
-				System.out.println(s.getTitle()+"\n"+s.getSigninTime());
-			}
+//			for(SignIn s:signinList){
+//				System.out.println(s.getTitle()+"\n"+s.getSigninTime());
+//			}
 			
 		} catch (Exception e) {
 			System.out.println("--------daoimpl出现异常---------");
@@ -98,20 +98,52 @@ public class SignInDAOImpl extends OpenTransactionUtils implements SignInDAO {
 
 	@Override
 	public SignIn findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		SignIn signin=null;
+		super.openTransaction();
+		try {
+			//通过编号查询签到记录
+			String hql="from SignIn where signinId=?";
+			Query query=session.createQuery(hql);
+			query.setInteger(0, id);
+			
+			//执行查询并保存到签到对象
+			signin=(SignIn) query.uniqueResult();
+			
+		} catch (Exception e) {
+			System.out.println("--------daoimpl出现异常---------");
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		//System.out.println(signin.getTitle());
+		return signin;
 	}
 
 	@Override
 	public Long getAllCount(String keyWord) {
-		// TODO Auto-generated method stub
-		return null;
+		Long count=0L;
+		super.openTransaction();
+		try {
+			//通过关键字查询所有记录条数
+			String hql="select count(signinId) from SignIn where title like ?";
+			Query query=session.createQuery(hql);
+			query.setString(0, "%"+keyWord+"%");
+			
+			//执行查询
+			count=(Long)query.uniqueResult();
+			
+		} catch (Exception e) {
+			System.out.println("--------daoimpl出现异常---------");
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		//System.out.println(count);
+		return count;
 	}
 
 	@Override
 	public SignIn findByBean(SignIn bean) {
+		//该对象不需要此方法
 		
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -125,8 +157,5 @@ public class SignInDAOImpl extends OpenTransactionUtils implements SignInDAO {
 		//pageSelAll("",1,2,"asc","signinTime");
 		//findById(1);
 		//getAllCount("");
-		//AssociationActivity aa=new AssociationActivity();
-		//aa.setActivityName("篮球社常规训练");
-		//findByBean(aa);
 	}
 }
