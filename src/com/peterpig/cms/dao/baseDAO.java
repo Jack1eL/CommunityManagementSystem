@@ -42,7 +42,7 @@ public interface baseDAO<T, K> {
 	 * @param orderField 根据此字段排序
 	 * @return 返回列表
 	 */
-	public List<T> pageSelAll(String keyWord,K curPage,K pageSize,String orderType,String orderField);
+	public List<T> pageSelAll(String keyWord,K curPage,K pageSize,String orderType,String orderField,K beanId);
 	
 	/**
 	 * 根据id查询数据
