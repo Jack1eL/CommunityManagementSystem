@@ -56,7 +56,7 @@ public interface baseDAO<T, K> {
 	 * @param keyWord 根据关键字查询数据的总数
 	 * @return 返回长整型总数数量
 	 */
-	public Long getAllCount(String keyWord,K beanID);
+	public Long getAllCount(String keyWord,K beanId);
 	
 	
 	/**
