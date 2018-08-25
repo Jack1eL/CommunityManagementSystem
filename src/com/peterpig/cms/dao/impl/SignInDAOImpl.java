@@ -10,6 +10,7 @@ import org.junit.Test;
 
 
 
+
 import com.peterpig.cms.bean.AssociationActivity;
 import com.peterpig.cms.bean.SignIn;
 import com.peterpig.cms.bean.SignInType;
@@ -76,13 +77,13 @@ public class SignInDAOImpl extends OpenTransactionUtils implements SignInDAO {
 		super.openTransaction();
 		try {
 			//查询签到记录：1、活动名模糊查询 2、通过某一字段进行排序 3、分页
-			String hql="from SignIn where title like ? and activity like ? order by "+orderField+" "+orderType;
+			String hql="from SignIn where title like ? and activity.activityId like ? order by "+orderField+" "+orderType;
 			Query query=session.createQuery(hql);
 			query.setString(0, "%"+keyWord+"%");
 			if(beanId==null){
-				
+				query.setString(1, "");
 			}else{
-				
+				query.setInteger(1, beanId);
 			}
 			query.setFirstResult((curPage-1)*pageSize);
 			query.setMaxResults(pageSize);
@@ -124,15 +125,19 @@ public class SignInDAOImpl extends OpenTransactionUtils implements SignInDAO {
 	}
 
 	@Override
-	public Long getAllCount(String keyWord) {
+	public Long getAllCount(String keyWord, Integer beanID) {
 		Long count=0L;
 		super.openTransaction();
 		try {
 			//通过关键字查询所有记录条数
-			String hql="select count(signinId) from SignIn where title like ?";
+			String hql="select count(signinId) from SignIn where title like ? and activity.activityId like ?";
 			Query query=session.createQuery(hql);
 			query.setString(0, "%"+keyWord+"%");
-			
+			if(beanId==null){
+				query.setString(1, "");
+			}else{
+				query.setInteger(1, beanId);
+			}
 			//执行查询
 			count=(Long)query.uniqueResult();
 			
@@ -158,11 +163,11 @@ public class SignInDAOImpl extends OpenTransactionUtils implements SignInDAO {
 	 */
 	@Test
 	public void t(){
-		
 		//pageSelAll("",1,2,"asc","signinTime");
 		//findById(1);
 		//getAllCount("");
 	}
+
 
 
 }
