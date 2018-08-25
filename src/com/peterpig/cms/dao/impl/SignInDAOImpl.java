@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.junit.Test;
 
 
+
 import com.peterpig.cms.bean.AssociationActivity;
 import com.peterpig.cms.bean.SignIn;
 import com.peterpig.cms.bean.SignInType;
@@ -70,15 +71,19 @@ public class SignInDAOImpl extends OpenTransactionUtils implements SignInDAO {
 	}
 
 	@Override
-	public List<SignIn> pageSelAll(String keyWord, Integer curPage,
-			Integer pageSize, String orderType, String orderField) {
+	public List<SignIn> pageSelAll(String keyWord, Integer curPage, Integer pageSize, String orderType, String orderField, Integer beanId) {
 		List<SignIn> signinList=null;
 		super.openTransaction();
 		try {
 			//查询签到记录：1、活动名模糊查询 2、通过某一字段进行排序 3、分页
-			String hql="from SignIn where title like ? order by "+orderField+" "+orderType;
+			String hql="from SignIn where title like ? and activity like ? order by "+orderField+" "+orderType;
 			Query query=session.createQuery(hql);
 			query.setString(0, "%"+keyWord+"%");
+			if(beanId==null){
+				
+			}else{
+				
+			}
 			query.setFirstResult((curPage-1)*pageSize);
 			query.setMaxResults(pageSize);
 			
@@ -158,4 +163,6 @@ public class SignInDAOImpl extends OpenTransactionUtils implements SignInDAO {
 		//findById(1);
 		//getAllCount("");
 	}
+
+
 }

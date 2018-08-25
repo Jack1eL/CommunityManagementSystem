@@ -69,23 +69,29 @@ public class AssociationActivityDAOImpl extends OpenTransactionUtils implements
 		return flag;
 	}
 
+
 	@Override
-	public List<AssociationActivity> pageSelAll(String keyWord, Integer curPage, Integer pageSize, String orderType, String orderField) {
+	public List<AssociationActivity> pageSelAll(String keyWord, Integer curPage, Integer pageSize, String orderType, String orderField, Integer beanId) {
 		List<AssociationActivity> activityList=null;
 		super.openTransaction();
 		try {
 			//查询社团活动：1、活动名模糊查询 2、通过某一字段进行排序 3、分页
-			String hql="from AssociationActivity where activityName like ? order by "+orderField+" "+orderType;
+			String hql="from AssociationActivity where activityName like ? and association.associationId like ? order by "+orderField+" "+orderType;
 			Query query=session.createQuery(hql);
 			query.setString(0, "%"+keyWord+"%");
+			if(beanId==null){
+				query.setString(1, "");
+			}else{
+				query.setInteger(1, beanId);
+			}
 			query.setFirstResult((curPage-1)*pageSize);
 			query.setMaxResults(pageSize);
 			
 			//执行查询并且保存到列表
 			activityList=query.list();
-			/*for(AssociationActivity aa:list){
-				System.out.println(aa.getActivityId()+"\n"+aa.getActivityName());
-			}*/
+//			for(AssociationActivity aa:activityList){
+//				System.out.println(aa.getActivityId()+"\n"+aa.getActivityName());
+//			}
 			
 		} catch (Exception e) {
 			System.out.println("--------daoimpl出现异常---------");
@@ -170,11 +176,12 @@ public class AssociationActivityDAOImpl extends OpenTransactionUtils implements
 	 */
 	@Test
 	public void t(){
-		//pageSelAll("",1,2,"asc","activityName");
+		//pageSelAll("",1,2,"asc","activityName",3);
 		//findById(1);
 		//getAllCount("");
 		//AssociationActivity aa=new AssociationActivity();
 		//aa.setActivityName("篮球社常规训练");
 		//findByBean(aa);
 	}
+
 }
