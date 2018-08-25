@@ -125,14 +125,19 @@ public class AssociationActivityDAOImpl extends OpenTransactionUtils implements
 	}
 
 	@Override
-	public Long getAllCount(String keyWord) {
+	public Long getAllCount(String keyWord, Integer beanId) {
 		Long count=0l;
 		super.openTransaction();
 		try{
 			//查找社团活动表中的所有记录条数
-			String hql="select count(activityId) from AssociationActivity where activityName like ?";
+			String hql="select count(activityId) from AssociationActivity where activityName like ? and association.associationId like ?";
 			Query query=session.createQuery(hql);
 			query.setString(0, "%"+keyWord+"%");
+			if(beanId==null){
+				query.setString(1, "");
+			}else{
+				query.setInteger(1, beanId);
+			}
 			count=(Long)query.uniqueResult();
 			
 			//System.out.println(count);
@@ -178,10 +183,11 @@ public class AssociationActivityDAOImpl extends OpenTransactionUtils implements
 	public void t(){
 		//pageSelAll("",1,2,"asc","activityName",3);
 		//findById(1);
-		//getAllCount("");
+		//getAllCount("",2);
 		//AssociationActivity aa=new AssociationActivity();
 		//aa.setActivityName("篮球社常规训练");
 		//findByBean(aa);
 	}
+
 
 }

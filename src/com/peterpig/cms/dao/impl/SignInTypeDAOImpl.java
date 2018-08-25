@@ -70,7 +70,8 @@ public class SignInTypeDAOImpl extends OpenTransactionUtils implements
 
 	@Override
 	public List<SignInType> pageSelAll(String keyWord, Integer curPage,
-			Integer pageSize, String orderType, String orderField) {
+			Integer pageSize, String orderType, String orderField,
+			Integer beanId) {
 		List<SignInType> signinTypeList=null;
 		super.openTransaction();
 		try {
@@ -117,8 +118,9 @@ public class SignInTypeDAOImpl extends OpenTransactionUtils implements
 		return signinType;
 	}
 
+
 	@Override
-	public Long getAllCount(String keyWord) {
+	public Long getAllCount(String keyWord, Integer beanId) {
 		Long count=0L;
 		super.openTransaction();
 		try {
@@ -155,4 +157,7 @@ public class SignInTypeDAOImpl extends OpenTransactionUtils implements
 		//findById(1);
 		//getAllCount("签到");
 	}
+
+
+
 }

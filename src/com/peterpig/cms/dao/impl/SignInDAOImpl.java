@@ -125,7 +125,7 @@ public class SignInDAOImpl extends OpenTransactionUtils implements SignInDAO {
 	}
 
 	@Override
-	public Long getAllCount(String keyWord, Integer beanID) {
+	public Long getAllCount(String keyWord, Integer beanId) {
 		Long count=0L;
 		super.openTransaction();
 		try {
