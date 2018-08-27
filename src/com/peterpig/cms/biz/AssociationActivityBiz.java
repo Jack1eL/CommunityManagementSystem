@@ -36,7 +36,7 @@ public interface AssociationActivityBiz {
 	 * @param pageSize 页内记录数
 	 * @param orderType 排序类型
 	 * @param orderField 排序字段
-	 * @return 活动列表
+	 * @return 活动集合
 	 */
 	public List<AssociationActivity> findAllActivity(String keyWord,Integer curPage,Integer pageSize,String orderType,String orderField);
 	
@@ -51,7 +51,7 @@ public interface AssociationActivityBiz {
 	 * @param orderType 排序类型
 	 * @param orderField 排序字段
 	 * @param associationId 所属社团编号
-	 * @return 活动列表
+	 * @return 活动集合
 	 */
 	public List<AssociationActivity> findAllActivityByAssociationId(String keyWord,Integer curPage,Integer pageSize,String orderType,String orderField,Integer associationId);
 	
