@@ -1,6 +1,9 @@
 package com.peterpig.cms.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.Query;
 
 import com.peterpig.cms.bean.AuditStatus;
 import com.peterpig.cms.dao.AuditStatusDAO;
@@ -66,8 +69,25 @@ public class AuditStatusDAOImpl extends OpenTransactionUtils implements
 	public List<AuditStatus> pageSelAll(String keyWord, Integer curPage,
 			Integer pageSize, String orderType, String orderField,
 			Integer beanId) {
-		String hql="from AuditStatus ";
-		return null;
+		List<AuditStatus> asList=null;
+		super.openTransaction();
+		try{
+			if(beanId==null)
+				beanId=0;
+			asList=new ArrayList<AuditStatus>();
+			String hql="from AuditStatus where status_name like ? and status_id=? order by "+orderField+" "+orderType;
+			Query query=session.createQuery(hql);
+			query.setString(0,"%"+keyWord+"%");
+			query.setInteger(1, beanId);
+			query.setFirstResult((curPage-1)*pageSize);
+			query.setMaxResults(pageSize);
+			asList=query.list();  //存入
+		}catch(Exception e){
+			System.out.print("----------------daoImpl出现问题!-----------------");
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		return asList;
 	}
 
 	@Override
@@ -78,8 +98,23 @@ public class AuditStatusDAOImpl extends OpenTransactionUtils implements
 
 	@Override
 	public Long getAllCount(String keyWord, Integer beanId) {
-		// TODO Auto-generated method stub
-		return null;
+		Long count=0L;
+		super.openTransaction();
+		try{
+			if(beanId==null)
+				beanId=0;
+			String hql="select count(status_id) from AudisStatus where status_name like ? and beanId=?";
+			Query query=session.createQuery(hql);
+			query.setString(0,"%"+keyWord+"%");
+			query.setInteger(1, beanId);
+			count=(Long) query.uniqueResult();   //强转类型
+			transaction.commit();
+		}catch(Exception e){
+			System.out.print("----------------daoImpl出现问题!-----------------");
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		return count;
 	}
 
 	@Override

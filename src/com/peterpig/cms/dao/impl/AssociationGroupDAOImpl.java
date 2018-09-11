@@ -1,7 +1,10 @@
 package com.peterpig.cms.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import org.hibernate.Query;
 
 import com.peterpig.cms.bean.AssociationGroup;
 import com.peterpig.cms.bean.Student;
@@ -69,8 +72,28 @@ public class AssociationGroupDAOImpl extends OpenTransactionUtils implements Ass
 	@Override
 	public List<AssociationGroup> pageSelAll(String keyWord, Integer curPage,
 			Integer pageSize, String orderType, String orderField,Integer beanId) {
-		String hql="from AssociationGroup where association_id like ? ";
-		return null;
+		List<AssociationGroup> agList=null;
+		super.openTransaction();
+		try{
+			if(beanId==null)
+				beanId=0;
+			agList=new ArrayList<AssociationGroup>();
+			String hql="from AssociationGroup where (association_id like ? or group_number like ?) and group_id=?";
+			Query query=session.createQuery(hql);
+			query.setString(0, "%"+keyWord+"%");
+			query.setString(1,"%"+keyWord+"%");
+			query.setInteger(2, beanId);
+			//分页设置
+			query.setFirstResult((curPage-1)*pageSize);
+			query.setMaxResults(pageSize);
+			agList=query.list();  //将查询的结果放入容器
+			transaction.commit();
+		}catch(Exception e){
+			System.out.println("---------------daoImpl出现问题！--------------");
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		return agList;
 	}
 
 	@Override
@@ -81,8 +104,24 @@ public class AssociationGroupDAOImpl extends OpenTransactionUtils implements Ass
 
 	@Override
 	public Long getAllCount(String keyWord,Integer beanId) {
-		// TODO Auto-generated method stub
-		return null;
+		Long count=0L;
+		super.openTransaction();
+		try{
+			if(beanId==null)
+				beanId=0;
+			String hql="select count(association_id) from AssociationGroup where (association_id like ? or group_number like ?) and group_id=?";
+			Query query=session.createQuery(hql);
+			query.setString(0, "%"+keyWord+"%");
+			query.setString(1,"%"+keyWord+"%");
+			query.setInteger(2, beanId);
+			count=(Long) query.uniqueResult(); 
+			transaction.commit();
+		}catch(Exception e){
+			System.out.println("---------------daoImpl出现问题！--------------");
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		return count;
 	}
 
 	@Override
