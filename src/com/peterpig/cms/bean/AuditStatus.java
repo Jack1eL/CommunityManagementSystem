@@ -14,7 +14,7 @@ public class AuditStatus {
 	/** 审核状态名 */
 	private String statusName;
 	/** 状态表对应社团表中的多个社团 */
-	private Set<Association> assocaitions=new HashSet<Association>();
+	private Set<Association> associations=new HashSet<Association>();
 	
 	/*----------------------------------GETTER AND SETTER------------------------------------------*/
 	
@@ -30,11 +30,11 @@ public class AuditStatus {
 	public void setStatusName(String statusName) {
 		this.statusName = statusName;
 	}
-	public Set<Association> getAssocaitions() {
-		return assocaitions;
+	public Set<Association> getAssociations() {
+		return associations;
 	}
-	public void setAssocaitions(Set<Association> assocaitions) {
-		this.assocaitions = assocaitions;
+	public void setAssociations(Set<Association> associations) {
+		this.associations = associations;
 	}
 	
 }
