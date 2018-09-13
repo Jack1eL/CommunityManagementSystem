@@ -81,7 +81,7 @@ public class SignInDAOImpl extends OpenTransactionUtils implements SignInDAO {
 			Query query=session.createQuery(hql);
 			query.setString(0, "%"+keyWord+"%");
 			if(beanId==null){
-				query.setString(1, "");
+				query.setString(1, "%%");
 			}else{
 				query.setInteger(1, beanId);
 			}
