@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="../../res/layui/css/layui.css">
+  <link rel="stylesheet" href="../../res/css/global.css">
+</head>
+<body>
+
+<div class="pp-header layui-bg-black">
+  <div class="layui-container">
+    <a class="pp-logo" href="/">
+      <img src="../../res/images/logo.png" alt="layui">
+    </a>
+    <ul class="layui-nav pp-nav layui-hide-xs">
+      <li class="layui-nav-item layui-this">
+        <a href="../index.html"><i class="iconfont icon-jiaoliu"></i>主页</a>
+      </li>
+      <li class="layui-nav-item">
+        <a href="/"><i class="iconfont icon-iconmingxinganli"></i>我的社团</a>
+      </li>
+    </ul>
+    
+    <ul class="layui-nav pp-nav-user">
+      
+      <!-- 未登入的状态 -->
+      <li class="layui-nav-item">
+        <a class="iconfont icon-touxiang layui-hide-xs" href="user/login.html"></a>
+      </li>
+      <li class="layui-nav-item">
+        <a href="user/login.html">登入</a>
+      </li>
+      <li class="layui-nav-item">
+        <a href="user/reg.html">注册</a>
+      </li>
+      <li class="layui-nav-item layui-hide-xs">
+        <a href="/app/qq/" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" title="QQ登入" class="iconfont icon-qq"></a>
+      </li>
+      <li class="layui-nav-item layui-hide-xs">
+        <a href="/app/weibo/" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" title="微博登入" class="iconfont icon-weibo"></a>
+      </li>
+       
+      
+      <!-- 登入后的状态
+      <li class="layui-nav-item">
+        <a class="pp-nav-avatar" href="javascript:;">
+          <cite class="layui-hide-xs">用户名</cite>
+          <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
+          <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a href="../user/set.html"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
+          <dd><a href="../user/message.html"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
+          <dd><a href="../user/home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
+          <hr style="margin: 5px 0;">
+          <dd><a href="" style="text-align: center;">退出</a></dd>
+        </dl>
+      </li>
+		-->
+    </ul>
+  </div>
+</div>
+
+<div class="pp-panel pp-column">
+  <div class="layui-container">
+    <ul class="layui-clear">
+      <li class="layui-hide-xs layui-this"><a href="/">###的活动</a></li> 
+    </ul> 
+    
+    <div class="pp-column-right layui-hide-xs"> 
+      <span class="pp-search"><i class="layui-icon"></i></span> 
+      <a href="jie/add.html" class="layui-btn">搜索活动</a> 
+    </div> 
+    <div class="layui-hide-sm layui-show-xs-block" style="margin-top: -10px; padding-bottom: 10px; text-align: center;"> 
+      <a href="jie/add.html" class="layui-btn">搜索活动</a> 
+    </div> 
+  </div>
+</div>
+
+<div class="layui-container">
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-md8 content detail">
+      <div class="pp-panel detail-box">
+        <h1>标题</h1>
+        <div class="pp-detail-info">
+          <!-- <span class="layui-badge">审核中</span> -->
+     
+          
+          <div class="pp-admin-box" data-id="123">
+            <span class="layui-btn layui-btn-xs jie-admin" type="del">删除</span>
+            
+            <span class="layui-btn layui-btn-xs jie-admin" type="set" field="stick" rank="1">置顶</span> 
+            <!-- <span class="layui-btn layui-btn-xs jie-admin" type="set" field="stick" rank="0" style="background-color:#ccc;">取消置顶</span> -->
+            
+          </div>
+          <span class="pp-list-nums"> 
+           <!-- <a href="#comment"><i class="iconfont" title="回答">&#xe60c;</i>**</a>-->
+            <i class="iconfont" title="人气">&#xe60b;</i>***
+          </span>
+        </div>
+        <div class="detail-about">
+          <a class="pp-avatar" href="../user/home.html">
+            <img src="##头像##" alt="##">
+          </a>
+          <div class="pp-detail-user">
+            <a href="../user/home.html" class="pp-link">
+              <cite>用户名</cite>
+              <i class="iconfont icon-renzheng" title="认证信息：{{ rows.user.approve }}"></i>
+              <i class="layui-badge pp-badge-vip">VIP3</i>
+            </a>
+            <span>2017-11-30</span>
+          </div>
+          <div class="detail-hits" id="LAY_jieAdmin" data-id="123">
+            <span class="layui-btn layui-btn-xs jie-admin" type="edit"><a href="add.html">编辑此贴</a></span>
+          </div>
+        </div>
+        <div class="detail-body photos">
+          <p>
+           #####################
+          </p>
+          <p>
+            <img src="../../res/images/fly.jpg" alt="##">
+          </p>
+        </div>
+      </div>
+
+    </div>
+    <div class="layui-col-md4">
+      <dl class="pp-panel pp-list-one">
+        <dt class="pp-panel-title">##########</dt>
+        <dd>
+          <a href="">放点什么？</a>
+          <span><i class="iconfont icon-pinglun1"></i> 16</span>
+        </dd>
+        <dd>
+          <a href="">放点什么？</a>
+          <span><i class="iconfont icon-pinglun1"></i> 16</span>
+        </dd>
+        <dd>
+          <a href="">放点什么？</a>
+          <span><i class="iconfont icon-pinglun1"></i> 16</span>
+        </dd>
+        <dd>
+          <a href="">放点什么？</a>
+          <span><i class="iconfont icon-pinglun1"></i> 16</span>
+        </dd>
+        <dd>
+          <a href="">放点什么？</a>
+          <span><i class="iconfont icon-pinglun1"></i> 16</span>
+        </dd>
+        <dd>
+          <a href="">放点什么？</a>
+          <span><i class="iconfont icon-pinglun1"></i> 16</span>
+        </dd>
+
+        <!-- 无数据时 -->
+        <!--
+        <div class="pp-none">没有相关数据</div>
+        -->
+      </dl>
+
+      <div class="pp-panel">
+        <div class="pp-panel-title">
+          #####
+        </div>
+        <div class="pp-panel-main">
+          <a href="###" target="_blank" class="pp-zanzhu" time-limit="2017.09.25-2099.01.01" style="background-color: #5FB878;">######</a>
+        </div>
+      </div>
+
+      <div class="pp-panel" style="padding: 20px 0; text-align: center;">
+        <img src="#群二维码#" style="max-width: 100%;" alt="QQ二维码">
+        <p style="position: relative; color: #666;">QQ扫码加群</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="pp-footer">
+  <p><a href="/" target="_blank">PP技术支持</a> 2017 &copy; <a href="http://www.layui.com/" target="_blank">pp出品</a></p>
+  <p>
+	<a href="/" target="_blank">如</a>
+    <a href="/" target="_blank">商业合作</a>
+	<a href="/" target="_blank">或</a>
+    <a href="/" target="_blank">招聘我们</a>
+	<a href="/" target="_blank">请</a>
+    <a href="/" target="_blank">加我微信</a>
+  </p>
+</div>
+
+<script src="../../res/layui/layui.js"></script>
+<script>
+layui.cache.page = 'jie';
+layui.cache.user = {
+  username: '游客'
+  ,uid: -1
+  ,avatar: '../../res/images/avatar/00.jpg'
+  ,experience: 83
+  ,sex: '男'
+};
+layui.config({
+  version: "3.0.0"
+  ,base: '../../res/mods/'
+}).extend({
+  pp: 'index'
+}).use(['pp', 'face'], function(){
+  var $ = layui.$
+  ,pp = layui.pp;
+  //如果你是采用模版自带的编辑器，你需要开启以下语句来解析。
+  /*
+  $('.detail-body').each(function(){
+    var othis = $(this), html = othis.html();
+    othis.html(pp.content(html));
+  });
+  */
+});
+</script>
+
+</body>
+</html>
