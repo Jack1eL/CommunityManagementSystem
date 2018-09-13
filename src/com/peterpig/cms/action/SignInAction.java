@@ -5,18 +5,18 @@ import java.util.List;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
-import com.peterpig.cms.bean.AssociationActivity;
-import com.peterpig.cms.biz.AssociationActivityBiz;
-import com.peterpig.cms.biz.impl.AssociationActivityBizImpl;
+import com.peterpig.cms.bean.SignIn;
+import com.peterpig.cms.biz.SignInBiz;
+import com.peterpig.cms.biz.impl.SignInBizImpl;
 
-public class AssociationActivityAction extends ActionSupport implements
-		ModelDriven<AssociationActivity> {
-	/** 社团活动对象 */
-	private AssociationActivity associationActivity=new AssociationActivity();
-	/** 社团活动逻辑层接口 */
-	private AssociationActivityBiz biz=new AssociationActivityBizImpl();
-	/** 社团活动列表 */
-	private List<AssociationActivity> list=new ArrayList<AssociationActivity>();
+public class SignInAction extends ActionSupport implements ModelDriven<SignIn> {
+	
+	/** 签到对象 */
+	private SignIn signin=new SignIn();
+	/** 签到列表 */
+	private List<SignIn> list = new ArrayList<SignIn>();
+	/** 签到对象的逻辑层接口 */
+	private SignInBiz biz= new SignInBizImpl();
 	/** 信息 */
 	private String message;
 	/** 当前页*/
@@ -33,16 +33,16 @@ public class AssociationActivityAction extends ActionSupport implements
 	private String orderField;
 	
 	/*-----------------------------GETTER AND SETTER-----------------------------*/
-	public AssociationActivity getAssociationActivity() {
-		return associationActivity;
+	public SignIn getSignin() {
+		return signin;
 	}
-	public void setAssociationActivity(AssociationActivity associationActivity) {
-		this.associationActivity = associationActivity;
+	public void setSignin(SignIn signin) {
+		this.signin = signin;
 	}
-	public List<AssociationActivity> getList() {
+	public List<SignIn> getList() {
 		return list;
 	}
-	public void setList(List<AssociationActivity> list) {
+	public void setList(List<SignIn> list) {
 		this.list = list;
 	}
 	public String getMessage() {
@@ -50,24 +50,6 @@ public class AssociationActivityAction extends ActionSupport implements
 	}
 	public void setMessage(String message) {
 		this.message = message;
-	}
-	public String getKeyWord() {
-		return keyWord;
-	}
-	public void setKeyWord(String keyWord) {
-		this.keyWord = keyWord;
-	}
-	public String getOrderType() {
-		return orderType;
-	}
-	public void setOrderType(String orderType) {
-		this.orderType = orderType;
-	}
-	public String getOrderField() {
-		return orderField;
-	}
-	public void setOrderField(String orderField) {
-		this.orderField = orderField;
 	}
 	public Integer getCurPage() {
 		return curPage;
@@ -87,10 +69,28 @@ public class AssociationActivityAction extends ActionSupport implements
 	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
 	}
+	public String getKeyWord() {
+		return keyWord;
+	}
+	public void setKeyWord(String keyWord) {
+		this.keyWord = keyWord;
+	}
+	public String getOrderType() {
+		return orderType;
+	}
+	public void setOrderType(String orderType) {
+		this.orderType = orderType;
+	}
+	public String getOrderField() {
+		return orderField;
+	}
+	public void setOrderField(String orderField) {
+		this.orderField = orderField;
+	}
 	
 	/*-----------------------------业务-----------------------------*/
 	public String add(){
-		if(biz.addActivity(associationActivity)){
+		if(biz.addSignIn(signin)){
 			message="添加成功";
 			return SUCCESS;
 		}else{
@@ -100,7 +100,7 @@ public class AssociationActivityAction extends ActionSupport implements
 	}
 	
 	public String update(){
-		if(biz.updateActivity(associationActivity)){
+		if(biz.updateSignIn(signin)){
 			message="添加成功";
 			return SUCCESS;
 		}else{
@@ -110,7 +110,7 @@ public class AssociationActivityAction extends ActionSupport implements
 	}
 	
 	public String delete(){
-		if(biz.deleteActivity(associationActivity.getActivityId())){
+		if(biz.deleteSignIn(signin.getSigninId())){
 			message="添加成功";
 			return SUCCESS;
 		}else{
@@ -119,9 +119,10 @@ public class AssociationActivityAction extends ActionSupport implements
 		}
 	}
 	
+	
 	public String findAll(){
 		totalPage=(int)(Math.ceil(((double)biz.getAllCount(keyWord))/pageSize));
-		list=biz.findAllActivity(keyWord, curPage, pageSize, orderType, orderField);
+		list=biz.findAllSignIn(keyWord, curPage, pageSize, orderType, orderField);
 		
 		if(list!=null){
 			message="查询成功";
@@ -134,9 +135,9 @@ public class AssociationActivityAction extends ActionSupport implements
 		}
 	}
 	
-	public String findAllByAssociationId(){
+	public String findAllByActivityId(){
 		totalPage=(int)(Math.ceil(((double)biz.getAllCount(keyWord))/pageSize));
-		list=biz.findAllActivityByAssociationId(keyWord, curPage, pageSize, orderType, orderField, associationActivity.getAssociation().getAssociationId());
+		list=biz.findAllSignInByActivityId(keyWord, curPage, pageSize, orderType, orderField, signin.getActivity().getActivityId());
 		
 		if(list!=null){
 			message="查询成功";
@@ -149,9 +150,9 @@ public class AssociationActivityAction extends ActionSupport implements
 		}
 	}
 	
-	public String findByActivityId(){
-		associationActivity=biz.findById(associationActivity.getActivityId());
-		if(associationActivity!=null){
+	public String findBySignInId(){
+		signin=biz.findById(signin.getSigninId());
+		if(signin!=null){
 			message="查询成功";
 			return SUCCESS;
 		}else{
@@ -159,12 +160,13 @@ public class AssociationActivityAction extends ActionSupport implements
 			return INPUT;
 		}
 	}
+	
 	
 	
 	@Override
-	public AssociationActivity getModel() {
+	public SignIn getModel() {
 		// TODO Auto-generated method stub
-		return associationActivity;
+		return null;
 	}
 
 }
