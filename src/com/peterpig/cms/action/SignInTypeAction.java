@@ -5,18 +5,17 @@ import java.util.List;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
-import com.peterpig.cms.bean.SignIn;
-import com.peterpig.cms.biz.SignInBiz;
-import com.peterpig.cms.biz.impl.SignInBizImpl;
+import com.peterpig.cms.bean.SignInType;
+import com.peterpig.cms.biz.SignInTypeBiz;
+import com.peterpig.cms.biz.impl.SignInTypeBizImpl;
 
-public class SignInAction extends ActionSupport implements ModelDriven<SignIn> {
-	
-	/** 签到对象 */
-	private SignIn signin=new SignIn();
-	/** 签到列表 */
-	private List<SignIn> list = new ArrayList<SignIn>();
-	/** 签到对象的逻辑层接口 */
-	private SignInBiz biz= new SignInBizImpl();
+public class SignInTypeAction extends ActionSupport implements ModelDriven<SignInType>{
+	/** 签到类型对象 */
+	private SignInType signinType=new SignInType();
+	/** 签到类型列表 */
+	private List<SignInType> list=new ArrayList<SignInType>();
+	/** 签到类型的逻辑层接口 */
+	private SignInTypeBiz biz=new SignInTypeBizImpl();
 	/** 信息 */
 	private String message;
 	/** 当前页*/
@@ -33,16 +32,16 @@ public class SignInAction extends ActionSupport implements ModelDriven<SignIn> {
 	private String orderField;
 	
 	/*-----------------------------GETTER AND SETTER-----------------------------*/
-	public SignIn getSignin() {
-		return signin;
+	public SignInType getSigninType() {
+		return signinType;
 	}
-	public void setSignin(SignIn signin) {
-		this.signin = signin;
+	public void setSigninType(SignInType signinType) {
+		this.signinType = signinType;
 	}
-	public List<SignIn> getList() {
+	public List<SignInType> getList() {
 		return list;
 	}
-	public void setList(List<SignIn> list) {
+	public void setList(List<SignInType> list) {
 		this.list = list;
 	}
 	public String getMessage() {
@@ -90,7 +89,7 @@ public class SignInAction extends ActionSupport implements ModelDriven<SignIn> {
 	
 	/*-----------------------------业务-----------------------------*/
 	public String add(){
-		if(biz.addSignIn(signin)){
+		if(biz.addSignInType(signinType)){
 			message="添加成功";
 			return SUCCESS;
 		}else{
@@ -100,29 +99,28 @@ public class SignInAction extends ActionSupport implements ModelDriven<SignIn> {
 	}
 	
 	public String update(){
-		if(biz.updateSignIn(signin)){
-			message="添加成功";
+		if(biz.updateSignInType(signinType)){
+			message="修改成功";
 			return SUCCESS;
 		}else{
-			message="添加失败";
+			message="修改失败";
 			return INPUT;
 		}
 	}
 	
 	public String delete(){
-		if(biz.deleteSignIn(signin.getSigninId())){
-			message="添加成功";
+		if(biz.deleteSignInType(signinType.getTypeId())){
+			message="删除成功";
 			return SUCCESS;
 		}else{
-			message="添加失败";
+			message="删除失败";
 			return INPUT;
 		}
 	}
-	
 	
 	public String findAll(){
 		totalPage=(int)(Math.ceil(((double)biz.getAllCount(keyWord))/pageSize));
-		list=biz.findAllSignIn(keyWord, curPage, pageSize, orderType, orderField);
+		list=biz.findAllSignInType(keyWord, curPage, pageSize, orderType, orderField);
 		
 		if(list!=null){
 			message="查询成功";
@@ -135,24 +133,9 @@ public class SignInAction extends ActionSupport implements ModelDriven<SignIn> {
 		}
 	}
 	
-	public String findAllByActivityId(){
-		totalPage=(int)(Math.ceil(((double)biz.getAllCount(keyWord,signin.getActivity().getActivityId()))/pageSize));
-		list=biz.findAllSignInByActivityId(keyWord, curPage, pageSize, orderType, orderField, signin.getActivity().getActivityId());
-		
-		if(list!=null){
-			message="查询成功";
-			
-			return SUCCESS;
-		}else{
-			message="查询失败";
-			
-			return INPUT;
-		}
-	}
-	
-	public String findBySignInId(){
-		signin=biz.findById(signin.getSigninId());
-		if(signin!=null){
+	public String findBySignInTypeId(){
+		signinType=biz.findById(signinType.getTypeId());
+		if(signinType!=null){
 			message="查询成功";
 			return SUCCESS;
 		}else{
@@ -160,12 +143,11 @@ public class SignInAction extends ActionSupport implements ModelDriven<SignIn> {
 			return INPUT;
 		}
 	}
-	
 	
 	
 	@Override
-	public SignIn getModel() {
-		return signin;
+	public SignInType getModel() {
+		return signinType;
 	}
-
+	
 }

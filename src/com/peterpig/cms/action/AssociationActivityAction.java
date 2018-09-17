@@ -135,7 +135,7 @@ public class AssociationActivityAction extends ActionSupport implements
 	}
 	
 	public String findAllByAssociationId(){
-		totalPage=(int)(Math.ceil(((double)biz.getAllCount(keyWord))/pageSize));
+		totalPage=(int)(Math.ceil(((double)biz.getAllCount(keyWord,associationActivity.getAssociation().getAssociationId()))/pageSize));
 		list=biz.findAllActivityByAssociationId(keyWord, curPage, pageSize, orderType, orderField, associationActivity.getAssociation().getAssociationId());
 		
 		if(list!=null){
@@ -160,10 +160,8 @@ public class AssociationActivityAction extends ActionSupport implements
 		}
 	}
 	
-	
 	@Override
 	public AssociationActivity getModel() {
-		// TODO Auto-generated method stub
 		return associationActivity;
 	}
 
