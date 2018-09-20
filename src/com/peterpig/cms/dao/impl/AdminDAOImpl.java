@@ -64,13 +64,18 @@ public class AdminDAOImpl extends OpenTransactionUtils implements AdminDAO {
 	}
 
 	@Override
-	public List<Admin> pageSelAll(String keyWord, Integer curPage,
-			Integer pageSize, String orderType, String orderField) {
+	public List<Admin> pageSelAll(String keyWord, Integer curPage,Integer pageSize, String orderType, String orderFiel,Integer beanId) {
 		List<Admin> list = null;
 		super.openTransaction();
 		try{
-			String hql="from Admin";
+			String hql="from Admin where username like ? admin_id like ? order by "+orderFiel+" "+orderType;
 			Query query=session.createQuery(hql);
+			query.setString(0, "%"+keyWord+"%");
+			if(beanId==null){
+				query.setString(1, "");
+			}else{
+				query.setInteger(1, beanId);
+			}
 			query.setFirstResult((curPage-1)*pageSize);
 			query.setMaxResults(pageSize);
 			list=query.list(); //将查询出的内容保存到列表中
@@ -97,12 +102,18 @@ public class AdminDAOImpl extends OpenTransactionUtils implements AdminDAO {
 	}
 
 	@Override
-	public Long getAllCount(String keyWord) {
+	public Long getAllCount(String keyWord,Integer beanId) {
 		Long count=0l;
 		super.openTransaction();
 		try{
-			String hql="select count(id) from Admin";
+			String hql="select count(adminId) from Admin where username like ? and adminid like ?";
 			Query query=session.createQuery(hql);
+			query.setString(0, "%"+keyWord+"%");
+			if(beanId==null){
+				query.setString(1, "");
+			}else{
+				query.setInteger(1, beanId);
+			}
 			count=(Long)query.uniqueResult();
 			transaction.commit();
 		}catch(Exception e){

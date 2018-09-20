@@ -1,5 +1,6 @@
 package com.peterpig.cms.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -62,10 +63,11 @@ public class DepartmentDAOImpl extends OpenTransactionUtils implements Departmen
 	}
 
 	@Override
-	public List<Department> pageSelAll(String keyWord, Integer curPage,Integer pageSize, String orderType, String orderField) {
+	public List<Department> pageSelAll(String keyWord, Integer curPage,Integer pageSize, String orderType, String orderField ,Integer beanId) {
 		List<Department> list = null;
 		super.openTransaction();
 		try{
+			list = new ArrayList<Department>();
 			String hql="from Department";
 			Query query=session.createQuery(hql);
 			query.setFirstResult((curPage-1)*pageSize);
@@ -94,11 +96,11 @@ public class DepartmentDAOImpl extends OpenTransactionUtils implements Departmen
 	}
 
 	@Override
-	public Long getAllCount(String keyWord) {
+	public Long getAllCount(String keyWord, Integer beanId) {
 		Long count=0l;
 		super.openTransaction();
 		try{
-			String hql="select count(id) from Department";
+			String hql="select count(departmentId) from Department";
 			Query query=session.createQuery(hql);
 			count=(Long)query.uniqueResult();
 			transaction.commit();
