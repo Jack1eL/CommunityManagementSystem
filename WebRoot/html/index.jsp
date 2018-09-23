@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE HTML>
 <html style="background-color: #e2e2e2;">
@@ -88,43 +89,43 @@
 
   <div class="pp-tab-border pp-case-tab">
     <span>
-      <a href="#" class="tab-this">活动</a>
-      <a href="#">社团</a>
+      <a href="#" class="tab-this">社团</a>
+      <a href="#">活动</a>
     </span>
   </div>
   <div class="layui-tab layui-tab-brief">
     <ul class="layui-tab-title">
-      <li class="layui-this" id="rank1"><a href="##">按时间排行</a></li>
-      <li id="rank2"><a href="##" >按##排行</a></li>
+      <li id="rank1"><a href="javascript:void(0)">按时间排序</a></li>
+      <li class="layui-this" id="rank2"><a href="javascript:void(0)" >按活动名排序</a></li>
     </ul>
   </div>
 	
   <section class="act-content" >
-			<div class="home-mod recommend layout">
-							<div class="recommend-list">
-								<div class="recommend-content" style="display: block;" id="recommend_content_2">
-									<ul class="recommend-act act-list" id="act-list">
-										
-									</ul>
-								</div>								
-							</div>
-						</div>
-			
-			</section>
+	<div class="home-mod recommend layout">
+		<div class="recommend-list">
+			<div class="recommend-content" style="display: block;" id="recommend_content_2">
+				<ul class="recommend-act act-list" id="act-list">
+					
+				</ul>
+			</div>								
+		</div>
+	</div>
+	
+  </section>
 
+  <div style="clear:both;"></div>
   <div style="text-align: center;">
     <div class="laypage-main">
-      <span class="laypage-curr" href="##">1</span>
-      <span href="##">2</span>
-	  <span href="##">3</span>
-      <span href="##">4</span>
-      <span href="##">5</span>
-      <span>…</span>
-      <a href="" class="laypage-last" title="尾页">尾页</a>
-      <a href="" class="laypage-next">下一页</a>
+      <button id="first">首页</button>
+      <button id="prev">上一页</button>
+      <div class="layui-bg-black layui-btn-disabled">第<span id="cur"></span>页</div>
+      <div class="layui-bg-black layui-btn-disabled">共<span id="tot"></span>页</div>
+      <button id="next">下一页</button>
+      <button id="last">尾页</button>
     </div>
   </div>
-
+  <input id="orderType" type="text" />
+  <input id="orderField" type="text" />
 </div>
 
 <div class="pp-footer">
@@ -155,6 +156,78 @@ layui.config({
 }).extend({
   pp: 'index'
 }).use('pp');
+
+
+
+/*社团列表*/
+/* $(document).ready(function(){
+	var code = '';
+	for(var i=1;i<4;i++){
+
+	
+	code+='<li><a class="act-img" href="activity.html"><img src="../res/images/main.jpg"/><span class="act-num">'+"已有"+'<strong class="act-img-t">'+"n"+'</strong>'+"人关注"+'</span><span class="act-number">'+"##人"+'</span></a><div class="act-inner"><h4  href="activity.html" title="">'+"活动名"+'</h4><p class="act-date">'+"活动时间:"+'<span>'+"####"+"~"+"#######"+'</span></p><p>'+"##########"+'</p></div></li>';
+	$("#act-list").html(code);
+	}
+	
+}); */
+
+//进入时请求所有的社团活动列表
+ajaxAssociationActivity("",1,"desc","activityName");
+$("#first").click(function(){
+	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val());
+});
+$("#prev").click(function(){
+	ajaxAssociationActivity("",parseInt($("#cur").text())-1,$("#orderType").val(),$("#orderField").val());
+});
+
+$("#next").click(function(){
+	//alert(parseInt($("#cur").text())+1);
+	ajaxAssociationActivity("",parseInt($("#cur").text())+1,$("#orderType").val(),$("#orderField").val());
+});
+$("#last").click(function(){
+	ajaxAssociationActivity("",$("#tot").text(),$("#orderType").val(),$("#orderField").val());
+});
+
+/* $("#rank1").click(function(){
+	if($("#orderType").val()=="desc"){
+		$("#orderType").val("asc");
+	}else{
+		$("#orderType").val("desc");
+	}
+	$("#orderField").val("activityBegin");
+	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val());
+});
+
+$("#rank2").click(function(){
+	if($("#orderType").val()=="desc"){
+		$("#orderType").val("asc");
+	}else{
+		$("#orderType").val("desc");
+	}
+	$("#orderField").val("activityName");
+	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val());
+}); */
+function ajaxAssociationActivity(keyWord,curPage,orderType,orderField){
+	$.ajax({
+		type:"POST",
+		url:"${pageContext.request.contextPath}/findAllActivity.action?keyWord="+keyWord+"&curPage="+curPage+"&orderType="+orderType+"&orderField="+orderField,
+		dataType:"json",
+		processData:false,
+		success:function(data){
+			$("#cur").text(data.curPage);
+			$("#tot").text(data.totalPage);
+			$("#orderType").val(data.orderType);
+			$("#orderField").val(data.orderField);
+			var code = '';
+			for(var i=0;i<data.list.length;i++){
+				code+='<li><a class="act-img" href="activity.html"><img src="${pageContext.request.contextPath}/res/images/main.jpg"/><span class="act-num">'+"已有"+'<strong class="act-img-t">'+"n"+'</strong>'+"人关注"+'</span><span class="act-number">'+"##人"+'</span></a><div class="act-inner"><h4  href="activity.html" title="">'+data.list[i].activityName+'</h4><p class="act-date">'+"活动时间:<br>"+'<span>'+data.list[i].activityBegin+"至<br>"+data.list[i].activityEnd+'</span></p><p></p></div></li>';
+				$("#act-list").html(code);
+			}
+		}
+	});
+}
+
+
 </script>
 </body>
 </html>
