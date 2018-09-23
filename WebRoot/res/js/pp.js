@@ -7,7 +7,7 @@ $(document).ready(function(){
 	});
 });
 /*社团列表*/
-$(document).ready(function(){
+/*$(document).ready(function(){
 	var code = '';
 	for(var i=1;i<4;i++){
 
@@ -16,7 +16,7 @@ $(document).ready(function(){
 	$("#act-list").html(code);
 	}
 	
-});
+});*/
 
 $(document).ready(function(){
 	var list=$(".laypage-main"),//获取最外层框架的名称
