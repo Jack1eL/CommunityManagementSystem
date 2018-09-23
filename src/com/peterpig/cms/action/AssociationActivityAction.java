@@ -89,36 +89,6 @@ public class AssociationActivityAction extends ActionSupport implements
 	}
 	
 	/*-----------------------------业务-----------------------------*/
-	public String add(){
-		if(biz.addActivity(associationActivity)){
-			message="添加成功";
-			return SUCCESS;
-		}else{
-			message="添加失败";
-			return INPUT;
-		}
-	}
-	
-	public String update(){
-		if(biz.updateActivity(associationActivity)){
-			message="添加成功";
-			return SUCCESS;
-		}else{
-			message="添加失败";
-			return INPUT;
-		}
-	}
-	
-	public String delete(){
-		if(biz.deleteActivity(associationActivity.getActivityId())){
-			message="添加成功";
-			return SUCCESS;
-		}else{
-			message="添加失败";
-			return INPUT;
-		}
-	}
-	
 	public String findAll(){
 		totalPage=(int)(Math.ceil(((double)biz.getAllCount(keyWord))/pageSize));
 		list=biz.findAllActivity(keyWord, curPage, pageSize, orderType, orderField);
@@ -135,7 +105,7 @@ public class AssociationActivityAction extends ActionSupport implements
 	}
 	
 	public String findAllByAssociationId(){
-		totalPage=(int)(Math.ceil(((double)biz.getAllCount(keyWord,associationActivity.getAssociation().getAssociationId()))/pageSize));
+		totalPage=(int)(Math.ceil(((double)biz.getAllCount(keyWord))/pageSize));
 		list=biz.findAllActivityByAssociationId(keyWord, curPage, pageSize, orderType, orderField, associationActivity.getAssociation().getAssociationId());
 		
 		if(list!=null){
@@ -160,8 +130,10 @@ public class AssociationActivityAction extends ActionSupport implements
 		}
 	}
 	
+	
 	@Override
 	public AssociationActivity getModel() {
+		// TODO Auto-generated method stub
 		return associationActivity;
 	}
 
