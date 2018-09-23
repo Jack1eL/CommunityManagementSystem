@@ -91,6 +91,19 @@ public class AssociationActivityAction extends ActionSupport implements
 	/*-----------------------------业务-----------------------------*/
 	public String findAll(){
 		totalPage=(int)(Math.ceil(((double)biz.getAllCount(keyWord))/pageSize));
+		if(curPage==null || curPage<1){
+			curPage=1;
+		}
+		if(totalPage==0){
+			totalPage=1;
+		}
+		if(curPage>totalPage){
+			curPage=totalPage;
+		}
+		if(orderType=="asc" || orderType=="")
+			orderType="desc";
+		
+		
 		list=biz.findAllActivity(keyWord, curPage, pageSize, orderType, orderField);
 		
 		if(list!=null){
@@ -105,7 +118,7 @@ public class AssociationActivityAction extends ActionSupport implements
 	}
 	
 	public String findAllByAssociationId(){
-		totalPage=(int)(Math.ceil(((double)biz.getAllCount(keyWord))/pageSize));
+		totalPage=(int)(Math.ceil(((double)biz.getAllCount(keyWord,associationActivity.getAssociation().getAssociationId()))/pageSize));
 		list=biz.findAllActivityByAssociationId(keyWord, curPage, pageSize, orderType, orderField, associationActivity.getAssociation().getAssociationId());
 		
 		if(list!=null){
