@@ -88,15 +88,14 @@ public class AssociationPositionDAOImpl extends OpenTransactionUtils implements 
 			String orderField,Integer beanId) {
 		List<AssociationPosition> apList=null;
 		super.openTransaction();
-		try{
-			if(beanId==null)
-				beanId=0;
-			apList=new ArrayList<AssociationPosition>();
+		try{		
 			//模糊查询: 1、根据用户提供的关键字(社团名。社团简介。社团状态)； 2、设置排序的字段； 3、设置排序的方式。 
-			String hql="from AssociationPosition where position_name like ? or position_id=?  order by "+orderField+" "+orderType;
+			String hql="from AssociationPosition where position_name like ? or position_id like ?  order by "+orderField+" "+orderType;
 			Query query=session.createQuery(hql);  
 			query.setString(0, "%"+keyWord+"%");
-			query.setInteger(1, beanId);
+			query.setInteger(1,beanId);
+			if(beanId==null)
+				query.setString(1,"%%");
 			query.setFirstResult((curPage-1)*pageSize);
 			query.setMaxResults(pageSize);
 			apList=query.list();  //将查询出的结果放入集合中
@@ -130,14 +129,14 @@ public class AssociationPositionDAOImpl extends OpenTransactionUtils implements 
 		Long count=0L;   //创建一个长整型变量,便于获取查询结果进行返回
 		super.openTransaction();
 		try{
-			if(beanId==null)
-				beanId=0;
 			//创建查询语句，根据用户提供的关键字查询记录总数
-			String hql="select count(position_id) from AssociationPosition where position_name like ? and association_id=?";	
+			String hql="select count(position_id) from AssociationPosition where position_name like ? and association_id like ?";	
 			Query query=session.createQuery(hql);   //创建查询
 			// 根据分页查询提供的参数进行模糊查询 
 			query.setString(0, "%"+keyWord+"%");
-			query.setInteger(1, beanId);
+			query.setInteger(1,beanId);
+			if(beanId==null)
+				query.setString(1,"%%");
 			count=(Long) query.uniqueResult();  //获取查询的结果
 			transaction.commit();
 		}catch(Exception e){

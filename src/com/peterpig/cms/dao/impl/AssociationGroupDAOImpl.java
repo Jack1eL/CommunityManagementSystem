@@ -75,14 +75,13 @@ public class AssociationGroupDAOImpl extends OpenTransactionUtils implements Ass
 		List<AssociationGroup> agList=null;
 		super.openTransaction();
 		try{
-			if(beanId==null)
-				beanId=0;
-			agList=new ArrayList<AssociationGroup>();
-			String hql="from AssociationGroup where (association_id like ? or group_number like ?) and group_id=?";
+			String hql="from AssociationGroup where (association_id like ? or group_number like ?) and group_id like ?";
 			Query query=session.createQuery(hql);
 			query.setString(0, "%"+keyWord+"%");
 			query.setString(1,"%"+keyWord+"%");
-			query.setInteger(2, beanId);
+			query.setInteger(2,beanId);
+			if(beanId==null)
+				query.setString(2,"%%");
 			//分页设置
 			query.setFirstResult((curPage-1)*pageSize);
 			query.setMaxResults(pageSize);
@@ -107,13 +106,13 @@ public class AssociationGroupDAOImpl extends OpenTransactionUtils implements Ass
 		Long count=0L;
 		super.openTransaction();
 		try{
-			if(beanId==null)
-				beanId=0;
-			String hql="select count(association_id) from AssociationGroup where (association_id like ? or group_number like ?) and group_id=?";
+			String hql="select count(association_id) from AssociationGroup where (association_id like ? or group_number like ?) and group_id like ?";
 			Query query=session.createQuery(hql);
 			query.setString(0, "%"+keyWord+"%");
 			query.setString(1,"%"+keyWord+"%");
-			query.setInteger(2, beanId);
+			query.setInteger(2,beanId);
+			if(beanId==null)
+				query.setString(2,"%%");
 			count=(Long) query.uniqueResult(); 
 			transaction.commit();
 		}catch(Exception e){

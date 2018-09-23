@@ -72,13 +72,12 @@ public class AuditStatusDAOImpl extends OpenTransactionUtils implements
 		List<AuditStatus> asList=null;
 		super.openTransaction();
 		try{
-			if(beanId==null)
-				beanId=0;
-			asList=new ArrayList<AuditStatus>();
-			String hql="from AuditStatus where status_name like ? and status_id=? order by "+orderField+" "+orderType;
+			String hql="from AuditStatus where status_name like ? and status_id like ? order by "+orderField+" "+orderType;
 			Query query=session.createQuery(hql);
 			query.setString(0,"%"+keyWord+"%");
-			query.setInteger(1, beanId);
+			query.setInteger(1,beanId);
+			if(beanId==null)
+				query.setString(1,"%%");
 			query.setFirstResult((curPage-1)*pageSize);
 			query.setMaxResults(pageSize);
 			asList=query.list();  //存入
@@ -101,12 +100,12 @@ public class AuditStatusDAOImpl extends OpenTransactionUtils implements
 		Long count=0L;
 		super.openTransaction();
 		try{
-			if(beanId==null)
-				beanId=0;
-			String hql="select count(status_id) from AudisStatus where status_name like ? and beanId=?";
+			String hql="select count(status_id) from AudisStatus where status_name like ? and beanId like ?";
 			Query query=session.createQuery(hql);
 			query.setString(0,"%"+keyWord+"%");
-			query.setInteger(1, beanId);
+			query.setInteger(1,beanId);
+			if(beanId==null)
+				query.setString(1,"%%");
 			count=(Long) query.uniqueResult();   //强转类型
 			transaction.commit();
 		}catch(Exception e){
