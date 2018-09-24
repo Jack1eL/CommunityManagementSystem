@@ -135,7 +135,7 @@ public class AdminDAOImpl extends OpenTransactionUtils implements AdminDAO {
 		Admin admin = null;
 		super.openTransaction();
 		try{
-			String hql="from User where username=? and password=?";
+			String hql="from Admin where username=? and password=?";
 			Query query=session.createQuery(hql);
 			query.setString(0, bean.getUsername());
 			query.setString(1, bean.getPassword());
