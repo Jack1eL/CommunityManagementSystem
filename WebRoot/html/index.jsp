@@ -126,6 +126,7 @@
       <button id="last">尾页</button>
     </div>
   </div>
+  <!-- 排序类型和字段的隐藏域 -->
   <input id="orderType" type="text" />
   <input id="orderField" type="text" />
 </div>
@@ -193,6 +194,7 @@ $("#last").click(function(){
 	ajaxAssociationActivity("",$("#tot").text(),$("#orderType").val(),$("#orderField").val());
 });
 
+//根据时间排序
 /* $("#rank1").click(function(){
 	if($("#orderType").val()=="desc"){
 		$("#orderType").val("asc");
@@ -202,7 +204,7 @@ $("#last").click(function(){
 	$("#orderField").val("activityBegin");
 	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val());
 });
-
+//根据活动名排序
 $("#rank2").click(function(){
 	if($("#orderType").val()=="desc"){
 		$("#orderType").val("asc");
@@ -212,6 +214,8 @@ $("#rank2").click(function(){
 	$("#orderField").val("activityName");
 	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val());
 }); */
+
+//异步请求获取所有的社团活动列表
 function ajaxAssociationActivity(keyWord,curPage,orderType,orderField){
 	$.ajax({
 		type:"POST",
