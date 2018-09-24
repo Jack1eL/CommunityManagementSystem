@@ -70,7 +70,7 @@
 <div class="pp-panel pp-column">
   <div class="layui-container">
     <ul class="layui-clear">
-      <li class="layui-hide-xs layui-this"><a href="/">###的活动</a></li> 
+      <li class="layui-hide-xs layui-this"><a href="/"><span id="asso"></span>的活动</a></li> 
     </ul> 
     
     <div class="pp-column-right layui-hide-xs"> 
@@ -147,13 +147,13 @@ layui.cache.page = 'jie';
 layui.cache.user = {
   username: '游客'
   ,uid: -1
-  ,avatar: '../../res/images/avatar/00.jpg'
+  ,avatar: '${pageContext.request.contextPath}/res/images/avatar/00.jpg'
   ,experience: 83
   ,sex: '男'
 };
 layui.config({
   version: "3.0.0"
-  ,base: '../../res/mods/'
+  ,base: '${pageContext.request.contextPath}/res/mods/'
 }).extend({
   pp: 'index'
 }).use('pp');
@@ -208,32 +208,32 @@ function ajaxAssociationActivity(keyWord,curPage,orderType,orderField,associatio
 		dataType:"json",
 		processData:false,
 		success:function(data){
-			$("#cur").text(data.curPage);
-			$("#tot").text(data.totalPage);
-			$("#orderType").val(data.orderType);
-			$("#orderField").val(data.orderField);
-			
-			var code = '';
-			for(var i=0;i<=data.list.length;i++){
-				var h='活动'+i+'类型';
-				var b=data.list[i].activityName;
-				var s='活动发布者';
-				var n=data.list[i].activityBegin+"至"+data.list[i].activityEnd;
+		
+			if(data.list.length!=0){
+				$("#cur").text(data.curPage);
+				$("#tot").text(data.totalPage);
+				$("#orderType").val(data.orderType);
+				$("#orderField").val(data.orderField);
+				var code = '';
+				for(var i=0;i<=data.list.length;i++){
+					var h='活动'+i+'类型';
+					var b=data.list[i].activityName;
+					var s='活动发布者';
+					var n=data.list[i].activityBegin+"至"+data.list[i].activityEnd;
+					
+					code+='<li><h2><a class="pp-avatar" href="/u/6497232"><img src="${pageContext.request.contextPath}/res/images/avatar/0.jpg"></a><a class="layui-badge">'+h+'</a><a href="${pageContext.request.contextPath}/html/jie/detail.jsp?activityId='+data.list[i].activityId+'">'+b+'</a></h2><div class="pp-list-info"><a href="##"><cite>'+s+'</cite></a><span class="layui-badge pp-badge-accept layui-hide-xs"><i class="iconfont icon-shijian"></i>'+n+'</span><span class="pp-list-nums"></span></div><div class="pp-list-badge"></div></li>';
 				
-				code+='<li><h2><a class="pp-avatar" href="/u/6497232"><img src="../res/images/avatar/0.jpg"></a><a class="layui-badge">'+h+'</a><a href="jie/detail.html">'+b+'</a></h2><div class="pp-list-info"><a href="##"><cite>'+s+'</cite></a><span class="layui-badge pp-badge-accept layui-hide-xs"><i class="iconfont icon-shijian"></i>'+n+'</span><span class="pp-list-nums"></span></div><div class="pp-list-badge"></div></li>';
-			
-				$("#as-list").html(code);
+					$("#as-list").html(code);
+					
+					$("#asso").text(data.list[i].association.name);
+				}
+			}else{
+				$("#as-list").html('<blockquote class="layui-elem-quote layui-quote-nm">这个社团并没有活动！</blockquote>');
 			}
 		}
 	});
 	
 }
-
-
-
-
-
-
 </script>
 </body>
 </html>
