@@ -26,4 +26,12 @@
 		</action>
 	</package>
 	
+	<package name="Association" namespace="/" extends="json-default,comm">
+		<action name="showAssociation" class="com.peterpig.cms.action.AssociationAction" method="showAssociation">
+			<param name="pageSize">6</param>
+			<result name="success" type="json">
+				<param name="root">action</param>
+			</result>
+		</action>
+	</package>
 </struts>
