@@ -32,7 +32,7 @@
 <div class="pp-header layui-bg-black">
   <div class="layui-container">
     <a class="pp-logo" href="/">
-      <img src="../res/images/logo.png" alt="layui">
+      <!-- <img src="../res/images/logo.png" alt="layui"> -->
     </a>
     <ul class="layui-nav pp-nav layui-hide-xs">
       <li class="layui-nav-item layui-this"> 
@@ -79,27 +79,28 @@
 </div>
 
 <div class="pp-case-header">
-  <p class="pp-case-year">2017</p>
+  <p class="pp-case-year">2018</p>
   <a href="/case/{{ year }}/">
     <img class="pp-case-banner" src="../res/images/main.jpg" alt="#####">
   </a>
 </div>
 
 <div class="pp-main" style="overflow: hidden;">
-
+  <!-- 社团or活动 -->
   <div class="pp-tab-border pp-case-tab">
     <span>
       <a href="#" class="tab-this">社团</a>
       <a href="#">活动</a>
     </span>
   </div>
+  <!-- 排序类型 -->
   <div class="layui-tab layui-tab-brief">
     <ul class="layui-tab-title">
       <li id="rank1"><a href="javascript:void(0)">按时间排序</a></li>
       <li class="layui-this" id="rank2"><a href="javascript:void(0)" >按活动名排序</a></li>
     </ul>
   </div>
-	
+  <!-- 列表区 -->
   <section class="act-content" >
 	<div class="home-mod recommend layout">
 		<div class="recommend-list">
@@ -114,12 +115,13 @@
   </section>
 
   <div style="clear:both;"></div>
+  <!-- 分页区 -->
   <div style="text-align: center;">
     <div class="laypage-main">
       <button id="first">首页</button>
       <button id="prev">上一页</button>
-      <div class="layui-bg-black layui-btn-disabled">第<span id="cur"></span>页</div>
-      <div class="layui-bg-black layui-btn-disabled">共<span id="tot"></span>页</div>
+      <div class="layui-bg-green">第<span id="cur"></span>页</div>
+      <div class="layui-bg-green">共<span id="tot"></span>页</div>
       <button id="next">下一页</button>
       <button id="last">尾页</button>
     </div>
@@ -173,17 +175,20 @@ layui.config({
 
 //进入时请求所有的社团活动列表
 ajaxAssociationActivity("",1,"desc","activityName");
+//点击首页
 $("#first").click(function(){
 	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val());
 });
+//点击上一页
 $("#prev").click(function(){
 	ajaxAssociationActivity("",parseInt($("#cur").text())-1,$("#orderType").val(),$("#orderField").val());
 });
-
+//点击下一页
 $("#next").click(function(){
 	//alert(parseInt($("#cur").text())+1);
 	ajaxAssociationActivity("",parseInt($("#cur").text())+1,$("#orderType").val(),$("#orderField").val());
 });
+//点击尾页
 $("#last").click(function(){
 	ajaxAssociationActivity("",$("#tot").text(),$("#orderType").val(),$("#orderField").val());
 });
