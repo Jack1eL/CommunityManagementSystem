@@ -62,13 +62,13 @@
       <li class="layui-nav-item">
         <a class="pp-nav-avatar" href="javascript:;">
           <cite class="layui-hide-xs">贤心</cite>
-          <i class="layui-badge pp-badge-vip layui-hide-xs">**</i>
+          <i class="layui-badge pp-badge-vip layui-hide-xs">学生/管理员</i>
           <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
         </a>
         <dl class="layui-nav-child">
-          <dd><a href="user/reg.html"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
-          <dd><a href="user/message.html"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
-          <dd><a href="user/home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
+          <dd><a href="../user/set.html"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
+          <dd><a href="../user/message.html"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
+          <dd><a href="../user/home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
           <hr style="margin: 5px 0;">
           <dd><a href="" style="text-align: center;">退出</a></dd>
         </dl>
@@ -143,24 +143,22 @@
 	 
   </p>
 </div>
-<script src="../res/layui/layui.js"></script>
+<script src="${pageContext.request.contextPath}/res/layui/layui.js"></script>
 <script>
 layui.cache.page = 'user';
 layui.cache.user = {
   username: '游客'
   ,uid: -1
-  ,avatar: '../../res/images/avatar/00.jpg'
+  ,avatar: '${pageContext.request.contextPath}/res/images/avatar/00.jpg'
   ,experience: 83
   ,sex: '男'
 };
 layui.config({
   version: "3.0.0"
-  ,base: '../../res/mods/'
+  ,base: '${pageContext.request.contextPath}/res/mods/'
 }).extend({
   pp: 'index'
 }).use('pp');
-
-
 
 /*社团列表*/
 /* $(document).ready(function(){
@@ -174,67 +172,6 @@ layui.config({
 	
 }); */
 
-//进入时请求所有的社团活动列表
-/**ajaxAssociationActivity("",1,"desc","activityName");
-//点击首页
-$("#first").click(function(){
-	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val());
-});
-//点击上一页
-$("#prev").click(function(){
-	ajaxAssociationActivity("",parseInt($("#cur").text())-1,$("#orderType").val(),$("#orderField").val());
-});
-//点击下一页
-$("#next").click(function(){
-	//alert(parseInt($("#cur").text())+1);
-	ajaxAssociationActivity("",parseInt($("#cur").text())+1,$("#orderType").val(),$("#orderField").val());
-});
-//点击尾页
-$("#last").click(function(){
-	ajaxAssociationActivity("",$("#tot").text(),$("#orderType").val(),$("#orderField").val());
-});
-
-//根据时间排序
-$("#rank1").click(function(){
-	if($("#orderType").val()=="desc"){
-		$("#orderType").val("asc");
-	}else{
-		$("#orderType").val("desc");
-	}
-	$("#orderField").val("activityBegin");
-	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val());
-});
-//根据活动名排序
-$("#rank2").click(function(){
-	if($("#orderType").val()=="desc"){
-		$("#orderType").val("asc");
-	}else{
-		$("#orderType").val("desc");
-	}
-	$("#orderField").val("activityName");
-	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val());
-}); 
-
-//异步请求获取所有的社团活动列表
-/**function ajaxAssociationActivity(keyWord,curPage,orderType,orderField){
-	$.ajax({
-		type:"POST",
-		url:"${pageContext.request.contextPath}/findAllActivity.action?keyWord="+keyWord+"&curPage="+curPage+"&orderType="+orderType+"&orderField="+orderField,
-		dataType:"json",
-		processData:false,
-		success:function(data){
-			$("#cur").text(data.curPage);
-			$("#tot").text(data.totalPage);
-			$("#orderType").val(data.orderType);
-			$("#orderField").val(data.orderField);
-			var code = '';
-			for(var i=0;i<data.list.length;i++){
-				code+='<li><a class="act-img" href="activity.html"><img src="${pageContext.request.contextPath}/res/images/main.jpg"/><span class="act-num">'+"已有"+'<strong class="act-img-t">'+"n"+'</strong>'+"人关注"+'</span><span class="act-number">'+"##人"+'</span></a><div class="act-inner"><h4  href="activity.html" title="">'+data.list[i].activityName+'</h4><p class="act-date">'+"活动时间:<br>"+'<span>'+data.list[i].activityBegin+"至<br>"+data.list[i].activityEnd+'</span></p><p></p></div></li>';
-				$("#act-list").html(code);
-			}
-		}
-	});
-}*/
 
 ajaxAssociation("",1,"desc","name");
 //点击首页
@@ -279,7 +216,7 @@ function ajaxAssociation(keyWord,curPage,orderType,orderField){
 			$("#orderField").val(data.orderField);
 			var code = '';
 			for(var i=0;i<data.associationList.length;i++){
-				code+='<li><a class="act-img" href="activity.html"><img src="${pageContext.request.contextPath}/res/images/main.jpg"/><span class="act-num">'+"已有"+'<strong class="act-img-t">'+"n"+'</strong>'+"人关注"+'</span><span class="act-number">'+"##人"+'</span></a><div class="act-inner"><h4  href="activity.html" title="">'+data.associationList[i].name+'</h4><span style="color:#01aaed">'+data.associationList[i].explains+'</span><p></p></div></li>';
+				code+='<li><a class="act-img" href="activity.jsp?associationId='+data.associationList[i].associationId+'"><img src="${pageContext.request.contextPath}/res/images/main.jpg"/><span class="act-num">'+"已有"+'<strong class="act-img-t">'+"n"+'</strong>'+"人关注"+'</span><span class="act-number">'+"##人"+'</span></a><div class="act-inner"><h4  href="activity.html" title="">'+data.associationList[i].name+'</h4><span style="color:#01aaed">'+data.associationList[i].explains+'</span><p></p></div></li>';
 				$("#act-list").html(code);
 			}
 		}
