@@ -9,6 +9,7 @@ import com.peterpig.cms.bean.Admin;
 import com.peterpig.cms.dao.AdminDAO;
 import com.peterpig.cms.util.OpenTransactionUtils;
 
+
 public class AdminDAOImpl extends OpenTransactionUtils implements AdminDAO {
 
 	@Override
@@ -127,6 +128,24 @@ public class AdminDAOImpl extends OpenTransactionUtils implements AdminDAO {
 	public Admin findByBean(Admin bean) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Admin findAllInfo(Admin bean){
+		Admin admin = null;
+		super.openTransaction();
+		try{
+			String hql="from User where username=? and password=?";
+			Query query=session.createQuery(hql);
+			query.setString(0, bean.getUsername());
+			query.setString(1, bean.getPassword());
+			admin=(Admin)query.uniqueResult();
+			transaction.commit();
+		}catch(Exception e){
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		return admin;
 	}
 
 }
