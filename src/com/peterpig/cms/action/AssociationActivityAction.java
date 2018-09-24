@@ -119,6 +119,18 @@ public class AssociationActivityAction extends ActionSupport implements
 	
 	public String findAllByAssociationId(){
 		totalPage=(int)(Math.ceil(((double)biz.getAllCount(keyWord,associationActivity.getAssociation().getAssociationId()))/pageSize));
+		if(curPage==null || curPage<1){
+			curPage=1;
+		}
+		if(totalPage==0){
+			totalPage=1;
+		}
+		if(curPage>totalPage){
+			curPage=totalPage;
+		}
+		if(orderType=="asc" || orderType=="")
+			orderType="desc";
+		
 		list=biz.findAllActivityByAssociationId(keyWord, curPage, pageSize, orderType, orderField, associationActivity.getAssociation().getAssociationId());
 		
 		if(list!=null){
