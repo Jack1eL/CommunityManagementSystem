@@ -35,7 +35,7 @@ public interface ClassesBiz {
 	 * @param orderField 根据此字段排序
 	 * @return 返回列表
 	 */
-	public List<Classes> findAllClasses(String keyWord,Integer curPage,Integer pageSize,String orderType,String orderField,Integer ClassesId);
+	public List<Classes> findAllClasses(String keyWord,Integer curPage,Integer pageSize,String orderType,String orderField,Integer classesId);
 	
 	/**
 	 * 根据id查询数据
@@ -49,5 +49,5 @@ public interface ClassesBiz {
 	 * @param keyWord 根据关键字查询数据的总数
 	 * @return 返回长整型总数数量
 	 */
-	public Long getAllCount(String keyWord,Integer departmentId);
+	public Long getAllCount(String keyWord,Integer classesId);
 }
