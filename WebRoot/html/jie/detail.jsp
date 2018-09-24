@@ -34,35 +34,33 @@
     </ul>
     
     <ul class="layui-nav pp-nav-user">
+      <c:if test="${empty sessionScope.Student}">
+	      <!-- 未登入的状态 -->
+	      <li class="layui-nav-item">
+	        <a class="iconfont icon-touxiang layui-hide-xs" href="${pageContext.request.contextPath}/user/login.html"></a>
+	      </li>
+	      <li class="layui-nav-item">
+	        <a href="${pageContext.request.contextPath}/user/login.html">登入</a>
+	      </li>
+      </c:if>
       
-      <!-- 未登入的状态 -->
-      <li class="layui-nav-item">
-        <a class="iconfont icon-touxiang layui-hide-xs" href="${pageContext.request.contextPath}/user/login.html"></a>
-      </li>
-      <li class="layui-nav-item">
-        <a href="${pageContext.request.contextPath}/user/login.html">登入</a>
-      </li>
-      <li class="layui-nav-item">
-        <a href="${pageContext.request.contextPath}/user/reg.html">注册</a>
-      </li>
-       
+      <c:if test="${not empty sessionScope.Student}">
+	      <!-- 登入后的状态 -->
+	      <li class="layui-nav-item">
+	        <a class="pp-nav-avatar" href="javascript:;">
+	          <cite class="layui-hide-xs">${sessionScope.Student.username}</cite>
+	          <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
+	        </a>
+	        <dl class="layui-nav-child">
+	          <dd><a href="../user/set.html"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
+	          <dd><a href="../user/message.html"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
+	          <dd><a href="../user/home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
+	          <hr style="margin: 5px 0;">
+	          <dd><a href="" style="text-align: center;">退出</a></dd>
+	        </dl>
+	      </li>
+      </c:if>
       
-      <!-- 登入后的状态
-      <li class="layui-nav-item">
-        <a class="pp-nav-avatar" href="javascript:;">
-          <cite class="layui-hide-xs">用户名</cite>
-          <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
-          <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
-        </a>
-        <dl class="layui-nav-child">
-          <dd><a href="../user/set.html"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
-          <dd><a href="../user/message.html"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
-          <dd><a href="../user/home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
-          <hr style="margin: 5px 0;">
-          <dd><a href="" style="text-align: center;">退出</a></dd>
-        </dl>
-      </li>
-		-->
     </ul>
   </div>
 </div>
