@@ -156,7 +156,7 @@ ModelDriven<Admin> {
 	public String logout(){
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		ActionContext.getContext().getValueStack().push(admin);
-		session.remove(admin);
+		session.remove("Admin");
 		result = "logoutOK";
 		return result;
 	}
