@@ -36,44 +36,40 @@
     </a>
     <ul class="layui-nav pp-nav layui-hide-xs">
       <li class="layui-nav-item layui-this"> 
-		  <a href="index.html"><i class="iconfont icon-jiaoliu"></i> 主页</a> 
+		  <a href="index.jsp"><i class="iconfont icon-jiaoliu"></i>主页</a> 
 	  </li>
       <li class="layui-nav-item ">
-        <a href=""><i class="iconfont icon-iconmingxinganli"></i>我的社团</a>
+        <a href="activity.jsp?associationId=待完成学生的社团ID"><i class="iconfont icon-iconmingxinganli"></i>我的社团</a>
       </li>
     </ul>
     
     <ul class="layui-nav pp-nav-user">
+      <c:if test="${empty sessionScope.Student}">
+	      <!-- 未登入的状态 -->
+	      <li class="layui-nav-item">
+	        <a class="iconfont icon-touxiang layui-hide-xs" href="${pageContext.request.contextPath}/user/login.html"></a>
+	      </li>
+	      <li class="layui-nav-item">
+	        <a href="${pageContext.request.contextPath}/html/user/login.jsp">登入</a>
+	      </li>
+      </c:if>
       
-      <!-- 未登入的状态 -->
-		 <!--
-      <li class="layui-nav-item">
-        <a class="iconfont icon-touxiang layui-hide-xs" href="user/login.html"></a>
-      </li>
-      <li class="layui-nav-item">
-        <a href="user/login.html">登入</a>
-      </li>
-      <li class="layui-nav-item">
-        <a href="user/reg.html">注册</a>
-      </li>
-      -->
-      <!-- 登入后的状态 -->
-     
-      <li class="layui-nav-item">
-        <a class="pp-nav-avatar" href="javascript:;">
-          <cite class="layui-hide-xs">贤心</cite>
-          <i class="layui-badge pp-badge-vip layui-hide-xs">学生/管理员</i>
-          <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
-        </a>
-        <dl class="layui-nav-child">
-          <dd><a href="../user/set.html"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
-          <dd><a href="../user/message.html"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
-          <dd><a href="../user/home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
-          <hr style="margin: 5px 0;">
-          <dd><a href="" style="text-align: center;">退出</a></dd>
-        </dl>
-      </li>
-      
+      <c:if test="${not empty sessionScope.Student}">
+	      <!-- 登入后的状态 -->
+	      <li class="layui-nav-item">
+	        <a class="pp-nav-avatar" href="javascript:;">
+	          <cite class="layui-hide-xs">${sessionScope.Student.username}</cite>
+	          <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
+	        </a>
+	        <dl class="layui-nav-child">
+	          <dd><a href="../user/set.html"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
+	          <dd><a href="../user/message.html"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
+	          <dd><a href="../user/home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
+	          <hr style="margin: 5px 0;">
+	          <dd><a href="" style="text-align: center;">退出</a></dd>
+	        </dl>
+	      </li>
+      </c:if>
     </ul>
   </div>
 </div>
@@ -132,14 +128,14 @@
 </div>
 
 <div class="pp-footer">
-  <p><a href="/" target="_blank">PP技术支持</a> 2017 &copy; <a href="/" target="_blank">pp出品</a> <a href="/" target="_blank">管理员模式</a></p>
+  <p><a href="" target="_blank">PP技术支持</a> 2017 &copy; <a href="" target="_blank">pp出品</a><a href="${pageContext.request.contextPath}/html/user/home.jsp" target="_blank">管理员模式</a></p>
   <p>
-	<a href="/" target="_blank">如</a>
-    <a href="/" target="_blank">商业合作</a>
-	<a href="/" target="_blank">或</a>
-    <a href="/" target="_blank">招聘我们</a>
-	<a href="/" target="_blank">请</a>
-    <a href="/" target="_blank">加我微信</a>
+	<a href="" target="_blank">如</a>
+    <a href="" target="_blank">商业合作</a>
+	<a href="" target="_blank">或</a>
+    <a href="" target="_blank">招聘我们</a>
+	<a href="" target="_blank">请</a>
+    <a href="" target="_blank">加我微信</a>
 	 
   </p>
 </div>
