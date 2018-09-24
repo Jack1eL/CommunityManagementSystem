@@ -79,5 +79,14 @@ public class AdminBizImpl implements AdminBiz {
 		}
 		return count;
 	}
+	public Admin login(Admin bean){
+		Admin admin= null;
+		try{
+			admin = dao.findAllInfo(bean);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return admin;
+	}
 
 }
