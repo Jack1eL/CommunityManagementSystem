@@ -1,4 +1,4 @@
-$(document).ready(function(){	
+/*$(document).ready(function(){	
 	var code ='';
 	for(var i=0;i<=4;i++){
 	var h='活动'+i+'类型';
@@ -10,7 +10,7 @@ $(document).ready(function(){
 
 	$("#as-list").html(code);
 }
-});
+});*/
 
 $(document).ready(function(){
 	var list=$(".laypage-main"),//获取最外层框架的名称

@@ -49,12 +49,4 @@ $(document).ready(function(){
 
 		});
 	});
-var timeHoverNews;
-$(document).ready(function(){
-	$(".pp-nav-user").bind("mouseover mouseout",function(){
-		clearTimeout(timeHoverNews);
-		timeHoverNews = setTimeout(function(){
-			$(".layui-nav-child").toggleClass("layui-nav-child-1");
-			},800);
-		});
-});
+
