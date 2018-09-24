@@ -24,6 +24,14 @@
 				<param name="root">action</param>
 			</result>
 		</action>
+		
+		<action name="findAllActivityByAssociationId" class="com.peterpig.cms.action.AssociationActivityAction" method="findAllByAssociationId">
+			<param name="pageSize">9</param>
+			<result name="success" type="json">
+				<param name="root">action</param>
+			</result>
+		</action>
+		
 	</package>
 	
 	<package name="Association" namespace="/" extends="json-default,comm">
