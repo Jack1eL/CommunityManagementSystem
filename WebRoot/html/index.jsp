@@ -86,13 +86,13 @@
 </div>
 
 <div class="pp-main" style="overflow: hidden;">
-  <!-- 社团or活动 -->
+  <!-- 社团or活动 
   <div class="pp-tab-border pp-case-tab">
     <span>
       <a href="#" class="tab-this">社团</a>
       <a href="#">活动</a>
     </span>
-  </div>
+  </div> -->
   <!-- 排序类型 -->
   <div class="layui-tab layui-tab-brief">
     <ul class="layui-tab-title">
@@ -195,7 +195,7 @@ $("#last").click(function(){
 });
 
 //根据时间排序
-/* $("#rank1").click(function(){
+$("#rank1").click(function(){
 	if($("#orderType").val()=="desc"){
 		$("#orderType").val("asc");
 	}else{
@@ -213,7 +213,7 @@ $("#rank2").click(function(){
 	}
 	$("#orderField").val("activityName");
 	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val());
-}); */
+}); 
 
 //异步请求获取所有的社团活动列表
 function ajaxAssociationActivity(keyWord,curPage,orderType,orderField){
