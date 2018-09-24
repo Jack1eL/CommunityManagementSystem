@@ -189,7 +189,18 @@ public class AssociationAction extends ActionSupport implements
 	 */
 	public String showAssociation(){
 		/** 获取查询出的总记录条数  */
-		totalPage=(int)(Math.ceil((double)this.biz.getPages( association.getAssociationId(),keyWord)));
+		totalPage=(int)(Math.ceil((double)this.biz.getPages( association.getAssociationId(),keyWord)/pageSize));
+		if(curPage==null || curPage<1){
+			curPage=1;
+		}
+		if(totalPage==0){
+			totalPage=1;
+		}
+		if(curPage>totalPage){
+			curPage=totalPage;
+		}
+		if(orderType=="asc" || orderType=="")
+			orderType="desc";
 		associationList=this.biz.showAssociation(keyWord, curPage, pageSize, orderType, orderField, association.getAssociationId());
 		//判断
 		if(associationList!=null){
