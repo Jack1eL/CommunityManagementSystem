@@ -10,28 +10,35 @@
 	<constant name="struts.i18n.encoding" value="UTF-8"/>
 	<!-- 常量配置：设置使用开发模式 -->
 	<constant name="struts.devMode" value="true"/>
-	
+	<!-- 公共包 -->
 	<package name="comm" namespace="/" extends="struts-default">
+		<!-- 公共的错误页返回结果 -->
 		<global-results>
 			<result name="input" type="dispatcher">/html/error.jsp</result>
 		</global-results>
 	</package>
-	
+	<!-- 社团活动 -->
 	<package name="AssociationActivity" namespace="/" extends="json-default,comm">
+		<!-- 查询所有社团的全部活动 -->
 		<action name="findAllActivity" class="com.peterpig.cms.action.AssociationActivityAction" method="findAll">
 			<param name="pageSize">9</param>
 			<result name="success" type="json">
 				<param name="root">action</param>
 			</result>
 		</action>
-		
+		<!-- 通过社团ID查询某个社团的全部活动 -->
 		<action name="findAllActivityByAssociationId" class="com.peterpig.cms.action.AssociationActivityAction" method="findAllByAssociationId">
 			<param name="pageSize">9</param>
 			<result name="success" type="json">
 				<param name="root">action</param>
 			</result>
 		</action>
-		
+		<!-- 通过活动ID查询某个活动 -->
+		<action name="findActivityById" class="com.peterpig.cms.action.AssociationActivityAction" method="findByActivityId">
+			<result name="success" type="json">
+				<param name="root">action</param>
+			</result>
+		</action>
 	</package>
 	
 	<package name="Association" namespace="/" extends="json-default,comm">
