@@ -175,7 +175,7 @@ layui.config({
 }); */
 
 //进入时请求所有的社团活动列表
-ajaxAssociationActivity("",1,"desc","activityName");
+/**ajaxAssociationActivity("",1,"desc","activityName");
 //点击首页
 $("#first").click(function(){
 	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val());
@@ -216,7 +216,7 @@ $("#rank2").click(function(){
 }); 
 
 //异步请求获取所有的社团活动列表
-function ajaxAssociationActivity(keyWord,curPage,orderType,orderField){
+/**function ajaxAssociationActivity(keyWord,curPage,orderType,orderField){
 	$.ajax({
 		type:"POST",
 		url:"${pageContext.request.contextPath}/findAllActivity.action?keyWord="+keyWord+"&curPage="+curPage+"&orderType="+orderType+"&orderField="+orderField,
@@ -234,7 +234,58 @@ function ajaxAssociationActivity(keyWord,curPage,orderType,orderField){
 			}
 		}
 	});
+}*/
+
+ajaxAssociation("",1,"desc","name");
+//点击首页
+$("#first").click(function(){
+	ajaxAssociation("",1,$("#orderType").val(),$("#orderField").val());
+});
+//点击上一页
+$("#prev").click(function(){
+	ajaxAssociation("",parseInt($("#cur").text())-1,$("#orderType").val(),$("#orderField").val());
+});
+//点击下一页
+$("#next").click(function(){
+	//alert(parseInt($("#cur").text())+1);
+	ajaxAssociation("",parseInt($("#cur").text())+1,$("#orderType").val(),$("#orderField").val());
+});
+//点击尾页
+$("#last").click(function(){
+	ajaxAssociation("",$("#tot").text(),$("#orderType").val(),$("#orderField").val());
+});
+//根据活动名排序
+$("#rank2").click(function(){
+	if($("#orderType").val()=="desc"){
+		$("#orderType").val("asc");
+	}else{
+		$("#orderType").val("desc");
+	}
+	$("#orderField").val("name");
+	ajaxAssociation("",1,$("#orderType").val(),$("#orderField").val());
+}); 
+
+//异步获取社团列表
+function ajaxAssociation(keyWord,curPage,orderType,orderField){
+	$.ajax({
+		type:"POST",
+		url:"${pageContext.request.contextPath}/showAssociation.action?keyWord="+keyWord+"&curPage="+curPage+"&orderType="+orderType+"&orderField="+orderField,
+		dataType:"json",
+		processData:false,
+		success:function(data){
+			$("#cur").text(data.curPage);
+			$("#tot").text(data.totalPage);
+			$("#orderType").val(data.orderType);
+			$("#orderField").val(data.orderField);
+			var code = '';
+			for(var i=0;i<data.associationList.length;i++){
+				code+='<li><a class="act-img" href="activity.html"><img src="${pageContext.request.contextPath}/res/images/main.jpg"/><span class="act-num">'+"已有"+'<strong class="act-img-t">'+"n"+'</strong>'+"人关注"+'</span><span class="act-number">'+"##人"+'</span></a><div class="act-inner"><h4  href="activity.html" title="">'+data.associationList[i].name+'</h4><span style="color:#01aaed">'+data.associationList[i].explains+'</span><p></p></div></li>';
+				$("#act-list").html(code);
+			}
+		}
+	});
 }
+
 
 
 </script>
