@@ -10,21 +10,21 @@ public interface StudentInfoBiz {
 	 * @param bean 要添加的类型
 	 * @return 添加成功返回true，添加失败返回false
 	 */
-	public boolean addStudentInfo(StudentInfo sutdentInfo);
+	public boolean addStudentInfo(StudentInfo studentInfo);
 	
 	/**
 	 * 修改
 	 * @param bean 要修改的类
 	 * @return 修改成功返回true，修改失败返回false
 	 */
-	public boolean updateStudentInfo(StudentInfo sutdentInfo);
+	public boolean updateStudentInfo(StudentInfo studentInfo);
 	
 	/**
 	 * 删除
 	 * @param id 根据id删除记录
 	 * @return 删除成功返回true，删除失败返回false
 	 */
-	public boolean removeStudentInfo(Integer sutdentInfoId);
+	public boolean removeStudentInfo(Integer studentInfoId);
 	
 	/**
 	 * 查询分页操作(支持模糊查询)
