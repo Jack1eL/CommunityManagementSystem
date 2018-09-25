@@ -42,11 +42,28 @@
 	</package>
 	
 	<package name="Association" namespace="/" extends="json-default,comm">
+		<!-- 学生登录拦截器 -->
+		<!-- 
+		<interceptors>
+			<interceptor name="interceptor1" class="com.peterpig.cms.interceptor.StudentLoginInterceptor"></interceptor>
+			<interceptor-stack name="loginInterceptor">
+				
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="interceptor1">
+					<param name="exludeAction" >login</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		 -->
 		<action name="showAssociation" class="com.peterpig.cms.action.AssociationAction" method="showAssociation">
+			<!-- 引用学生登录拦截器 -->
+			<!-- <interceptor-ref name="loginInterceptor"></interceptor-ref>
+			<result name="nologin">/html/user/login.jsp</result> -->
 			<param name="pageSize">6</param>
 			<result name="success" type="json">
 				<param name="root">action</param>
 			</result>
+			
 		</action>
 	</package>
 	
