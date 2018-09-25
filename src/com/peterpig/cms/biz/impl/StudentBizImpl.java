@@ -80,5 +80,15 @@ public class StudentBizImpl implements StudentBiz {
 		}
 		return count;
 	}
+	@Override
+	public Student login(Student bean) {
+		Student student = null;
+		try{
+			student = dao.findAllInfo(bean);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return student;
+	}
 
 }
