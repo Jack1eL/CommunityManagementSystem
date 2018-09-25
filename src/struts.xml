@@ -75,4 +75,13 @@
 			<result name="logoutOK" type="redirect">/html/user/home.jsp</result>
 		</action>
 	</package>
+	
+	<package name="Student" namespace="/" extends="json-default,comm">
+		<action name="loginStudent" class="com.peterpig.cms.action.StudentAction" method="login">
+			<result name="loginOK" type="redirect">/html/index.jsp</result>
+		</action>
+		<action name="logoutStudent" class="com.peterpig.cms.action.StudentAction" method="logout">
+			<result name="logoutOK" type="redirect">/html/index.jsp</result>
+		</action>
+	</package>
 </struts>
