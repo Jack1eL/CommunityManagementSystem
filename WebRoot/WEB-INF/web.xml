@@ -12,6 +12,18 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   
+	<filter>
+    <filter-name>AdminLoginFilter</filter-name>
+    <filter-class>
+			com.peterpig.cms.filter.AdminLoginFilter
+		</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AdminLoginFilter</filter-name>
+    <url-pattern>/html/user/backindex.jsp</url-pattern>
+  </filter-mapping> 
+  
+  
   <error-page>
 	<error-code>404</error-code>
 	<location>/html/other/404.jsp</location>
