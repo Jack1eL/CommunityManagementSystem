@@ -12,9 +12,10 @@
 	<meta charset="utf-8">
     <title>用户中心</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="../../res/layui/css/layui.css">
-    <link rel="stylesheet" href="../../res/css/global.css">
-	<script src="../../res/js/admin.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/layui/css/layui.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/global.css">
+    <script src="${pageContext.request.contextPath}/res/js/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/res/js/admin.js"></script>
 </head>
 <body>
 
@@ -49,10 +50,6 @@
           <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
         </a>
         <dl class="layui-nav-child">
-          <dd><a href="../user/set.html"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
-          <dd><a href="../user/message.html"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
-          <dd><a href="../user/home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
-          <hr style="margin: 5px 0;">
           <dd><a href="${pageContext.request.contextPath}/logoutAdmin.action" style="text-align: center;">退出</a></dd>
         </dl>
       </li>
@@ -75,18 +72,6 @@
         管理中心
       </a>
     </li>
-    <li class="layui-nav-item">
-      <a href="set.html">
-        <i class="layui-icon">&#xe620;</i>
-        基本设置
-      </a>
-    </li>
-    <li class="layui-nav-item">
-      <a href="message.html">
-        <i class="layui-icon">&#xe611;</i>
-        我的消息
-      </a>
-    </li>
   </ul>
 
   <div class="site-tree-mobile layui-hide">
@@ -103,46 +88,45 @@
   <div class="pp-panel pp-panel-user" pad20>
     <div class="layui-tab layui-tab-brief" lay-filter="user">
       <ul class="layui-tab-title" id="LAY_mine">
-        <li data-type="mine-jie" lay-id="index" class="layui-this">活动审核（<span>3</span>）</li>
-        <li data-type="collection" data-url="/collection/find/" lay-id="collection">社团管理（<span>3</span>）</li>
+        <li class="layui-this">社团管理（<span>3</span>）</li>
+        <li>活动审核（<span>3</span>）</li>
       </ul>
       <div class="layui-tab-content" style="padding: 20px 0;">
         <div class="layui-tab-item layui-show">
-          <ul class="mine-view jie-row" id="activityList">
-            <li>
-              <a class="jie-title" href="../jie/detail.html" target="_blank">******活动</a>
-              <i>2017/3/14 上午8:30:00</i>
-              <a class="mine-edit" href="/jie/edit/8116">编辑</a>
-			  <a class="mine-edit" href="/">删除</a>
-              <em>待审核</em>
-            </li>
-            <li>
-              <a class="jie-title" href="../jie/detail.html" target="_blank">*****的***活动</a>
-              <i>2017/3/14 上午8:30:00</i>
-              <a class="mine-edit" href="/jie/edit/8116">编辑</a>
-				<a class="mine-edit" href="/">删除</a>
-              <em>待审核</em>
-            </li>
-            <li>
-              <a class="jie-title" href="../jie/detail.html" target="_blank">1212</a>
-              <i>2017/3/14 上午8:30:00</i>
-              <a class="mine-edit" href="/jie/edit/8116">编辑</a>
-				<a class="mine-edit" href="/">删除</a>
-              <em>已通过</em>
-            </li>
+          <ul class="mine-view jie-row" id="backAssociation">
+            
           </ul>
+          <div style="clear:both;"></div>
+	         	<!-- 分页区 -->
+			<div style="text-align: center;">
+			  <div class="laypage-main">
+			    <button id="first">首页</button>
+			    <button id="prev">上一页</button>
+			    <div class="layui-bg-green">第<span id="cur"></span>页</div>
+			    <div class="layui-bg-green">共<span id="tot"></span>页</div>
+			    <button id="next">下一页</button>
+			    <button id="last">尾页</button>
+			  </div>
+			</div>
           <div id="LAY_page"></div>
         </div>
         <div class="layui-tab-item">
-          <ul class="mine-view jie-row">
-            <li>
-              <a class="jie-title" href="../jie/detail.html" target="_blank">***********社团</a>
-              <i>创建于****~****~**~**</i>  
-			  <div class="pp-admin-box" data-id="123">
-            	<span class="layui-btn layui-btn-xs jie-admin" type="del">删除</span>           
-         	  </div>
-			</li>
+          
+			
+			<ul class="mine-view jie-row" id="activityList">
+          	
           </ul>
+          <!-- 分页区 -->
+			<div style="text-align: center;">
+			  <div class="laypage-main">
+			    <button id="first1">首页</button>
+			    <button id="prev1">上一页</button>
+			    <div class="layui-bg-green">第<span id="cur1"></span>页</div>
+			    <div class="layui-bg-green">共<span id="tot1"></span>页</div>
+			    <button id="next1">下一页</button>
+			    <button id="last1">尾页</button>
+			  </div>
+			</div>
           <div id="LAY_page1"></div>
         </div>
       </div>
@@ -175,6 +159,89 @@ layui.config({
 }).extend({
   pp: 'index'
 }).use('pp');
+//----------------社团活动列表相关
+//进入页面时异步请求第一页的社团活动列表
+ajaxAssociationActivity(1);
+
+//点击首页
+$("#first1").click(function(){
+	ajaxAssociationActivity(1);
+});
+//点击上一页
+$("#prev1").click(function(){
+	ajaxAssociationActivity(parseInt($("#cur1").text())-1);
+});
+//点击下一页
+$("#next1").click(function(){
+	ajaxAssociationActivity(parseInt($("#cur1").text())+1);
+});
+//点击尾页
+$("#last1").click(function(){
+	ajaxAssociationActivity($("#tot1").text());
+});
+
+//----------------社团列表相关
+//进入页面时异步请求第一页的社团列表
+ajaxAssociation(1);
+
+//点击首页
+$("#first").click(function(){
+	ajaxAssociation(1);
+});
+//点击上一页
+$("#prev").click(function(){
+	ajaxAssociation(parseInt($("#cur").text())-1);
+});
+//点击下一页
+$("#next").click(function(){
+	//alert(parseInt($("#cur").text())+1);
+	ajaxAssociation(parseInt($("#cur").text())+1);
+});
+//点击尾页
+$("#last").click(function(){
+	ajaxAssociation($("#tot").text());
+});
+
+
+
+//异步请求社团列表，进行分页查询
+function ajaxAssociation(curPage){
+	$.ajax({
+		type:"POST",
+		url:"${pageContext.request.contextPath}/showAssociation.action?keyWord="+""+"&curPage="+curPage+"&orderType=desc&orderField=name",
+		dataType:"json",
+		processData:false,
+		success:function(data){
+			$("#cur").text(data.curPage);		
+			$("#tot").text(data.totalPage);		
+			var code = '';
+			for(var i=0;i<data.associationList.length;i++){
+				code+='<li><a class="jie-title" href="${pageContext.request.contextPath}/jie/detail.html" target="_blank">' +data.associationList[i].name+ '</a><i>' +data.associationList[i].explains+ '</i><div class="pp-admin-box data-id=123"><a class="mine-edit href=/jie/edit/8116" >编辑</a><a class="mine-edit" type="del">删除</a></div><em>' +data.associationList[i].status.statusName+ '</em></li>';
+				$("#backAssociation").html(code);
+			}
+		}
+	});	
+}
+
+//异步请求社团活动列表，进行分页查询
+function ajaxAssociationActivity(curPage){
+	$.ajax({
+		type:"POST",
+		url:"${pageContext.request.contextPath}/findAllActivity.action?keyWord="+""+"&curPage="+curPage+"&orderType=desc&orderField=activityName",
+		dataType:"json",
+		processData:false,
+		success:function(data){
+			$("#cur1").text(data.curPage);		
+			$("#tot1").text(data.totalPage);		
+			var code = '';
+			for(var i=0;i<data.list.length;i++){
+				code+='<li><a class="jie-title" href="${pageContext.request.contextPath}/jie/detail.html" target="_blank">' +data.list[i].activityName+ '</a><i>' +data.list[i].explains+ '</i><div class="pp-admin-box data-id=123"><a class="mine-edit href=/jie/edit/8116" >编辑</a><a class="mine-edit" type="del">删除</a></div><em>' +data.list[i].status.statusName+ '</em></li>';
+				$("#activityList").html(code);
+			}
+		}
+	});	
+}
+
 </script>
 
 </body>
