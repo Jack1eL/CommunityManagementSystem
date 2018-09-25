@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.junit.Test;
 
+import com.peterpig.cms.bean.Admin;
 import com.peterpig.cms.bean.Student;
 import com.peterpig.cms.dao.StudentDAO;
 import com.peterpig.cms.util.OpenTransactionUtils;
@@ -65,7 +66,7 @@ public class StudentDAOImpl extends OpenTransactionUtils implements StudentDAO {
 		List<Student> list = null;
 		super.openTransaction();
 		try{
-			String hql = "from Student where username like ? and classes.classesId like ? order by "+orderField+" "+orderType;
+			String hql = "from Student where username like ? and association.associationId like ? order by "+orderField+" "+orderType;
 			Query query=session.createQuery(hql);
 			query.setString(0, "%"+keyWord+"%");
 			if(beanId==null){
@@ -104,7 +105,7 @@ public class StudentDAOImpl extends OpenTransactionUtils implements StudentDAO {
 		Long count = 0L;
 		super.openTransaction();
 		try{
-			String hql = "select count(studentId) from student where username like ? and classes.classesId like ? ";
+			String hql = "select count(studentId) from Student where username like ? and association.associationId like ? ";
 			Query query =  session.createQuery(hql);
 			query.setString(0,"#"+keyWord+"#" );
 			if(beanId==null){
@@ -128,7 +129,31 @@ public class StudentDAOImpl extends OpenTransactionUtils implements StudentDAO {
 	}
 	@Test
 	public void tt(){
-		findById(1);
+		//findById(1);
+		//pageSelAll("",1,2,"asc","username",3);
+		//getAllCount("",2);
+		Student student = new Student();
+		student.setUsername("aaa");
+		student.setPassword("123");
+		System.out.println(findAllInfo(student));
+	}
+
+	@Override
+	public Student findAllInfo(Student bean) {
+		Student student = null;
+		super.openTransaction();
+		try{
+			String hql="from Student where username=? and password=?";
+			Query query=session.createQuery(hql);
+			query.setString(0, bean.getUsername());
+			query.setString(1, bean.getPassword());
+			student=(Student)query.uniqueResult();
+			transaction.commit();
+		}catch(Exception e){
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		return student;
 	}
 
 }
