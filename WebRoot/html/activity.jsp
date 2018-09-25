@@ -108,12 +108,17 @@
       </div>
 	  <div class="layui-col-md4">
       <div class="pp-panel">
-        <div class="pp-panel-title">
-          #####
-        </div>
-        <div class="pp-panel-main">
-          <a href="###" target="_blank" class="pp-zanzhu" time-limit="2017.09.25-2099.01.01" style="background-color: #5FB878;">######</a>
-        </div>
+        <div class="pp-panel-title">社团简介</div>
+	  <div class="layui-col-md12">
+      	<div class="layui-card">
+        	<div class="layui-card-body" style="margin-top:-20px;">
+          		################################
+        	</div>
+      	</div>
+  	  </div>
+      </div>
+	  <div class="pp-panel-main">
+          <a href="###" target="_blank" class="pp-zanzhu layui-bg-green" time-limit="2017.09.25-2099.01.01">查看所有成员</a>
       </div>
       <div class="pp-panel" style="padding: 20px 0; text-align: center;">
         <img src="#群二维码#" style="max-width: 100%;" alt="QQ二维码">
