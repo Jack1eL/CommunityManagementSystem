@@ -107,7 +107,7 @@ public class AssociationDAOImpl extends OpenTransactionUtils implements
 			Integer pageSize, String orderType, String orderField,Integer beanId) {
 		List<Association> associationList=null;
 		super.openTransaction();
-		try{
+		try{ 
 			//模糊查询: 1、根据用户提供的关键字(社团名。社团简介。社团状态)； 2、设置排序的字段； 3、设置排序的方式。 
 			String hql="from Association where (name like ? or explains like ? or status_id like ?) and association_id like ? order by "+orderField+" "+orderType;
 		
@@ -152,6 +152,7 @@ public class AssociationDAOImpl extends OpenTransactionUtils implements
 		Long count=0L;   //创建一个长整型变量,便于获取查询结果进行返回
 		super.openTransaction();
 		try{
+			System.out.println(keyWord);
 			//创建查询语句，根据用户提供的关键字查询记录总数
 			String hql="select count(association_id) from Association where (name like ? or explains like ? or status_id like ?) and association_id like ?";		
 			Query query=session.createQuery(hql);   //创建查询
@@ -164,7 +165,6 @@ public class AssociationDAOImpl extends OpenTransactionUtils implements
 			else
 				query.setInteger(3,beanId);
 			count=(Long) query.uniqueResult();  //获取查询的结果
-			System.out.println(count);
 			transaction.commit();
 		}catch(Exception e){
 			System.out.println("-----------------daoImpl出现问题!------------------");
