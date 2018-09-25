@@ -50,4 +50,10 @@ public interface StudentBiz {
 	 * @return 返回长整型总数数量
 	 */
 	public Long getAllCount(String keyWord,Integer studentId);
+	/**
+	 * 登陆方法
+	 * @param bean
+	 * @return
+	 */
+	public Student login(Student bean);
 }
