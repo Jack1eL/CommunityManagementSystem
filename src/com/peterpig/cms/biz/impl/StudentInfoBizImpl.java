@@ -14,10 +14,10 @@ public class StudentInfoBizImpl implements StudentInfoBiz {
 		dao = new StudentInfoDAOImpl();
 	}
 	@Override
-	public boolean addStudentInfo(StudentInfo sutdentInfo) {
+	public boolean addStudentInfo(StudentInfo studentInfo) {
 		boolean flag = false;
 		try{
-			flag = dao.doCreat(sutdentInfo);
+			flag = dao.doCreat(studentInfo);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -25,10 +25,10 @@ public class StudentInfoBizImpl implements StudentInfoBiz {
 	}
 
 	@Override
-	public boolean updateStudentInfo(StudentInfo sutdentInfo) {
+	public boolean updateStudentInfo(StudentInfo studentInfo) {
 		boolean flag = false;
 		try{
-			flag = dao.doUpdate(sutdentInfo);
+			flag = dao.doUpdate(studentInfo);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -36,10 +36,10 @@ public class StudentInfoBizImpl implements StudentInfoBiz {
 	}
 
 	@Override
-	public boolean removeStudentInfo(Integer sutdentInfoId) {
+	public boolean removeStudentInfo(Integer studentInfoId) {
 		boolean flag = false;
 		try{
-			flag = dao.doRemove(sutdentInfoId);
+			flag = dao.doRemove(studentInfoId);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
