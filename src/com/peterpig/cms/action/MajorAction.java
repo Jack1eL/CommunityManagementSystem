@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
-import com.peterpig.cms.bean.Department;
-import com.peterpig.cms.biz.DepartmentBiz;
-import com.peterpig.cms.biz.impl.DepartmentBizImpl;
+import com.peterpig.cms.bean.Major;
+import com.peterpig.cms.biz.MajorBiz;
+import com.peterpig.cms.biz.impl.MajorBizImpl;
 
-public class DepartmentAction extends ActionSupport implements ModelDriven<Department> {
-	/**系部对象 */
-	private Department department = new Department();
-	/** 系部逻辑层接口*/
-	private DepartmentBiz departmentBiz = new DepartmentBizImpl();
-	/** 系部列表*/
-	private ArrayList<Department> list = new ArrayList<Department>();
+public class MajorAction extends ActionSupport implements ModelDriven<Major> {
+	/**专业对象 */
+	private Major major = new Major();
+	/** 专业逻辑层接口*/
+	private MajorBiz majorBiz = new MajorBizImpl();
+	/** 专业列表*/
+	private ArrayList<Major> list = new ArrayList<Major>();
 	/** 信息 */
 	private String message;
 	/** 当前页*/
@@ -31,126 +31,79 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
 	private String orderField;
 	/** 结果 */
 	private String result;
-	
-	
-	public Department getDepartment() {
-		return department;
+	@Override
+	public Major getModel() {
+		// TODO Auto-generated method stub
+		return major;
 	}
-
-
-	public void setDepartment(Department department) {
-		this.department = department;
+	public Major getMajor() {
+		return major;
 	}
-
-
-	public DepartmentBiz getDepartmentBiz() {
-		return departmentBiz;
+	public void setMajor(Major major) {
+		this.major = major;
 	}
-
-
-	public void setDepartmentBiz(DepartmentBiz departmentBiz) {
-		this.departmentBiz = departmentBiz;
+	public MajorBiz getMajorBiz() {
+		return majorBiz;
 	}
-
-
-	public ArrayList<Department> getList() {
+	public void setMajorBiz(MajorBiz majorBiz) {
+		this.majorBiz = majorBiz;
+	}
+	public ArrayList<Major> getList() {
 		return list;
 	}
-
-
-	public void setList(ArrayList<Department> list) {
+	public void setList(ArrayList<Major> list) {
 		this.list = list;
 	}
-
-
 	public String getMessage() {
 		return message;
 	}
-
-
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
-
 	public Integer getCurPage() {
 		return curPage;
 	}
-
-
 	public void setCurPage(Integer curPage) {
 		this.curPage = curPage;
 	}
-
-
 	public Integer getTotalPage() {
 		return totalPage;
 	}
-
-
 	public void setTotalPage(Integer totalPage) {
 		this.totalPage = totalPage;
 	}
-
-
 	public Integer getPageSize() {
 		return pageSize;
 	}
-
-
 	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
 	}
-
-
 	public String getKeyWord() {
 		return keyWord;
 	}
-
-
 	public void setKeyWord(String keyWord) {
 		this.keyWord = keyWord;
 	}
-
-
 	public String getOrderType() {
 		return orderType;
 	}
-
-
 	public void setOrderType(String orderType) {
 		this.orderType = orderType;
 	}
-
-
 	public String getOrderField() {
 		return orderField;
 	}
-
-
 	public void setOrderField(String orderField) {
 		this.orderField = orderField;
 	}
-
-
 	public String getResult() {
 		return result;
 	}
-
-
 	public void setResult(String result) {
 		this.result = result;
 	}
-
-
-	@Override
-	public Department getModel() {
-		// TODO Auto-generated method stub
-		return department;
-	}
- 
 	public String addDepartment(){
-		if(departmentBiz.addDepartment(department)){
+		if(majorBiz.addMajor(major)){
 			message="添加成功";
 			result="addOK";
 		}else{
@@ -161,7 +114,7 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
 	}
 	
 	public String remove(){
-		if(departmentBiz.removeDepartment(department.getDepartmentId())){
+		if(majorBiz.removeMajor(major.getMajorId())){
 			message="删除成功";
 			result = "removeOK";
 		}else{
@@ -171,7 +124,7 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
 		return result;
 	}
 	public String update(){
-		if(departmentBiz.updateDepartment(department)){
+		if(majorBiz.updateMajor(major)){
 			message="修改成功";
 			result="updateOK";
 		}else{
@@ -182,7 +135,7 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
 	}
 	
 	public String findAll(){
-		totalPage=(int)(Math.ceil(((double)departmentBiz.getAllCount(keyWord, department.getDepartmentId()))/pageSize));
+		totalPage=(int)(Math.ceil(((double)majorBiz.getAllCount(keyWord, major.getMajorId()))/pageSize));
 		if(curPage==null || curPage<1){
 			curPage=1;
 		}
@@ -194,7 +147,7 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
 		}
 		if(orderType=="asc" || orderType=="")
 			orderType="desc";
-		list = (ArrayList<Department>) departmentBiz.findAllDepartment(keyWord, curPage, pageSize, orderType, orderField, department.getDepartmentId());
+		list = (ArrayList<Major>) majorBiz.findAllMajor(keyWord, curPage, pageSize, orderType, orderField, major.getMajorId());
 		if(list != null)
 			result="findbyjspOK";
 		else
@@ -202,8 +155,8 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
 		return result;
 	}
 	public String findById(){
-		department = departmentBiz.findById(department.getDepartmentId());
-		if(department!=null){
+		major = majorBiz.findById(major.getMajorId());
+		if(major!=null){
 			result="findbyidOK";
 		}else{
 			result="findbyidFAIL";
