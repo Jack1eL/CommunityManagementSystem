@@ -33,7 +33,7 @@
 			<generator class="native"/>
 		</id>
 		<set name="associations" table="association">
-			<key column="statusId" />
+			<key column="status_id" />
 			<one-to-many class="Association" />
 		</set>
 		<property name="statusName" column="status_name" type="string" length="20" />
