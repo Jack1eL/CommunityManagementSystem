@@ -38,9 +38,18 @@
       <li class="layui-nav-item layui-this"> 
 		  <a href="index.jsp"><i class="iconfont icon-jiaoliu"></i>主页</a> 
 	  </li>
-      <li class="layui-nav-item ">
-        <a href="activity.jsp?associationId=待完成学生的社团ID"><i class="iconfont icon-iconmingxinganli"></i>我的社团</a>
-      </li>
+	  <c:if test="${not empty sessionScope.Student}">
+	  	<c:if test="${not empty sessionScope.Student.association}">
+	      <li class="layui-nav-item ">
+	        <a href="activity.jsp?associationId=${sessionScope.Student.association.associationId}"><i class="iconfont icon-iconmingxinganli"></i>我的社团</a>
+	      </li>
+	    </c:if>
+	    <c:if test="${empty sessionScope.Student.association}">
+	      <li class="layui-nav-item ">
+	        你还没有加入社团
+	      </li>
+	    </c:if>
+      </c:if>
     </ul>
     
     <ul class="layui-nav pp-nav-user">
@@ -169,23 +178,23 @@ layui.config({
 }); */
 
 
-ajaxAssociation("",1,"desc","name");
+ajaxAssociation("",1,"desc","name",1);
 //点击首页
 $("#first").click(function(){
-	ajaxAssociation("",1,$("#orderType").val(),$("#orderField").val());
+	ajaxAssociation("",1,$("#orderType").val(),$("#orderField").val(),1);
 });
 //点击上一页
 $("#prev").click(function(){
-	ajaxAssociation("",parseInt($("#cur").text())-1,$("#orderType").val(),$("#orderField").val());
+	ajaxAssociation("",parseInt($("#cur").text())-1,$("#orderType").val(),$("#orderField").val(),1);
 });
 //点击下一页
 $("#next").click(function(){
 	//alert(parseInt($("#cur").text())+1);
-	ajaxAssociation("",parseInt($("#cur").text())+1,$("#orderType").val(),$("#orderField").val());
+	ajaxAssociation("",parseInt($("#cur").text())+1,$("#orderType").val(),$("#orderField").val(),1);
 });
 //点击尾页
 $("#last").click(function(){
-	ajaxAssociation("",$("#tot").text(),$("#orderType").val(),$("#orderField").val());
+	ajaxAssociation("",$("#tot").text(),$("#orderType").val(),$("#orderField").val(),1);
 });
 //根据活动名排序
 $("#rank2").click(function(){
@@ -195,14 +204,14 @@ $("#rank2").click(function(){
 		$("#orderType").val("desc");
 	}
 	$("#orderField").val("name");
-	ajaxAssociation("",1,$("#orderType").val(),$("#orderField").val());
+	ajaxAssociation("",1,$("#orderType").val(),$("#orderField").val(),1);
 }); 
 
 //异步获取社团列表
-function ajaxAssociation(keyWord,curPage,orderType,orderField){
+function ajaxAssociation(keyWord,curPage,orderType,orderField,statusId){
 	$.ajax({
 		type:"POST",
-		url:"${pageContext.request.contextPath}/showAssociation.action?keyWord="+keyWord+"&curPage="+curPage+"&orderType="+orderType+"&orderField="+orderField,
+		url:"${pageContext.request.contextPath}/showAssociation.action?keyWord="+keyWord+"&curPage="+curPage+"&orderType="+orderType+"&orderField="+orderField+"&status.statusId="+statusId,
 		dataType:"json",
 		processData:false,
 		success:function(data){
