@@ -225,11 +225,55 @@ function ajaxAssociation(curPage,statusId){
 			  $("#del"+i).bind('click', function(){
 			    layer.open({
 			      type: 1,
-			      area: ['600px', '360px'],
-			      shadeClose: true, //点击遮罩关闭
-			      content: '\<\div style="padding:20px;">自定义内容\<\/div>',
+			      title:[''],
+			      content:'<div style="text-align:center;margin-top:40px;font-size:18px;">是否确认删除</div>',
+			      area: ['350px', '200px'],
+				  anim: 6,
+			      shadeClose: true, 
+				  btnAlign: 'c',
+			  	  btn: ['确认', '取消',]
+			  	  ,yes: function(index, layero){
+			    	//按钮【按钮一】的回调
+			  	  }
+			  	  ,btn2: function(index, layero){
+			    	//按钮【按钮二】的回调
+			    
+			    	//return false 开启该代码可禁止点击该按钮关闭
+			  	  }
+			  	  ,cancel: function(){ 
+			    	//右上角关闭回调
+			    	//return false 开启该代码可禁止点击该按钮关闭
+			  	  }
 			    });
 			  });
+			}
+			
+			//编辑按钮的jquery样式
+			for(var i=0;i<data.associationList.length;i++){
+				$("#update"+i).bind('click', function(){
+				    layer.open({
+				      type: 1,
+					  title: ['正在编辑', 'font-size:15px;'],
+				      area: ['540px', '300px'],
+				      shadeClose: true,
+					  content: '<form class="layui-form" action=""><div class="layui-form-item"><label class="layui-form-label">社团名称</label><div class="layui-input-block" style="width:200px"><input name="title" class="layui-input" type="text" placeholder="请输入内容" lay-verify="title" ></div></div><div class="layui-form-item layui-form-text"><label class="layui-form-label">社团简介</label><div class="layui-input-block" style="width:400px"><textarea class="layui-textarea" placeholder="请输入内容" style="max-height:400px;resize:none;"></textarea></div></div><form>',
+					  btnAlign: 'c',
+				  	  btn: ['确认修改', '取消',]
+				  	  ,yes: function(index, layero){
+				    	//按钮【按钮一】的回调
+				  	  }
+				  	  ,btn2: function(index, layero){
+				    	//按钮【按钮二】的回调
+				    
+				    	//return false 开启该代码可禁止点击该按钮关闭
+				  	  }
+				  	  ,cancel: function(){ 
+				    	//右上角关闭回调
+				    	//return false 开启该代码可禁止点击该按钮关闭
+				  	  }
+				
+				    });
+			    });
 			}
 		}
 	});	
@@ -256,11 +300,66 @@ function ajaxAssociationActivity(curPage){
 			  $("#delA"+i).bind('click', function(){
 			    layer.open({
 			      type: 1,
-			      area: ['600px', '360px'],
-			      shadeClose: true, //点击遮罩关闭
-			      content: '\<\div style="padding:20px;">自定义内容\<\/div>',
+			      title:[''],
+			      content:'<div style="text-align:center;margin-top:40px;font-size:18px;">是否确认删除</div>',
+			      area: ['350px', '200px'],
+				  anim: 6,
+			      shadeClose: true, 
+				  btnAlign: 'c',
+			  	  btn: ['确认', '取消',]
+			  	  ,yes: function(index, layero){
+			    	//按钮【按钮一】的回调
+			  	  }
+			  	  ,btn2: function(index, layero){
+			    	//按钮【按钮二】的回调
+			    
+			    	//return false 开启该代码可禁止点击该按钮关闭
+			  	  }
+			  	  ,cancel: function(){ 
+			    	//右上角关闭回调
+			    	//return false 开启该代码可禁止点击该按钮关闭
+			  	  }
 			    });
 			  });
+			}
+			
+			//编辑按钮的jquery样式
+			for(var i=0;i<data.list.length;i++){
+				$("#updateA"+i).bind('click', function(){
+				    layui.use('laydate', function(){
+				  	var laydate = layui.laydate;
+					var s='某个社团';//默认社团名称
+				  	//日期
+				  	laydate.render({
+						elem: '#test1'
+				  	});
+				  	laydate.render({
+				    	elem: '#test2'
+				  	});
+				    layer.open({
+				      type: 1,
+					  title: ['正在编辑', 'font-size:15px;'],
+				      area: ['540px', '400px'],
+				      shadeClose: true,
+					  content: '<form class="layui-form" action=""><div class="layui-form-item"><label class="layui-form-label">社团</label><div class="layui-input-block" style="width:200px"><input name="title" class="layui-input" type="text" placeholder='+s+' lay-verify="title" disabled></div></div><div class="layui-form-item"><label class="layui-form-label">活动名称</label><div class="layui-input-block" style="width:200px"><input name="title" class="layui-input" type="text" placeholder="请输入内容" lay-verify="title" ></div></div><div class="layui-form-item layui-form-text"><label class="layui-form-label">活动简介</label><div class="layui-input-block"><textarea class="layui-textarea" placeholder="请输入内容" style="width:400px"></textarea></div></div><div class="layui-form"><div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label">活动时间</label><div class="layui-input-inline" style="width:120px"><input class="layui-input" id="test1" type="text" placeholder="yyyy-MM-dd" ></div></div><div class="layui-inline"><div class="layui-form-mid">-</div><div class="layui-input-inline" style="width:120px"><input class="layui-input" id="test2" type="text" placeholder="yyyy-MM-dd"></div></div></div></div><form>',
+					  btnAlign: 'c',
+				  	  btn: ['确认修改', '取消',]
+				  	  ,yes: function(index, layero){
+				    	//按钮【按钮一】的回调
+				  	  }
+				  	  ,btn2: function(index, layero){
+				    	//按钮【按钮二】的回调
+				    
+				    	//return false 开启该代码可禁止点击该按钮关闭
+				  	  }
+				  	  ,cancel: function(){ 
+				    	//右上角关闭回调
+				    	//return false 开启该代码可禁止点击该按钮关闭
+				  	  }
+				
+				    });
+				  });
+			    });
 			}
 		}
 	});	
