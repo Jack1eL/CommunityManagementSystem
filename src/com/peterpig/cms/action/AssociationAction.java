@@ -201,7 +201,8 @@ public class AssociationAction extends ActionSupport implements
 		}
 		if(orderType=="asc" || orderType=="")
 			orderType="desc";
-		associationList=this.biz.showAssociation(keyWord, curPage, pageSize, orderType, orderField, association.getAssociationId());
+		//System.out.println(association.getStatus().getStatusId());
+		associationList=this.biz.showAssociation(keyWord, curPage, pageSize, orderType, orderField, association.getStatus().getStatusId());
 		//判断
 		if(associationList!=null){
 			message="查询成功!";
