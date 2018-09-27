@@ -159,6 +159,8 @@ layui.config({
 }).extend({
   pp: 'index'
 }).use('pp');
+
+
 //----------------社团活动列表相关
 //进入页面时异步请求第一页的社团活动列表
 ajaxAssociationActivity(1);
@@ -202,24 +204,58 @@ $("#last").click(function(){
 	ajaxAssociation($("#tot").text(),0);
 });
 
+var getI;
+function caonima(thisId){
+	getI=thisId;
+}
 
+//异步删除社团
+function ajaxDeleteAssociation(associationId){
+	$.ajax({
+		type:"POST",
+		url:"${pageContext.request.contextPath}/removeAssociation.action?associationId="+associationId,
+		dataType:"json",
+		processData:false,
+		success:function(data){
+			setTimeout(function(){
+				window.location.reload();
+			}, 1000);
+		}
+	});	
+}
+
+//异步删除社团活动
+function ajaxDeleteActivity(activityId){
+	$.ajax({
+		type:"POST",
+		url:"${pageContext.request.contextPath}/deleteActivity.action?activityId="+activityId,
+		dataType:"json",
+		processData:false,
+		success:function(data){
+			alert("删除成功");
+			window.location.reload();	
+		}
+	});	
+}
 
 //异步请求社团列表，进行分页查询
 function ajaxAssociation(curPage,statusId){
 	$.ajax({
 		type:"POST",
-		url:"${pageContext.request.contextPath}/showAssociation.action?keyWord="+""+"&curPage="+curPage+"&orderType=desc&orderField=name+&status.statusId="+statusId,
+		url:"${pageContext.request.contextPath}/showAssociation.action?keyWord="+""+"&curPage="+curPage+"&orderType=desc&orderField=associationId+&status.statusId="+statusId,
 		dataType:"json",
 		processData:false,
 		success:function(data){
+			
 			$("#cur").text(data.curPage);		
 			$("#tot").text(data.totalPage);		
-			var code = '';
+		
 			for(var i=0;i<data.associationList.length;i++){
-				code+='<li><a class="jie-title" href="${pageContext.request.contextPath}/jie/detail.html" target="_blank">' +data.associationList[i].name+ '</a><i>' +data.associationList[i].explains+ '</i><div class="pp-admin-box data-id=123"><button class="layui-btn layui-btn-xs" id="update'+i+'">编辑</button><button class="layui-btn layui-btn-xs" id="del'+i+'">删除</button></div><em>' +data.associationList[i].status.statusName+ '</em></li>';
-				$("#backAssociation").html(code);
 				
-			}
+				$("#backAssociation").append('<li><a class="jie-title" href="${pageContext.request.contextPath}/jie/detail.html" target="_blank">' +data.associationList[i].name+ '</a><i>' +data.associationList[i].explains+ '</i><div class="pp-admin-box data-id=123"><button class="layui-btn layui-btn-xs" id="update'+i+'">编辑</button><button class="layui-btn layui-btn-xs" id="del'+i+'" onClick="caonima(' +data.associationList[i].associationId+ ')">删除</button></div><em>' +data.associationList[i].status.statusName+ '</em></li>');
+				
+			}	
+						//删除按钮的jqeury样式
 			//删除按钮的jqeury样式
 			for(var i=0;i<data.associationList.length;i++){
 			  $("#del"+i).bind('click', function(){
@@ -233,7 +269,9 @@ function ajaxAssociation(curPage,statusId){
 				  btnAlign: 'c',
 			  	  btn: ['确认', '取消',]
 			  	  ,yes: function(index, layero){
-			    	//按钮【按钮一】的回调
+			    	ajaxDeleteAssociation(getI);
+			    	layer.closeAll();
+					layer.msg("删除成功");
 			  	  }
 			  	  ,btn2: function(index, layero){
 			    	//按钮【按钮二】的回调
@@ -250,13 +288,23 @@ function ajaxAssociation(curPage,statusId){
 			
 			//编辑按钮的jquery样式
 			for(var i=0;i<data.associationList.length;i++){
-				$("#update"+i).bind('click', function(){
+				$("#updateA"+i).bind('click', function(){
+				    layui.use('laydate', function(){
+				  	var laydate = layui.laydate;
+					var s='某个社团';//默认社团名称
+				  	//日期
+				  	laydate.render({
+						elem: '#test1'
+				  	});
+				  	laydate.render({
+				    	elem: '#test2'
+				  	});
 				    layer.open({
 				      type: 1,
 					  title: ['正在编辑', 'font-size:15px;'],
-				      area: ['540px', '300px'],
+				      area: ['540px', '400px'],
 				      shadeClose: true,
-					  content: '<form class="layui-form" action=""><div class="layui-form-item"><label class="layui-form-label">社团名称</label><div class="layui-input-block" style="width:200px"><input name="title" class="layui-input" type="text" placeholder="请输入内容" lay-verify="title" ></div></div><div class="layui-form-item layui-form-text"><label class="layui-form-label">社团简介</label><div class="layui-input-block" style="width:400px"><textarea class="layui-textarea" placeholder="请输入内容" style="max-height:400px;resize:none;"></textarea></div></div><form>',
+					  content: '<form class="layui-form" action=""><div class="layui-form-item"><label class="layui-form-label">社团</label><div class="layui-input-block" style="width:200px"><input name="title" class="layui-input" type="text" placeholder='+s+' lay-verify="title" disabled></div></div><div class="layui-form-item"><label class="layui-form-label">活动名称</label><div class="layui-input-block" style="width:200px"><input name="title" class="layui-input" type="text" placeholder="请输入内容" lay-verify="title" ></div></div><div class="layui-form-item layui-form-text"><label class="layui-form-label">活动简介</label><div class="layui-input-block"><textarea class="layui-textarea" placeholder="请输入内容" style="width:400px"></textarea></div></div><div class="layui-form"><div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label">活动时间</label><div class="layui-input-inline" style="width:120px"><input class="layui-input" id="test1" type="text" placeholder="yyyy-MM-dd" ></div></div><div class="layui-inline"><div class="layui-form-mid">-</div><div class="layui-input-inline" style="width:120px"><input class="layui-input" id="test2" type="text" placeholder="yyyy-MM-dd"></div></div></div></div></form>',
 					  btnAlign: 'c',
 				  	  btn: ['确认修改', '取消',]
 				  	  ,yes: function(index, layero){
@@ -273,6 +321,7 @@ function ajaxAssociation(curPage,statusId){
 				  	  }
 				
 				    });
+				  });
 			    });
 			}
 		}
@@ -291,7 +340,7 @@ function ajaxAssociationActivity(curPage){
 			$("#tot1").text(data.totalPage);		
 			var code = '';
 			for(var i=0;i<data.list.length;i++){
-				code+='<li><a class="jie-title" href="${pageContext.request.contextPath}/jie/detail.html" target="_blank">' +data.list[i].activityName+ '</a><i>' +data.list[i].explains+ '</i><div class="pp-admin-box data-id=123"><button class="layui-btn layui-btn-xs" id="updateA'+i+'">编辑</button><button class="layui-btn layui-btn-xs" id="delA'+i+'">删除</button></div><em>' +data.list[i].status.statusName+ '</em></li>';
+				code+='<li><a class="jie-title" href="${pageContext.request.contextPath}/jie/detail.html" target="_blank">' +data.list[i].activityName+ '</a><i>' +data.list[i].explains+ '</i><div class="pp-admin-box data-id=123"><button class="layui-btn layui-btn-xs" id="updateA'+i+'">编辑</button><button class="layui-btn layui-btn-xs" id="delA'+i+'" onClick="caonima(' +data.list[i].activityId+ ')">删除</button></div><em>' +data.list[i].status.statusName+ '</em></li>';
 				$("#activityList").html(code);
 			}
 			
@@ -308,7 +357,8 @@ function ajaxAssociationActivity(curPage){
 				  btnAlign: 'c',
 			  	  btn: ['确认', '取消',]
 			  	  ,yes: function(index, layero){
-			    	//按钮【按钮一】的回调
+			      	ajaxDeleteActivity(getI);
+			      	layer.closeAll();
 			  	  }
 			  	  ,btn2: function(index, layero){
 			    	//按钮【按钮二】的回调
