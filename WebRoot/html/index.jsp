@@ -103,8 +103,10 @@
     <ul class="layui-tab-title">
       <li id="rank1"><a href="javascript:void(0)">按时间排序</a></li>
       <li class="layui-this" id="rank2"><a href="javascript:void(0)" >按社团名排序</a></li>
-      <c:if test="${empty sessionScope.Student.association}">
-      	<a class="layui-btn" style="float:right;" href="${pageContext.request.contextPath}/html/add-association.jsp">申请社团</a>
+      <c:if test="${not empty sessionScope.Student}">
+	      <c:if test="${empty sessionScope.Student.association }">
+	      	<a class="layui-btn" style="float:right;" href="${pageContext.request.contextPath}/html/add-association.jsp">申请社团</a>
+	      </c:if>
       </c:if>
     </ul>
   </div>
@@ -140,7 +142,7 @@
 </div>
 
 <div class="pp-footer">
-  <p><a href="" target="_blank">PP技术支持</a> 2017 &copy; <a href="" target="_blank">pp出品</a><a href="${pageContext.request.contextPath}/html/user/home.jsp" target="_blank">管理员模式</a></p>
+  <p><a href="" target="_blank">PP技术支持</a> 2018 &copy; <a href="" target="_blank">pp出品</a><a href="${pageContext.request.contextPath}/html/user/home.jsp" target="_blank">管理员模式</a></p>
   <p>
 	<a href="" target="_blank">如</a>
     <a href="" target="_blank">商业合作</a>
