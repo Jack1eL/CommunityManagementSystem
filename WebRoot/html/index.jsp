@@ -102,7 +102,10 @@
   <div class="layui-tab layui-tab-brief">
     <ul class="layui-tab-title">
       <li id="rank1"><a href="javascript:void(0)">按时间排序</a></li>
-      <li class="layui-this" id="rank2"><a href="javascript:void(0)" >按活动名排序</a></li>
+      <li class="layui-this" id="rank2"><a href="javascript:void(0)" >按社团名排序</a></li>
+      <c:if test="${empty sessionScope.Student.association}">
+      	<a class="layui-btn" style="float:right;" href="${pageContext.request.contextPath}/html/add-association.jsp">申请社团</a>
+      </c:if>
     </ul>
   </div>
   <!-- 列表区 -->
@@ -221,7 +224,7 @@ function ajaxAssociation(keyWord,curPage,orderType,orderField,statusId){
 			$("#orderField").val(data.orderField);
 			var code = '';
 			for(var i=0;i<data.associationList.length;i++){
-				code+='<li><a class="act-img" href="activity.jsp?associationId='+data.associationList[i].associationId+'"><img src="${pageContext.request.contextPath}/res/images/main.jpg"/><span class="act-num">'+"已有"+'<strong class="act-img-t">'+"n"+'</strong>'+"人关注"+'</span><span class="act-number">'+"##人"+'</span></a><div class="act-inner"><h4  href="activity.html" title="">'+data.associationList[i].name+'</h4><span style="color:#01aaed">'+data.associationList[i].explains+'</span><p></p></div></li>';
+				code+='<li><a class="act-img" href="${pageContext.request.contextPath}/html/activity.jsp?associationId='+data.associationList[i].associationId+'"><img src="${pageContext.request.contextPath}/res/images/main.jpg"/><span class="act-num">'+"已有"+'<strong class="act-img-t">'+"n"+'</strong>'+"人关注"+'</span><span class="act-number">'+"##人"+'</span></a><div class="act-inner"><h4  href="activity.html" title="">'+data.associationList[i].name+'</h4><span style="color:#01aaed">'+data.associationList[i].explains+'</span><p></p></div></li>';
 				$("#act-list").html(code);
 			}
 		}

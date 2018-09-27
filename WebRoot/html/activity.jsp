@@ -56,7 +56,7 @@
 	          <dd><a href="../user/message.html"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
 	          <dd><a href="../user/home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
 	          <hr style="margin: 5px 0;">
-	          <dd><a href="" style="text-align: center;">退出</a></dd>
+	          <dd><a href="${pageContext.request.contextPath}/logoutStudent.action" style="text-align: center;">退出</a></dd>
 	        </dl>
 	      </li>
       </c:if>
@@ -86,7 +86,9 @@
       <div class="pp-panel">
         <div class="pp-panel-title pp-filter">
           <a>活动列表</a>
-        
+          <c:if test="${sessionScope.Student.position.positionId==1}">
+          	<a class="layui-btn" style="color:white;float:right;" href="${pageContext.request.contextPath}/html/add-activity.jsp?associationId=${param.associationId}">增加活动</a>
+          </c:if>
         </div>
         <ul class="pp-list" id="as-list">
             
