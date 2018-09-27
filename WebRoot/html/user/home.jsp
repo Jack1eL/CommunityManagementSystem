@@ -122,14 +122,14 @@
 	</c:if>
 
 <div class="pp-footer">
-  <p><a href="/" target="_blank">PP技术支持</a> 2017 &copy; <a href="/" target="_blank">pp出品</a> <a href="/" target="_blank">管理员模式</a></p>
+  <p><a href="" target="_blank">PP技术支持</a> 2018 &copy; <a href="" target="_blank">pp出品</a><a href="${pageContext.request.contextPath}/html/user/home.jsp" target="_blank">管理员模式</a></p>
   <p>
-	<a href="/" target="_blank">如</a>
-    <a href="/" target="_blank">商业合作</a>
-	<a href="/" target="_blank">或</a>
-    <a href="/" target="_blank">招聘我们</a>
-	<a href="/" target="_blank">请</a>
-    <a href="/" target="_blank">加我微信</a>
+	<a href="" target="_blank">如</a>
+    <a href="" target="_blank">商业合作</a>
+	<a href="" target="_blank">或</a>
+    <a href="" target="_blank">招聘我们</a>
+	<a href="" target="_blank">请</a>
+    <a href="" target="_blank">加我微信</a>
 	 
   </p>
 </div>
