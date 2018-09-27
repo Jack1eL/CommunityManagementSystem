@@ -176,7 +176,7 @@ public class AssociationAction extends ActionSupport implements
 		flag=this.biz.removeAssociation(association.getAssociationId());
 		if(flag){
 			message="删除社团成功!";
-			return ERROR;
+			return SUCCESS;
 		}else{
 			message="当前业务繁忙!";
 			return ERROR;
@@ -188,8 +188,9 @@ public class AssociationAction extends ActionSupport implements
 	 * @return
 	 */
 	public String showAssociation(){
+		System.out.println();
 		/** 获取查询出的总记录条数  */
-		totalPage=(int)(Math.ceil((double)this.biz.getPages( association.getAssociationId(),keyWord)/pageSize));
+		totalPage=(int)(Math.ceil((double)this.biz.getPages( association.getStatus().getStatusId(),keyWord)/pageSize));
 		if(curPage==null || curPage<1){
 			curPage=1;
 		}

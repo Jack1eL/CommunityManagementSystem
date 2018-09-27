@@ -89,6 +89,19 @@ public class AssociationActivityAction extends ActionSupport implements
 	}
 	
 	/*-----------------------------业务-----------------------------*/
+	
+	public String delete(){
+		boolean flag=biz.deleteActivity(associationActivity.getActivityId());
+		if(flag){
+			message="删除成功";
+			return SUCCESS;
+		}else{
+			message="删除失败";
+			return INPUT;
+		}
+	}
+	
+	
 	public String findAll(){
 		totalPage=(int)(Math.ceil(((double)biz.getAllCount(keyWord))/pageSize));
 		if(curPage==null || curPage<1){
