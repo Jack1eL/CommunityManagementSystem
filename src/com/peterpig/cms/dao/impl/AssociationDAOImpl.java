@@ -30,13 +30,15 @@ public class AssociationDAOImpl extends OpenTransactionUtils implements
 		try{
 			/* 如果要添加社团则需要先通过审核 */
 			Association association=new Association();
-			AuditStatus status= (AuditStatus)session.get(AuditStatus.class, bean.getAssociationId());//查询出未通过审核的数据
+			AuditStatus status= (AuditStatus)session.get(AuditStatus.class, 2);//查询出未通过审核的数据
 			Student student=(Student)session.get(Student.class, studentId);
+			AssociationPosition position=(AssociationPosition) session.get(AssociationPosition.class, 1);
 			//将要添加的信息set进对象属性值中进行保存
 			association.setName(bean.getName());
 			association.setExplains(bean.getExplains());
 			association.setStatus(status);
 			student.setAssociation(association);
+			student.setPosition(position);
 			session.save(association);
 			session.save(student);
 			transaction.commit();
@@ -80,8 +82,8 @@ public class AssociationDAOImpl extends OpenTransactionUtils implements
 		boolean flag=false;
 		super.openTransaction(); //开启事务
 		try{
-			Association association=(Association) session.get(Association.class, 1);
-			AssociationPosition position=(AssociationPosition) session.get(AssociationPosition.class, 4);
+			Association association=(Association) session.get(Association.class, id);
+			AssociationPosition position=(AssociationPosition) session.get(AssociationPosition.class, 3);
 			/***
 			 * 当次社团被删除，则所有的学生的职位改为普通学生，需要遍历修改
 			 */
@@ -151,7 +153,7 @@ public class AssociationDAOImpl extends OpenTransactionUtils implements
 		Long count=0L;   //创建一个长整型变量,便于获取查询结果进行返回
 		super.openTransaction();
 		try{
-			System.out.println(keyWord);
+			//System.out.println(beanId);
 			//创建查询语句，根据用户提供的关键字查询记录总数
 			String hql="select count(association_id) from Association where name like ? or explains like ? or status_id like ?";		
 			Query query=session.createQuery(hql);   //创建查询
