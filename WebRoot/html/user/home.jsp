@@ -20,7 +20,7 @@
 <div class="pp-header layui-bg-black">
   <div class="layui-container">
     <a class="pp-logo" href="/">
-      <img src="../../res/images/logo.png" alt="layui">
+      <!-- <img src="../res/images/logo.png" alt="layui"> -->
     </a>
     <ul class="layui-nav pp-nav layui-hide-xs">
       <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/html/index.jsp"><i class="iconfont icon-jiaoliu"></i>前台主页</a> </li>
