@@ -31,17 +31,17 @@
 
 <div class="pp-header layui-bg-black">
   <div class="layui-container">
-    <a class="pp-logo" href="/">
+    <a class="pp-logo" href="">
       <!-- <img src="../res/images/logo.png" alt="layui"> -->
     </a>
     <ul class="layui-nav pp-nav layui-hide-xs">
       <li class="layui-nav-item layui-this"> 
-		  <a href="index.jsp"><i class="iconfont icon-jiaoliu"></i>主页</a> 
+		  <a href="${pageContext.request.contextPath}/html/index.jsp"><i class="iconfont icon-jiaoliu"></i>主页</a> 
 	  </li>
 	  <c:if test="${not empty sessionScope.Student}">
 	  	<c:if test="${not empty sessionScope.Student.association}">
 	      <li class="layui-nav-item ">
-	        <a href="activity.jsp?associationId=${sessionScope.Student.association.associationId}"><i class="iconfont icon-iconmingxinganli"></i>我的社团</a>
+	        <a href="${pageContext.request.contextPath}/html/activity.jsp?associationId=${sessionScope.Student.association.associationId}"><i class="iconfont icon-iconmingxinganli"></i>我的社团</a>
 	      </li>
 	    </c:if>
 	    <c:if test="${empty sessionScope.Student.association}">
@@ -56,7 +56,7 @@
       <c:if test="${empty sessionScope.Student}">
 	      <!-- 未登入的状态 -->
 	      <li class="layui-nav-item">
-	        <a class="iconfont icon-touxiang layui-hide-xs" href="${pageContext.request.contextPath}/user/login.html"></a>
+	        <a class="iconfont icon-touxiang layui-hide-xs" href="${pageContext.request.contextPath}/html/user/login.jsp"></a>
 	      </li>
 	      <li class="layui-nav-item">
 	        <a href="${pageContext.request.contextPath}/html/user/login.jsp">登入</a>
