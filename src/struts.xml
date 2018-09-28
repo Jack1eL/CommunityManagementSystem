@@ -88,6 +88,7 @@
 	<package name="Admin" namespace="/" extends="json-default,comm">
 		<action name="loginAdmin" class="com.peterpig.cms.action.AdminAction" method="login">
 			<result name="loginOK" type="redirect">/html/user/backindex.jsp</result>
+			<result name="loginFAIL" type="dispatcher">/html/error.jsp</result>
 		</action>
 		<action name="logoutAdmin" class="com.peterpig.cms.action.AdminAction" method="logout">
 			<result name="logoutOK" type="redirect">/html/user/home.jsp</result>
@@ -97,6 +98,7 @@
 	<package name="Student" namespace="/" extends="json-default,comm">
 		<action name="loginStudent" class="com.peterpig.cms.action.StudentAction" method="login">
 			<result name="loginOK" type="redirect">/html/index.jsp</result>
+			<result name="loginFAIL" type="dispatcher">/html/error.jsp</result>
 		</action>
 		<action name="logoutStudent" class="com.peterpig.cms.action.StudentAction" method="logout">
 			<result name="logoutOK" type="redirect">/html/index.jsp</result>
