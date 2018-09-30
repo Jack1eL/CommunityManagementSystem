@@ -73,11 +73,11 @@
         </ul>
         <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
           <div class="layui-tab-item layui-show">
-            <form class="layui-form" action="">
+            <form class="layui-form" action="${pageContext.request.contextPath}/addActivity.action">
             	<div class="layui-form-item">
             		<label class="layui-form-label">社团</label>
             		<div class="layui-input-block" style="width:200px">
-            			<input name="title" class="layui-input" type="text" placeholder='+s+' lay-verify="title" disabled>
+            			<input class="layui-input" type="text" placeholder='+s+' lay-verify="title" disabled>
             		</div>
             	</div>
 	            <div class="layui-form-item">
@@ -108,6 +108,8 @@
 	           			</div>
 	           		</div>
 	           	</div>
+	           	<input name="association.associationId" value="${param.associationId}" type="text">
+	           	<input name="status.statusId" value="2" type="text">
 	           	<div class="layui-form-item">
 	                <button class="layui-btn" type="submit">发布活动</button>
 	                <a class="layui-btn" type="button" href="javascript:history.go(-1)">返回</a>

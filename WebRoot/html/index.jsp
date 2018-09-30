@@ -127,7 +127,7 @@
   <div style="clear:both;"></div>
   <!-- 分页区 -->
   <div style="text-align: center;">
-    <div class="laypage-main">
+    <div id="page" class="laypage-main">
       <button id="first">首页</button>
       <button id="prev">上一页</button>
       <div class="layui-bg-green">第<span id="cur"></span>页</div>
@@ -137,8 +137,8 @@
     </div>
   </div>
   <!-- 排序类型和字段的隐藏域 -->
-  <input id="orderType" type="text" />
-  <input id="orderField" type="text" />
+  <input id="orderType" type="hidden" />
+  <input id="orderField" type="hidden" />
 </div>
 
 <div class="pp-footer">
@@ -155,14 +155,14 @@
 </div>
 <script src="${pageContext.request.contextPath}/res/layui/layui.js"></script>
 <script>
-layui.cache.page = 'user';
+/* layui.cache.page = 'user';
 layui.cache.user = {
   username: '游客'
   ,uid: -1
   ,avatar: '${pageContext.request.contextPath}/res/images/avatar/00.jpg'
   ,experience: 83
   ,sex: '男'
-};
+}; */
 layui.config({
   version: "3.0.0"
   ,base: '${pageContext.request.contextPath}/res/mods/'
@@ -220,6 +220,9 @@ function ajaxAssociation(keyWord,curPage,orderType,orderField,statusId){
 		dataType:"json",
 		processData:false,
 		success:function(data){
+			if(data.totalPage<=1){
+				$("#page").css("display","none");
+			}
 			$("#cur").text(data.curPage);
 			$("#tot").text(data.totalPage);
 			$("#orderType").val(data.orderType);

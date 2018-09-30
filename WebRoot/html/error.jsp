@@ -82,7 +82,7 @@
 	<div class="pp-panel">
 	  <div class="pp-none">
 	    <h2><i class="iconfont icon-404"></i></h2>
-	    <p>${message}</p>
+	    <p><strong>${message}</strong></p>
 	  </div>
 	</div>
 </div>

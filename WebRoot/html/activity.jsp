@@ -25,10 +25,10 @@
       <!-- <img src="../res/images/logo.png" alt="layui"> -->
     </a>
     <ul class="layui-nav pp-nav layui-hide-xs">
-      <li class="layui-nav-item layui-this">
+      <li class="layui-nav-item">
         <a href="${pageContext.request.contextPath}/html/index.jsp"><i class="iconfont icon-jiaoliu"></i>主页</a>
       </li>
-      <li class="layui-nav-item">
+      <li class="layui-nav-item layui-this">
         <a href="${pageContext.request.contextPath}/html/activity.jsp?associationId=${sessionScope.Student.association.associationId}"><i class="iconfont icon-iconmingxinganli"></i>我的社团</a>
       </li>
     </ul>
@@ -40,7 +40,7 @@
 	        <a class="iconfont icon-touxiang layui-hide-xs" href="${pageContext.request.contextPath}/html/user/login.jsp"></a>
 	      </li>
 	      <li class="layui-nav-item">
-	        <a href="${pageContext.request.contextPath}/user/login.html">登入</a>
+	        <a href="${pageContext.request.contextPath}/html/user/login.jsp">登入</a>
 	      </li>
       </c:if>
       
@@ -67,17 +67,21 @@
 <div class="pp-panel pp-column">
   <div class="layui-container">
     <ul class="layui-clear">
-      <li class="layui-hide-xs layui-this"><a href="/"><span id="asso"></span>的活动</a></li> 
+      <li class="layui-hide-xs layui-this" style="font-size:20px; color:grey;">欢迎来到<span id="asso"></span>，在社团中享受快乐！</li> 
     </ul> 
     
     <div class="pp-column-right layui-hide-xs"> 
-      <span class="pp-search"><i class="layui-icon"></i></span> 
-      <a href="jie/add.html" class="layui-btn">搜索活动</a> 
-    </div> 
-    <div class="layui-hide-sm layui-show-xs-block" style="margin-top: -10px; padding-bottom: 10px; text-align: center;"> 
-      <a href="jie/add.html" class="layui-btn">搜索活动</a> 
-    </div> 
+		<form>
+           	<div class="layui-input-block" style="position: relative;top:10px;left: -53px;width: 300px">
+               <input type="text" class="layui-input">
+			</div>
+            <span class="pp-search" style="float: right;position: relative;top: -32px"><em class="layui-icon"></em></span>
+		</form>
+    </div>
   </div>
+</div>
+<div style="width:100%; height:400px; background-color:green;">
+<h1>社团篮子</h1>
 </div>
 
 <div class="layui-container">
@@ -87,7 +91,7 @@
         <div class="pp-panel-title pp-filter">
           <a>活动列表</a>
           <c:if test="${sessionScope.Student.position.positionId==1}">
-          	<a class="layui-btn" style="color:white;float:right;" href="${pageContext.request.contextPath}/html/add-activity.jsp?associationId=${param.associationId}">增加活动</a>
+          	<a class="layui-btn" style="color:white;float:right; margin-top:5px;" href="${pageContext.request.contextPath}/html/add-activity.jsp?associationId=${param.associationId}">增加活动</a>
           </c:if>
         </div>
         <ul class="pp-list" id="as-list">
@@ -95,7 +99,7 @@
         </ul>
       </div>
       <div style="text-align: center;">
-   		 <div class="laypage-main">
+   		 <div id="page" class="laypage-main">
    		 	  <button id="first">首页</button>
 		      <button id="prev">上一页</button>
 		      <div class="layui-bg-green">第<span id="cur"></span>页</div>
@@ -105,8 +109,8 @@
    		 </div>
   	  </div>
 	  <!-- 排序类型和字段的隐藏域 -->
-	  <input id="orderType" type="text" />
-	  <input id="orderField" type="text" />
+	  <input id="orderType" type="hidden" />
+	  <input id="orderField" type="hidden" />
       </div>
 	  <div class="layui-col-md4">
       <div class="pp-panel">
@@ -143,45 +147,36 @@
 	 
   </p>
 </div>
-<ul class="layui-fixbar">
-	<a  href="jie/add.html"><li class="layui-icon" style="background-color:#009688" lay-type="bar1"></li></a>
-</ul>
+
 <script src="${pageContext.request.contextPath}/res/layui/layui.js"></script>
 <script>
-layui.cache.page = 'jie';
-layui.cache.user = {
-  username: '游客'
-  ,uid: -1
-  ,avatar: '${pageContext.request.contextPath}/res/images/avatar/00.jpg'
-  ,experience: 83
-  ,sex: '男'
-};
+
 layui.config({
   version: "3.0.0"
   ,base: '${pageContext.request.contextPath}/res/mods/'
 }).extend({
   pp: 'index'
-}).use('pp');
+}).use('pp'); 
 
 
 //进入时请求所有的社团活动列表
-ajaxAssociationActivity("",1,"desc","activityName",${param.associationId});
+ajaxAssociationActivity("",1,"desc","activityName",${param.associationId},1);
 //点击首页
 $("#first").click(function(){
-	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val());
+	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val(),1);
 });
 //点击上一页
 $("#prev").click(function(){
-	ajaxAssociationActivity("",parseInt($("#cur").text())-1,$("#orderType").val(),$("#orderField").val());
+	ajaxAssociationActivity("",parseInt($("#cur").text())-1,$("#orderType").val(),$("#orderField").val(),1);
 });
 //点击下一页
 $("#next").click(function(){
 	//alert(parseInt($("#cur").text())+1);
-	ajaxAssociationActivity("",parseInt($("#cur").text())+1,$("#orderType").val(),$("#orderField").val());
+	ajaxAssociationActivity("",parseInt($("#cur").text())+1,$("#orderType").val(),$("#orderField").val(),1);
 });
 //点击尾页
 $("#last").click(function(){
-	ajaxAssociationActivity("",$("#tot").text(),$("#orderType").val(),$("#orderField").val());
+	ajaxAssociationActivity("",$("#tot").text(),$("#orderType").val(),$("#orderField").val(),1);
 });
 
 //根据时间排序
@@ -192,7 +187,7 @@ $("#rank1").click(function(){
 		$("#orderType").val("desc");
 	}
 	$("#orderField").val("activityBegin");
-	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val());
+	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val(),1);
 });
 //根据活动名排序
 $("#rank2").click(function(){
@@ -202,18 +197,20 @@ $("#rank2").click(function(){
 		$("#orderType").val("desc");
 	}
 	$("#orderField").val("activityName");
-	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val());
+	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val(),1);
 }); 
 
 //异步请求获取所有的社团活动列表
-function ajaxAssociationActivity(keyWord,curPage,orderType,orderField,associationId){
+function ajaxAssociationActivity(keyWord,curPage,orderType,orderField,associationId,statusId){
 	$.ajax({
 		type:"POST",
-		url:"${pageContext.request.contextPath}/findAllActivityByAssociationId.action?keyWord="+keyWord+"&curPage="+curPage+"&orderType="+orderType+"&orderField="+orderField+"&association.associationId="+associationId,
+		url:"${pageContext.request.contextPath}/findAllActivityByStatusId.action?keyWord="+keyWord+"&curPage="+curPage+"&orderType="+orderType+"&orderField="+orderField+"&association.associationId="+associationId+"&status.statusId="+statusId,
 		dataType:"json",
 		processData:false,
 		success:function(data){
-		
+			if(data.totalPage<=1){
+				$("#page").css("display","none");
+			}
 			if(data.list.length!=0){
 				$("#cur").text(data.curPage);
 				$("#tot").text(data.totalPage);
