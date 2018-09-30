@@ -93,9 +93,23 @@
       </ul>
       <div class="layui-tab-content" style="padding: 20px 0;">
         <div class="layui-tab-item layui-show">
-          <ul class="mine-view jie-row" id="backAssociation">
+          <!-- <ul class="mine-view jie-row" id="backAssociation">
             
-          </ul>
+          </ul> -->
+          <table class="layui-table" lay-skin="line">
+			  
+			  <thead>
+			    <tr>
+			      <th>社团名</th>
+			      <th>社团简介</th>
+			      <th>操作</th>
+			      <th>状态</th>
+			    </tr> 
+			  </thead>
+			  <tbody id="backAssociation">
+			    
+			  </tbody>
+		  </table>
           <div style="clear:both;"></div>
 	         	<!-- 分页区 -->
 			<div style="text-align: center;">
@@ -113,9 +127,26 @@
         <div class="layui-tab-item">
           
 			
-			<ul class="mine-view jie-row" id="activityList">
+		  <!-- <ul class="mine-view jie-row" id="activityList">
           	
-          </ul>
+          </ul> -->
+          <table class="layui-table" lay-skin="line">
+			  
+			  <thead>
+			    <tr>
+			      <th>活动名</th>
+			      <th>活动简介</th>
+			      <th>所属社团</th>
+			      <th>开始时间</th>
+			      <th>结束时间</th>
+			      <th>操作</th>
+			      <th>状态</th>
+			    </tr> 
+			  </thead>
+			  <tbody id="actList">
+			  
+			  </tbody>
+		  </table>
           <!-- 分页区 -->
 			<div style="text-align: center;">
 			  <div class="laypage-main">
@@ -155,8 +186,7 @@ layui.config({
   ,base: '../../res/mods/'
 }).extend({
   pp: 'index'
-}).use('pp'); 
-
+}).use('pp');
 
 //----------------社团活动列表相关
 //进入页面时异步请求第一页的社团活动列表
@@ -243,7 +273,7 @@ function ajaxAssociation(curPage,statusId){
 		dataType:"json",
 		processData:false,
 		success:function(data){
-			
+			$("#backAssociation").empty();
 			$("#cur").text(data.curPage);		
 			$("#tot").text(data.totalPage);		
 			var count=0;
@@ -251,8 +281,17 @@ function ajaxAssociation(curPage,statusId){
 				if(data.associationList[i].status.statusId==2){
 					count++;
 				}
-				$("#backAssociation").append('<li><a class="jie-title" href="${pageContext.request.contextPath}/jie/detail.html" target="_blank">' +data.associationList[i].name+ '</a><i>' +data.associationList[i].explains+ '</i><div class="pp-admin-box data-id=123"><button class="layui-btn layui-btn-xs" id="update'+i+'">编辑</button><button class="layui-btn layui-btn-xs" id="del'+i+'" onClick="caonima(' +data.associationList[i].associationId+ ')">删除</button></div><em>' +data.associationList[i].status.statusName+ '</em></li>');
-				
+				var str="";
+				if(data.associationList[i].explains.length>=5){
+					str=data.associationList[i].explains.substring(0,4)+"...";
+				}else{
+					str=data.associationList[i].explains.substring(0,data.associationList[i].explains.length);
+				}
+				if(data.associationList[i].status.statusId==1 || data.associationList[i].status.statusId==3){
+					$("#backAssociation").append('<tr><td>'+data.associationList[i].name+'</td><td title="'+data.associationList[i].explains+'">' +str+ '</td><td><button class="layui-btn layui-btn-xs" id="del'+i+'" onClick="caonima(' +data.associationList[i].associationId+ ')">删除</button></td><td>'+data.associationList[i].status.statusName+'</td></tr>');
+				}else{
+					$("#backAssociation").append('<tr><td>'+data.associationList[i].name+'</td><td title="'+data.associationList[i].explains+'">' +str+ '</td><td><button class="layui-btn layui-btn-xs">通过</button><button class="layui-btn layui-btn-xs">拒绝</button><button class="layui-btn layui-btn-xs" id="del'+i+'" onClick="caonima(' +data.associationList[i].associationId+ ')">删除</button></td><td>'+data.associationList[i].status.statusName+'</td></tr>');
+				}
 			}
 			if(count==0){
 				$("#redDot1").css("display","none");
@@ -289,44 +328,7 @@ function ajaxAssociation(curPage,statusId){
 			  });
 			}
 			
-			//编辑按钮的jquery样式
-			for(var i=0;i<data.associationList.length;i++){
-				$("#updateA"+i).bind('click', function(){
-				    layui.use('laydate', function(){
-				  	var laydate = layui.laydate;
-					var s='某个社团';//默认社团名称
-				  	//日期
-				  	laydate.render({
-						elem: '#test1'
-				  	});
-				  	laydate.render({
-				    	elem: '#test2'
-				  	});
-				    layer.open({
-				      type: 1,
-					  title: ['正在编辑', 'font-size:15px;'],
-				      area: ['540px', '400px'],
-				      shadeClose: true,
-					  content: '<form class="layui-form" action=""><div class="layui-form-item"><label class="layui-form-label">社团</label><div class="layui-input-block" style="width:200px"><input name="title" class="layui-input" type="text" placeholder='+s+' lay-verify="title" disabled></div></div><div class="layui-form-item"><label class="layui-form-label">活动名称</label><div class="layui-input-block" style="width:200px"><input name="title" class="layui-input" type="text" placeholder="请输入内容" lay-verify="title" ></div></div><div class="layui-form-item layui-form-text"><label class="layui-form-label">活动简介</label><div class="layui-input-block"><textarea class="layui-textarea" placeholder="请输入内容" style="width:400px"></textarea></div></div><div class="layui-form"><div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label">活动时间</label><div class="layui-input-inline" style="width:120px"><input class="layui-input" id="test1" type="text" placeholder="yyyy-MM-dd" ></div></div><div class="layui-inline"><div class="layui-form-mid">-</div><div class="layui-input-inline" style="width:120px"><input class="layui-input" id="test2" type="text" placeholder="yyyy-MM-dd"></div></div></div></div></form>',
-					  btnAlign: 'c',
-				  	  btn: ['确认修改', '取消',]
-				  	  ,yes: function(index, layero){
-				    	//按钮【按钮一】的回调
-				  	  }
-				  	  ,btn2: function(index, layero){
-				    	//按钮【按钮二】的回调
-				    
-				    	//return false 开启该代码可禁止点击该按钮关闭
-				  	  }
-				  	  ,cancel: function(){ 
-				    	//右上角关闭回调
-				    	//return false 开启该代码可禁止点击该按钮关闭
-				  	  }
-				
-				    });
-				  });
-			    });
-			}
+			
 		}
 	});	
 }
@@ -339,16 +341,25 @@ function ajaxAssociationActivity(curPage){
 		dataType:"json",
 		processData:false,
 		success:function(data){
+			$("#actList").empty();
 			$("#cur1").text(data.curPage);		
-			$("#tot1").text(data.totalPage);		
-			var code = '';
+			$("#tot1").text(data.totalPage);
 			var count=0;
 			for(var i=0;i<data.list.length;i++){
 				if(data.list[i].status.statusId==2){
 					count++;
 				}
-				code+='<li><a class="jie-title" href="${pageContext.request.contextPath}/jie/detail.html" target="_blank">' +data.list[i].activityName+ '</a><i>' +data.list[i].explains+ '</i><div class="pp-admin-box data-id=123"><button class="layui-btn layui-btn-xs" id="updateA'+i+'">编辑</button><button class="layui-btn layui-btn-xs" id="delA'+i+'" onClick="caonima(' +data.list[i].activityId+ ')">删除</button></div><em>' +data.list[i].status.statusName+ '</em></li>';
-				$("#activityList").html(code);
+				var str="";
+				if(data.list[i].explains.length>=5){
+					str=data.list[i].explains.substring(0,4)+"...";
+				}else{
+					str=data.list[i].explains.substring(0,data.list[i].explains.length);
+				}
+				if(data.list[i].status.statusId==1 || data.list[i].status.statusId==3){
+					$("#actList").append('<tr><td>'+data.list[i].activityName+'</td><td title="'+data.list[i].explains+'">' +str+ '</td><td>'+data.list[i].association.name+'</td><td>' +data.list[i].activityBegin+ '</td><td>' +data.list[i].activityEnd+ '</td><td><button class="layui-btn layui-btn-xs" id="delA'+i+'" onClick="caonima(' +data.list[i].activityId+ ')">删除</button></td><td>'+data.list[i].status.statusName+'</td></tr>');
+				}else{
+					$("#actList").append('<tr><td>'+data.list[i].activityName+'</td><td title="'+data.list[i].explains+'">' +str+ '</td><td>'+data.list[i].association.name+'</td><td>' +data.list[i].activityBegin+ '</td><td>' +data.list[i].activityEnd+ '</td><td><button class="layui-btn layui-btn-xs">通过</button><button class="layui-btn layui-btn-xs">拒绝</button><button class="layui-btn layui-btn-xs" id="delA'+i+'" onClick="caonima(' +data.list[i].activityId+ ')">删除</button></td><td>'+data.list[i].status.statusName+'</td></tr>');
+				}
 			}
 			if(count==0){
 				$("#redDot2").css("display","none");
@@ -384,44 +395,7 @@ function ajaxAssociationActivity(curPage){
 			  });
 			}
 			
-			//编辑按钮的jquery样式
-			for(var i=0;i<data.list.length;i++){
-				$("#updateA"+i).bind('click', function(){
-				    layui.use('laydate', function(){
-				  	var laydate = layui.laydate;
-					var s='某个社团';//默认社团名称
-				  	//日期
-				  	laydate.render({
-						elem: '#test1'
-				  	});
-				  	laydate.render({
-				    	elem: '#test2'
-				  	});
-				    layer.open({
-				      type: 1,
-					  title: ['正在编辑', 'font-size:15px;'],
-				      area: ['540px', '400px'],
-				      shadeClose: true,
-					  content: '<form class="layui-form" action=""><div class="layui-form-item"><label class="layui-form-label">社团</label><div class="layui-input-block" style="width:200px"><input name="title" class="layui-input" type="text" placeholder='+s+' lay-verify="title" disabled></div></div><div class="layui-form-item"><label class="layui-form-label">活动名称</label><div class="layui-input-block" style="width:200px"><input name="title" class="layui-input" type="text" placeholder="请输入内容" lay-verify="title" ></div></div><div class="layui-form-item layui-form-text"><label class="layui-form-label">活动简介</label><div class="layui-input-block"><textarea class="layui-textarea" placeholder="请输入内容" style="width:400px"></textarea></div></div><div class="layui-form"><div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label">活动时间</label><div class="layui-input-inline" style="width:120px"><input class="layui-input" id="test1" type="text" placeholder="yyyy-MM-dd" ></div></div><div class="layui-inline"><div class="layui-form-mid">-</div><div class="layui-input-inline" style="width:120px"><input class="layui-input" id="test2" type="text" placeholder="yyyy-MM-dd"></div></div></div></div><form>',
-					  btnAlign: 'c',
-				  	  btn: ['确认修改', '取消',]
-				  	  ,yes: function(index, layero){
-				    	//按钮【按钮一】的回调
-				  	  }
-				  	  ,btn2: function(index, layero){
-				    	//按钮【按钮二】的回调
-				    
-				    	//return false 开启该代码可禁止点击该按钮关闭
-				  	  }
-				  	  ,cancel: function(){ 
-				    	//右上角关闭回调
-				    	//return false 开启该代码可禁止点击该按钮关闭
-				  	  }
-				
-				    });
-				  });
-			    });
-			}
+			
 		}
 	});	
 }
