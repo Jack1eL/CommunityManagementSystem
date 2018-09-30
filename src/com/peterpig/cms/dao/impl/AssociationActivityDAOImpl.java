@@ -100,6 +100,42 @@ public class AssociationActivityDAOImpl extends OpenTransactionUtils implements
 		}
 		return activityList;
 	}
+	
+
+	@Override
+	public List<AssociationActivity> findAllByStatusId(String keyWord,
+			Integer curPage, Integer pageSize, String orderType,
+			String orderField, Integer beanId, Integer statusId) {
+		List<AssociationActivity> activityList=null;
+		super.openTransaction();
+		try {
+			//查询社团活动：1、活动名模糊查询 2、通过某一字段进行排序 3、分页
+			String hql="from AssociationActivity where activityName like ? and association.associationId like ? and status.statusId = ? order by "+orderField+" "+orderType;
+			Query query=session.createQuery(hql);
+			query.setString(0, "%"+keyWord+"%");
+			if(beanId==null){
+				query.setString(1, "%%");
+			}else{
+				query.setInteger(1, beanId);
+			}
+			query.setInteger(2, statusId);
+			query.setFirstResult((curPage-1)*pageSize);
+			query.setMaxResults(pageSize);
+			
+			//执行查询并且保存到列表
+			activityList=query.list();
+//			for(AssociationActivity aa:activityList){
+//				System.out.println(aa.getActivityId()+"\n"+aa.getActivityName());
+//			}
+			
+		} catch (Exception e) {
+			System.out.println("--------daoimpl出现异常---------");
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		return activityList;
+	}
+
 
 	@Override
 	public AssociationActivity findById(Integer id) {
