@@ -56,6 +56,24 @@ public interface AssociationActivityBiz {
 	public List<AssociationActivity> findAllActivityByAssociationId(String keyWord,Integer curPage,Integer pageSize,String orderType,String orderField,Integer associationId);
 	
 	/**
+	 * 查询某社团所有活动
+	 * 1、通过关键字模糊查询
+	 * 2、分页查询
+	 * 3、排序
+	 * @param keyWord 关键字
+	 * @param curPage 当前页
+	 * @param pageSize 页内记录数
+	 * @param orderType 排序类型
+	 * @param orderField 排序字段
+	 * @param associationId 所属社团编号
+	 * @param statusId 状态编号
+	 * @return 活动集合
+	 */
+	public List<AssociationActivity> findAllByStatusId(String keyWord,
+			Integer curPage, Integer pageSize, String orderType,
+			String orderField, Integer associationId, Integer statusId);
+	
+	/**
 	 * 通过活动编号查询活动详情
 	 * @param id 活动编号
 	 * @return 返回AssociationActivity对象，为null时未查询到
