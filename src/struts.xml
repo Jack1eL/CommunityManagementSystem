@@ -19,6 +19,11 @@
 	</package>
 	<!-- 社团活动 -->
 	<package name="AssociationActivity" namespace="/" extends="json-default,comm">
+		<action name="addActivity" class="com.peterpig.cms.action.AssociationActivityAction" method="add">
+			<result name="success" type="dispatcher">/html/other/tip.jsp</result>
+			<result name="input" type="dispatcher">/html/error.jsp</result>
+		</action>
+		
 		<action name="deleteActivity" class="com.peterpig.cms.action.AssociationActivityAction" method="delete">
 			<result name="success" type="json">
 				<param name="root">action</param>
@@ -40,6 +45,14 @@
 				<param name="root">action</param>
 			</result>
 		</action>
+		
+		<action name="findAllActivityByStatusId" class="com.peterpig.cms.action.AssociationActivityAction" method="findAllByStatusId">
+			<param name="pageSize">9</param>
+			<result name="success" type="json">
+				<param name="root">action</param>
+			</result>
+		</action>
+		
 		<!-- 通过活动ID查询某个活动 -->
 		<action name="findActivityById" class="com.peterpig.cms.action.AssociationActivityAction" method="findByActivityId">
 			<result name="success" type="json">
