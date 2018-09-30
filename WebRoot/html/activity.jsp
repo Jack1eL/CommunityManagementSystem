@@ -47,18 +47,13 @@
       <c:if test="${not empty sessionScope.Student}">
 	      <!-- 登入后的状态 -->
 	      <li class="layui-nav-item">
-	        <a class="pp-nav-avatar" href="javascript:;">
-	          <cite class="layui-hide-xs">${sessionScope.Student.username}</cite>
-	          <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
-	        </a>
-	        <dl class="layui-nav-child">
-	          <dd><a href="../user/set.html"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
-	          <dd><a href="../user/message.html"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
-	          <dd><a href="../user/home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
-	          <hr style="margin: 5px 0;">
-	          <dd><a href="${pageContext.request.contextPath}/logoutStudent.action" style="text-align: center;">退出</a></dd>
-	        </dl>
-	      </li>
+		    <a href="javascript:;"><img src="//t.cn/RCzsdCq" class="layui-nav-img">${sessionScope.Student.studentInfo.name}</a>
+		    <dl class="layui-nav-child">
+		      <dd><a href="">修改信息</a></dd>
+		      <dd><a href="">安全管理</a></dd>
+		      <dd><a href="">退了</a></dd>
+		    </dl>
+		  </li>
       </c:if>
     </ul>
   </div>
