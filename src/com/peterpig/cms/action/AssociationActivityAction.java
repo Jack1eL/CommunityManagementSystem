@@ -90,6 +90,18 @@ public class AssociationActivityAction extends ActionSupport implements
 	
 	/*-----------------------------业务-----------------------------*/
 	
+	
+	public String add(){
+		boolean flag=biz.addActivity(associationActivity);
+		if(flag){
+			message="添加成功";
+			return SUCCESS;
+		}else{
+			message="添加失败";
+			return INPUT;
+		}
+	}
+	
 	public String delete(){
 		boolean flag=biz.deleteActivity(associationActivity.getActivityId());
 		if(flag){
@@ -145,6 +157,33 @@ public class AssociationActivityAction extends ActionSupport implements
 			orderType="desc";
 		
 		list=biz.findAllActivityByAssociationId(keyWord, curPage, pageSize, orderType, orderField, associationActivity.getAssociation().getAssociationId());
+		
+		if(list!=null){
+			message="查询成功";
+			
+			return SUCCESS;
+		}else{
+			message="查询失败";
+			
+			return INPUT;
+		}
+	}
+	
+	public String findAllByStatusId(){
+		totalPage=(int)(Math.ceil(((double)biz.getAllCount(keyWord,associationActivity.getAssociation().getAssociationId()))/pageSize));
+		if(curPage==null || curPage<1){
+			curPage=1;
+		}
+		if(totalPage==0){
+			totalPage=1;
+		}
+		if(curPage>totalPage){
+			curPage=totalPage;
+		}
+		if(orderType=="asc" || orderType=="")
+			orderType="desc";
+		
+		list=biz.findAllByStatusId(keyWord, curPage, pageSize, orderType, orderField, associationActivity.getAssociation().getAssociationId(),associationActivity.getStatus().getStatusId());
 		
 		if(list!=null){
 			message="查询成功";
