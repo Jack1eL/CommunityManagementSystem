@@ -25,6 +25,7 @@
 	
   <style>
   .header{border-bottom: 1px solid #404553; border-right: 1px solid #404553;}
+  .promo-list div img{width: 100%; height: auto;max-width: 100%; display: block;margin-top: -30%;}
   </style>
 </head>
 <body class="pp-full">
@@ -66,28 +67,25 @@
       <c:if test="${not empty sessionScope.Student}">
 	      <!-- 登入后的状态 -->
 	      <li class="layui-nav-item">
-	        <a class="pp-nav-avatar" href="javascript:;">
-	          <cite class="layui-hide-xs">${sessionScope.Student.username}</cite>
-	          <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
-	        </a>
-	        <dl class="layui-nav-child">
-	          <dd><a href="../user/set.html"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
-	          <dd><a href="../user/message.html"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
-	          <dd><a href="../user/home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
-	          <hr style="margin: 5px 0;">
-	          <dd><a href="${pageContext.request.contextPath}/logoutStudent.action" style="text-align: center;">退出</a></dd>
-	        </dl>
-	      </li>
+		    <a href="javascript:;"><img src="//t.cn/RCzsdCq" class="layui-nav-img">${sessionScope.Student.studentInfo.name}</a>
+		    <dl class="layui-nav-child">
+		      <dd><a href="">修改信息</a></dd>
+		      <dd><a href="">安全管理</a></dd>
+		      <dd><a href="">退了</a></dd>
+		    </dl>
+		  </li>
       </c:if>
     </ul>
   </div>
 </div>
 
-<div class="pp-case-header">
-  <p class="pp-case-year">2018</p>
-  <a href="/case/{{ year }}/">
-    <img class="pp-case-banner" src="../res/images/main.jpg" alt="#####">
-  </a>
+<div class="pp-case-header" >
+ 	<div class="layui-carousel" id="promo" style=" position: absolute; left:50%;top:50%;transform: translate(-50%, -50%);">
+  	<div class="promo-list"  carousel-item="">
+    	<div><img src="../res/images/avatar/0.jpg" ></div>
+    	<div><img src="../res/images/avatar/6.jpg" ></div>
+  	</div>
+</div>
 </div>
 
 <div class="pp-main" style="overflow: hidden;">
@@ -101,7 +99,7 @@
   <!-- 排序类型 -->
   <div class="layui-tab layui-tab-brief">
     <ul class="layui-tab-title">
-      <li id="rank1"><a href="javascript:void(0)">按时间排序</a></li>
+      <!-- <li id="rank1"><a href="javascript:void(0)">按时间排序</a></li> -->
       <li class="layui-this" id="rank2"><a href="javascript:void(0)" >按社团名排序</a></li>
       <c:if test="${not empty sessionScope.Student}">
 	      <c:if test="${empty sessionScope.Student.association }">
@@ -155,14 +153,17 @@
 </div>
 <script src="${pageContext.request.contextPath}/res/layui/layui.js"></script>
 <script>
-/* layui.cache.page = 'user';
-layui.cache.user = {
-  username: '游客'
-  ,uid: -1
-  ,avatar: '${pageContext.request.contextPath}/res/images/avatar/00.jpg'
-  ,experience: 83
-  ,sex: '男'
-}; */
+layui.use(['carousel', 'form'], function(){
+  var carousel = layui.carousel
+  ,form = layui.form;
+  carousel.render({
+elem: '#promo'
+,interval: 1800
+,anim: 'fade'
+, width: '50%'
+,height: '100%'
+  });
+});
 layui.config({
   version: "3.0.0"
   ,base: '${pageContext.request.contextPath}/res/mods/'
