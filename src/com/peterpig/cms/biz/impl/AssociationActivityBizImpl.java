@@ -79,6 +79,20 @@ public class AssociationActivityBizImpl implements AssociationActivityBiz {
 	}
 
 	@Override
+	public List<AssociationActivity> findAllByStatusId(String keyWord,
+			Integer curPage, Integer pageSize, String orderType,
+			String orderField, Integer associationId, Integer statusId) {
+		List<AssociationActivity> activityList=null;
+		try {
+			activityList=this.dao.findAllByStatusId(keyWord, curPage, pageSize, orderType, orderField, associationId,statusId);
+		} catch (Exception e) {
+			System.out.println("--------bizimpl出现异常---------");
+			e.printStackTrace();
+		}
+		return activityList;
+	}
+
+	@Override
 	public AssociationActivity findById(Integer activityId) {
 		AssociationActivity activity=null;
 		try {
@@ -113,5 +127,6 @@ public class AssociationActivityBizImpl implements AssociationActivityBiz {
 		}
 		return count;
 	}
+
 
 }
