@@ -88,8 +88,8 @@
   <div class="pp-panel pp-panel-user" pad20>
     <div class="layui-tab layui-tab-brief" lay-filter="user">
       <ul class="layui-tab-title" id="LAY_mine">
-        <li class="layui-this">社团管理（<span>3</span>）</li>
-        <li>活动审核（<span>3</span>）</li>
+        <li class="layui-this">社团管理（<span id="assManage"></span>）<span id="redDot1" class="layui-badge-dot"></span></li>
+        <li>活动审核（<span id="actManage"></span>）<span id="redDot2" class="layui-badge-dot"></span></li>
       </ul>
       <div class="layui-tab-content" style="padding: 20px 0;">
         <div class="layui-tab-item layui-show">
@@ -149,20 +149,13 @@
 
 <script src="../../res/layui/layui.js"></script>
 <script>
-layui.cache.page = 'user';
-layui.cache.user = {
-  username: '游客'
-  ,uid: -1
-  ,avatar: '../../res/images/avatar/00.jpg'
-  ,experience: 83
-  ,sex: '男'
-};
+
 layui.config({
   version: "3.0.0"
   ,base: '../../res/mods/'
 }).extend({
   pp: 'index'
-}).use('pp');
+}).use('pp'); 
 
 
 //----------------社团活动列表相关
@@ -253,13 +246,19 @@ function ajaxAssociation(curPage,statusId){
 			
 			$("#cur").text(data.curPage);		
 			$("#tot").text(data.totalPage);		
-		
+			var count=0;
 			for(var i=0;i<data.associationList.length;i++){
-				
+				if(data.associationList[i].status.statusId==2){
+					count++;
+				}
 				$("#backAssociation").append('<li><a class="jie-title" href="${pageContext.request.contextPath}/jie/detail.html" target="_blank">' +data.associationList[i].name+ '</a><i>' +data.associationList[i].explains+ '</i><div class="pp-admin-box data-id=123"><button class="layui-btn layui-btn-xs" id="update'+i+'">编辑</button><button class="layui-btn layui-btn-xs" id="del'+i+'" onClick="caonima(' +data.associationList[i].associationId+ ')">删除</button></div><em>' +data.associationList[i].status.statusName+ '</em></li>');
 				
-			}	
-						//删除按钮的jqeury样式
+			}
+			if(count==0){
+				$("#redDot1").css("display","none");
+			}
+			$("#assManage").text(count);
+			
 			//删除按钮的jqeury样式
 			for(var i=0;i<data.associationList.length;i++){
 			  $("#del"+i).bind('click', function(){
@@ -343,10 +342,18 @@ function ajaxAssociationActivity(curPage){
 			$("#cur1").text(data.curPage);		
 			$("#tot1").text(data.totalPage);		
 			var code = '';
+			var count=0;
 			for(var i=0;i<data.list.length;i++){
+				if(data.list[i].status.statusId==2){
+					count++;
+				}
 				code+='<li><a class="jie-title" href="${pageContext.request.contextPath}/jie/detail.html" target="_blank">' +data.list[i].activityName+ '</a><i>' +data.list[i].explains+ '</i><div class="pp-admin-box data-id=123"><button class="layui-btn layui-btn-xs" id="updateA'+i+'">编辑</button><button class="layui-btn layui-btn-xs" id="delA'+i+'" onClick="caonima(' +data.list[i].activityId+ ')">删除</button></div><em>' +data.list[i].status.statusName+ '</em></li>';
 				$("#activityList").html(code);
 			}
+			if(count==0){
+				$("#redDot2").css("display","none");
+			}
+			$("#actManage").text(count);
 			
 			//删除按钮的jqeury样式
 			for(var i=0;i<data.list.length;i++){
