@@ -679,3 +679,36 @@ body .pp-user-main{position: relative; min-height: 600px;}
 .pp-times.end{
 	background: #c8c8c8;	
 }
+#carousel {
+   width:100%;
+   height:100%;
+   position:relative;
+   left:50%;top:50%;
+	margin-top: -20px;
+   transform: translate(-50%, -50%);
+   clear:both;
+   overflow:hidden;
+}
+#carousel img {
+    visibility:hidden; /* hide images until carousel can handle them */
+    cursor:pointer; /* otherwise it's not as obvious items can be clicked */
+}
+#carousel1{
+	float: left;
+	display: block;
+	position: absolute;
+	width: 200px;
+	max-height: 50px;
+	height:50px;
+	left:45%;top:358px;
+	overflow: hidden;
+	
+}
+#carousel1 span{
+	position: relative;
+	display: block;
+	width: 200px;
+	height: 50px;
+	overflow: hidden;
+}
+
