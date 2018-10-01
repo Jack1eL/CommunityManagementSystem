@@ -128,5 +128,17 @@ public class AssociationActivityBizImpl implements AssociationActivityBiz {
 		return count;
 	}
 
+	@Override
+	public boolean changeStatus(Integer activityId, Integer statusId) {
+		boolean flag=false;
+		try {
+			flag=this.dao.changeStatus(activityId, statusId);
+		} catch (Exception e) {
+			System.out.println("--------bizimpl出现异常---------");
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
 
 }
