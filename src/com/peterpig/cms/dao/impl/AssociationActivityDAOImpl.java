@@ -186,7 +186,32 @@ public class AssociationActivityDAOImpl extends OpenTransactionUtils implements
 		}
 		return count;
 	}
+	
 
+	@Override
+	public Long getAllCount(String keyWord, Integer associationId,
+			Integer statusId) {
+		Long count=0l;
+		super.openTransaction();
+		try{
+			//查找社团活动表中的所有记录条数
+			String hql="select count(activityId) from AssociationActivity where activityName like ? and association.associationId like ? and status.statusId=?";
+			Query query=session.createQuery(hql);
+			query.setString(0, "%"+keyWord+"%");
+			query.setInteger(1, associationId);
+			query.setInteger(2, statusId);
+			count=(Long)query.uniqueResult();
+			
+			//System.out.println(count);
+			transaction.commit();
+		}catch(Exception e){
+			System.out.println("--------daoimpl出现异常---------");
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
 	@Override
 	public AssociationActivity findByBean(AssociationActivity bean) {
 		AssociationActivity aa=null;
@@ -245,6 +270,7 @@ public class AssociationActivityDAOImpl extends OpenTransactionUtils implements
 		}
 		return flag;
 	}
+
 
 
 }
