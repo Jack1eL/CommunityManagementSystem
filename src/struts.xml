@@ -45,14 +45,14 @@
 		</action>
 		<!-- 通过社团ID查询某个社团的全部活动 -->
 		<action name="findAllActivityByAssociationId" class="com.peterpig.cms.action.AssociationActivityAction" method="findAllByAssociationId">
-			<param name="pageSize">9</param>
+			<param name="pageSize">8</param>
 			<result name="success" type="json">
 				<param name="root">action</param>
 			</result>
 		</action>
 		
 		<action name="findAllActivityByStatusId" class="com.peterpig.cms.action.AssociationActivityAction" method="findAllByStatusId">
-			<param name="pageSize">9</param>
+			<param name="pageSize">8</param>
 			<result name="success" type="json">
 				<param name="root">action</param>
 			</result>
@@ -99,6 +99,13 @@
 		
 		<action name="creatAssociation" class="com.peterpig.cms.action.AssociationAction" method="creatAssociation">
 			<result name="success" type="dispatcher">/html/index.jsp</result>
+			<result name="error" type="dispatcher">/html/error.jsp</result>
+		</action>
+		
+		<action name="findAssociationById" class="com.peterpig.cms.action.AssociationAction" method="findById">
+			<result name="success" type="json">
+				<param name="root">action</param>
+			</result>
 			<result name="error" type="dispatcher">/html/error.jsp</result>
 		</action>
 	</package>
