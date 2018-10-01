@@ -102,6 +102,17 @@ public class AssociationActivityAction extends ActionSupport implements
 		}
 	}
 	
+	public String changeStatus(){
+		boolean flag=biz.changeStatus(associationActivity.getActivityId(), associationActivity.getStatus().getStatusId());
+		if(flag){
+			message="操作成功";
+			return SUCCESS;
+		}else{
+			message="操作失败";
+			return INPUT;
+		}
+	}
+	
 	public String delete(){
 		boolean flag=biz.deleteActivity(associationActivity.getActivityId());
 		if(flag){
