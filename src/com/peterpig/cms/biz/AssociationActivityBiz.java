@@ -96,4 +96,12 @@ public interface AssociationActivityBiz {
 	 * @return 活动的数目
 	 */
 	public Long getAllCount(String keyWord,Integer associationId);
+	
+	/**
+	 * 修改状态
+	 * @param activityId 活动ID
+	 * @param statusId 状态
+	 * @return 修改成功true，失败false
+	 */
+	public boolean changeStatus(Integer activityId,Integer statusId);
 }
