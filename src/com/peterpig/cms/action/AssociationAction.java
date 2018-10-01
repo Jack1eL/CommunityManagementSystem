@@ -213,4 +213,15 @@ public class AssociationAction extends ActionSupport implements
 			return ERROR;
 		}	
 	}
+	
+	public String findById(){
+		association=this.biz.findById(association.getAssociationId());
+		if(association!=null){
+			message="查询成功!";
+			return SUCCESS;
+		}else{
+			message="业务繁忙!";
+			return ERROR;
+		}
+	}
 }

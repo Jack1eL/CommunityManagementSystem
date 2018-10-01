@@ -181,7 +181,7 @@ public class AssociationActivityAction extends ActionSupport implements
 	}
 	
 	public String findAllByStatusId(){
-		totalPage=(int)(Math.ceil(((double)biz.getAllCount(keyWord,associationActivity.getAssociation().getAssociationId()))/pageSize));
+		totalPage=(int)(Math.ceil(((double)biz.getAllCount(keyWord,associationActivity.getAssociation().getAssociationId(),associationActivity.getStatus().getStatusId()))/pageSize));
 		if(curPage==null || curPage<1){
 			curPage=1;
 		}
