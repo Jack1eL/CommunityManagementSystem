@@ -100,4 +100,28 @@ public class AssociationBizImpl implements AssociationBiz {
 		return count;
 	}
 
+	@Override
+	public boolean passAssociation(Integer associationId) {
+		boolean flag=false;
+		try{
+			flag=this.dao.updateAssociationToPass(associationId);
+		}catch(Exception e){
+			System.out.println("------------biz层报错!-------------");
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean refuseAssociation(Integer associationId, Integer studentId) {
+		boolean flag=false;
+		try{
+			flag=this.dao.updateAssociationToRefuse(associationId,studentId);
+		}catch(Exception e){
+			System.out.println("------------biz层报错!-------------");
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
 }
