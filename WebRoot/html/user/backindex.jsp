@@ -295,6 +295,8 @@ function ajaxAssociation(curPage,statusId){
 			}
 			if(count==0){
 				$("#redDot1").css("display","none");
+			}else{
+				$("#redDot1").css("display","inline-block");
 			}
 			$("#assManage").text(count);
 			
@@ -363,6 +365,8 @@ function ajaxAssociationActivity(curPage){
 			}
 			if(count==0){
 				$("#redDot2").css("display","none");
+			}else{
+				$("#redDot2").css("display","inline-block");
 			}
 			$("#actManage").text(count);
 			
