@@ -187,4 +187,51 @@ public class AssociationDAOImpl extends OpenTransactionUtils implements
 	
 	}
 
+	@Override
+	public boolean updateAssociationToPass(Integer associationId) {
+		boolean flag=false;
+		super.openTransaction();
+		try{
+			Association association=(Association) session.get(Association.class, associationId);
+			AuditStatus as=(AuditStatus) session.get(AuditStatus.class, 1);  //从状态表中查询出通过状态的信息，并将其通过信息传入到社团表中去
+			association.setStatus(as);
+			session.save(association);
+			transaction.commit();//提交
+			flag=true;
+		}catch(Exception e){
+			System.out.println("-----------------daoImpl出现问题!------------------");
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean updateAssociationToRefuse(Integer associationId, Integer studentId) {
+		boolean flag=false;
+		super.openTransaction();
+		try{
+			/**
+			 * 当管理员拒绝了此学生所申请的社团。
+			 * 首先需要把社团的状态改为未通过的状态
+			 * 并且学生的职务也要进行修改，将学生的职务修改为普通学生
+			 */
+			Association association=(Association) session.get(Association.class, associationId);
+			AuditStatus as=(AuditStatus) session.get(AuditStatus.class, 3);  //查询出审核状态为未通过的状态数据信息
+			association.setStatus(as);  //将未通过信息保存到关联的社团表中
+			Student student=(Student) session.get(Student.class, studentId);    
+			AssociationPosition ap=(AssociationPosition) session.get(AssociationPosition.class, 3); //查询出职务表中为普通的数据信息
+			student.setPosition(ap);  //将查询出的普通职务的信息数据保存到所关联的学生表中
+			session.save(association);
+			session.save(student);
+			transaction.commit();
+			flag=true;
+		}catch(Exception e){
+			System.out.println("-----------------daoImpl出现问题!------------------");
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
 }
