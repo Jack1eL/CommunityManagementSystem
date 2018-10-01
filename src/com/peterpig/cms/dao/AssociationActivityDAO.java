@@ -14,4 +14,6 @@ public interface AssociationActivityDAO extends baseDAO<AssociationActivity, Int
 	 * @return 修改成功true，失败false
 	 */
 	public boolean changeStatus(Integer activityId,Integer statusId);
+	
+	public Long getAllCount(String keyWord, Integer associationId, Integer statusId);
 }
