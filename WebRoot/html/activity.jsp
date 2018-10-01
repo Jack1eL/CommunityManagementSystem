@@ -157,11 +157,11 @@
       </div>
 	  <div class="layui-col-md4">
       <div class="pp-panel">
-        <div class="pp-panel-title">社团简介</div>
+        <div class="pp-panel-title"><h1>社团简介</h1></div>
 	  <div class="layui-col-md12">
       	<div class="layui-card">
-        	<div class="layui-card-body" style="margin-top:-20px;">
-          		################################
+        	<div id="ass-explains" class="layui-card-body" style="margin-top:-20px;">
+          		
         	</div>
       	</div>
   	  </div>
@@ -227,27 +227,29 @@ layui.config({
   ,base: '${pageContext.request.contextPath}/res/mods/'
 }).extend({
   pp: 'index'
-}).use('pp'); 
+}).use('pp');
 
+ 
+ajaxFindAssociationById(${param.associationId});
 
 //进入时请求所有的社团活动列表
 ajaxAssociationActivity("",1,"desc","activityName",${param.associationId},1);
 //点击首页
 $("#first").click(function(){
-	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val(),1);
+	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val(),${param.associationId},1);
 });
 //点击上一页
 $("#prev").click(function(){
-	ajaxAssociationActivity("",parseInt($("#cur").text())-1,$("#orderType").val(),$("#orderField").val(),1);
+	ajaxAssociationActivity("",parseInt($("#cur").text())-1,$("#orderType").val(),$("#orderField").val(),${param.associationId},1);
 });
 //点击下一页
 $("#next").click(function(){
 	//alert(parseInt($("#cur").text())+1);
-	ajaxAssociationActivity("",parseInt($("#cur").text())+1,$("#orderType").val(),$("#orderField").val(),1);
+	ajaxAssociationActivity("",parseInt($("#cur").text())+1,$("#orderType").val(),$("#orderField").val(),${param.associationId},1);
 });
 //点击尾页
 $("#last").click(function(){
-	ajaxAssociationActivity("",$("#tot").text(),$("#orderType").val(),$("#orderField").val(),1);
+	ajaxAssociationActivity("",$("#tot").text(),$("#orderType").val(),$("#orderField").val(),${param.associationId},1);
 });
 
 //根据时间排序
@@ -258,7 +260,7 @@ $("#rank1").click(function(){
 		$("#orderType").val("desc");
 	}
 	$("#orderField").val("activityBegin");
-	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val(),1);
+	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val(),${param.associationId},1);
 });
 //根据活动名排序
 $("#rank2").click(function(){
@@ -268,7 +270,7 @@ $("#rank2").click(function(){
 		$("#orderType").val("desc");
 	}
 	$("#orderField").val("activityName");
-	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val(),1);
+	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val(),${param.associationId},1);
 }); 
 
 //异步请求获取所有的社团活动列表
@@ -306,6 +308,19 @@ function ajaxAssociationActivity(keyWord,curPage,orderType,orderField,associatio
 		}
 	});
 	
+}
+
+
+function ajaxFindAssociationById(id){
+	$.ajax({
+		type:"POST",
+		url:"${pageContext.request.contextPath}/findAssociationById.action?associationId="+id,
+		dataType:"json",
+		processData:false,
+		success:function(data){
+			$("#ass-explains").append(data.association.explains);
+		}
+	});
 }
 </script>
 </body>
