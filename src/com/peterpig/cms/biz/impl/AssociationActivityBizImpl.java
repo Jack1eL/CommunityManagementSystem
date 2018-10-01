@@ -129,6 +129,19 @@ public class AssociationActivityBizImpl implements AssociationActivityBiz {
 	}
 
 	@Override
+	public Long getAllCount(String keyWord, Integer associationId,
+			Integer statusId) {
+		Long count=0L;
+		try {
+			count=this.dao.getAllCount(keyWord, associationId, statusId);
+		} catch (Exception e) {
+			System.out.println("--------bizimpl出现异常---------");
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	@Override
 	public boolean changeStatus(Integer activityId, Integer statusId) {
 		boolean flag=false;
 		try {
@@ -139,6 +152,7 @@ public class AssociationActivityBizImpl implements AssociationActivityBiz {
 		}
 		return flag;
 	}
+
 
 
 }

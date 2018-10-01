@@ -60,6 +60,20 @@ public class AssociationBizImpl implements AssociationBiz {
 		return flag;
 	}
 
+
+	@Override
+	public Association findById(Integer id) {
+		Association association=null;
+		try {
+			association=this.dao.findById(id);
+		} catch (Exception e) {
+			System.out.println("------------biz层报错!-------------");
+			e.printStackTrace();
+		}
+		return association;
+	}
+
+	
 	@Override
 	public List<Association> showAssociation(String keyWord, Integer curPage,
 			Integer pageSize, String orderType, String orderField,
