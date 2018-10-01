@@ -33,6 +33,9 @@ public interface AssociationBiz {
 	 */
 	public boolean removeAssociation(Integer associationId);
 	
+	
+	public Association findById(Integer id);
+	
 	/**
 	 * 查询社团
 	 * @param keyWord 关键字

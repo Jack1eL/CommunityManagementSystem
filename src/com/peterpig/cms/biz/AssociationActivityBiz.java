@@ -97,6 +97,9 @@ public interface AssociationActivityBiz {
 	 */
 	public Long getAllCount(String keyWord,Integer associationId);
 	
+	public Long getAllCount(String keyWord, Integer associationId,
+			Integer statusId);
+	
 	/**
 	 * 修改状态
 	 * @param activityId 活动ID
