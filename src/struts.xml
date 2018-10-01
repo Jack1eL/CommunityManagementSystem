@@ -90,6 +90,15 @@
 			</result>
 		</action>
 		
+		<!-- 通过某个社团(把你想要的result写到这里来！！！！！！！！！！！！！) -->
+		<action name="passAssociation" class="com.peterpig.cms.action.AssociationAction" method="passAssociation">
+		
+		</action>
+		<!-- 拒绝某个社团(把你想要的result写到这里来！！！！！！！！！！！！！) -->
+		<action name="refuseAssociation" class="com.peterpig.cms.action.AssociationAction" method="refuseAssociation">
+		
+		</action>
+		
 		<action name="removeAssociation" class="com.peterpig.cms.action.AssociationAction" method="removeAssociation">
 			<result name="success" type="json">
 				<param name="root">action</param>
