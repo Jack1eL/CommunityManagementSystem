@@ -24,6 +24,11 @@
 			<result name="input" type="dispatcher">/html/error.jsp</result>
 		</action>
 		
+		<action name="changeStatus" class="com.peterpig.cms.action.AssociationActivityAction" method="changeStatus">
+			<result name="success" type="redirect">/html/user/backindex.jsp</result>
+			<result name="input" type="dispatcher">/html/error.jsp</result>
+		</action>
+		
 		<action name="deleteActivity" class="com.peterpig.cms.action.AssociationActivityAction" method="delete">
 			<result name="success" type="json">
 				<param name="root">action</param>
