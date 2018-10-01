@@ -21,48 +21,40 @@
 
 <div class="pp-header layui-bg-black">
   <div class="layui-container">
-    <a class="pp-logo" href="/">
-      <img src="../res/images/logo.png" alt="layui">
+    <a class="pp-logo" href="">
+      <!-- <img src="../res/images/logo.png" alt="layui"> -->
     </a>
     <ul class="layui-nav pp-nav layui-hide-xs">
-      <li class="layui-nav-item layui-this">
-        <a href="index.html"><i class="iconfont icon-jiaoliu"></i>主页</a>
-      </li>
       <li class="layui-nav-item">
-        <a href="/"><i class="iconfont icon-iconmingxinganli"></i>我的社团</a>
+        <a href="${pageContext.request.contextPath}/html/index.jsp"><i class="iconfont icon-jiaoliu"></i>主页</a>
+      </li>
+      <li class="layui-nav-item layui-this">
+        <a href="${pageContext.request.contextPath}/html/activity.jsp?associationId=${sessionScope.Student.association.associationId}"><i class="iconfont icon-iconmingxinganli"></i>我的社团</a>
       </li>
     </ul>
     
     <ul class="layui-nav pp-nav-user">
+      <c:if test="${empty sessionScope.Student}">
+	      <!-- 未登入的状态 -->
+	      <li class="layui-nav-item">
+	        <a class="iconfont icon-touxiang layui-hide-xs" href="${pageContext.request.contextPath}/html/user/login.jsp"></a>
+	      </li>
+	      <li class="layui-nav-item">
+	        <a href="${pageContext.request.contextPath}/html/user/login.jsp">登入</a>
+	      </li>
+      </c:if>
       
-      <!-- 未登入的状态 -->
-      <li class="layui-nav-item">
-        <a class="iconfont icon-touxiang layui-hide-xs" href="user/login.html"></a>
-      </li>
-      <li class="layui-nav-item">
-        <a href="user/login.html">登入</a>
-      </li>
-      <li class="layui-nav-item">
-        <a href="user/reg.html">注册</a>
-      </li>
-      
-      <!-- 登入后的状态 -->
-      <!--
-      <li class="layui-nav-item">
-        <a class="pp-nav-avatar" href="javascript:;">
-          <cite class="layui-hide-xs">贤心</cite>
-          <i class="layui-badge pp-badge-vip layui-hide-xs">VIP3</i>
-          <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
-        </a>
-        <dl class="layui-nav-child">
-          <dd><a href="user/set.html"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
-          <dd><a href="user/message.html"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
-          <dd><a href="user/home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
-          <hr style="margin: 5px 0;">
-          <dd><a href="/user/logout/" style="text-align: center;">退出</a></dd>
-        </dl>
-      </li>
-      -->
+      <c:if test="${not empty sessionScope.Student}">
+	      <!-- 登入后的状态 -->
+	      <li class="layui-nav-item">
+		    <a href="javascript:;"><img src="//t.cn/RCzsdCq" class="layui-nav-img">${sessionScope.Student.studentInfo.name}</a>
+		    <dl class="layui-nav-child">
+		      <dd><a href="">修改信息</a></dd>
+		      <dd><a href="">安全管理</a></dd>
+		      <dd><a href="">退了</a></dd>
+		    </dl>
+		  </li>
+      </c:if>
     </ul>
   </div>
 </div>
@@ -71,20 +63,12 @@
   <div class="layui-container">
     <ul class="layui-clear">
       <li class="layui-hide-xs layui-this"><a href="/">###社团成员</a></li> 
-    </ul> 
-    
-    <div class="pp-column-right layui-hide-xs"> 
-      <span class="pp-search"><i class="layui-icon"></i></span> 
-      <a href="jie/add.html" class="layui-btn">搜索活动</a> 
-    </div> 
-    <div class="layui-hide-sm layui-show-xs-block" style="margin-top: -10px; padding-bottom: 10px; text-align: center;"> 
-      <a href="jie/add.html" class="layui-btn">搜索活动</a> 
-    </div> 
+    </ul>
   </div>
 </div>
 <div class="layui-container">
   <div class="layui-row layui-col-space15">
-    <div class="layui-col-md8">
+    <div class="layui-col-md12">
       <div class="pp-panel">
         <div class="pp-panel-title pp-filter">
           <a>成员列表</a>
@@ -163,9 +147,7 @@
 	 
   </p>
 </div>
-<ul class="layui-fixbar">
-	<a  href="jie/add.html"><li class="layui-icon" style="background-color:#009688" lay-type="bar1"></li></a>
-</ul>
+
 <script src="../res/layui/layui.js"></script>
 <script>
 layui.cache.page = 'jie';
