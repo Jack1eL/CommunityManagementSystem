@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/global.css">
 	<script src="${pageContext.request.contextPath}/res/js/jquery-3.2.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/res/js/act.js"></script>
+    <script src="${pageContext.request.contextPath}/res/js/jquery_waterwheelCarousel.js"></script>
 </head>
 <body>
 
@@ -75,9 +76,56 @@
     </div>
   </div>
 </div>
-<div style="width:100%; height:400px; background-color:green;">
-<h1>社团篮子</h1>
+<div style="text-align:center;">社团篮子</div>
+<div style="width: 100%; height: 300px;">
+	<div id="carousel" style="position: relative; display: block;">
+		<a href="#">
+			<img id="item-1" class="carousel-center" src="../res/images/avatar/0.jpg">
+		</a>
+		<a href="#">
+			<img id="item-2" src="../res/images/avatar/1.jpg">
+		</a>
+		<a href="#">
+			<img id="item-3" src="../res/images/avatar/2.jpg">
+		</a>
+		<a href="#">
+			<img id="item-4" src="../res/images/avatar/3.jpg">
+		</a>
+		<a href="#">
+			<img id="item-5" src="../res/images/avatar/4.jpg">
+		</a>
+		<a href="#">
+			<img id="item-6" src="../res/images/avatar/5.jpg">
+		</a>
+	</div>
+	<div id="carousel1">
+		<span id="carousel1_span1">
+			<i>1这个项目很棒</i>
+			<p>12121</p>
+		</span>
+		<span>
+			<i>2这个项目很棒</i>
+			<p>12121</p>
+		</span>
+		<span>
+			<i>3这个项目很棒</i>
+			<p>12121</p>
+		</span>
+		<span>
+			<i>4这个项目很棒</i>
+			<p>12121</p>
+		</span>
+		<span>
+			<i>5这个项目很棒</i>
+			<p>12121</p>
+		</span>
+		<span>
+			<i>6这个项目很棒</i>
+			<p>12121</p>
+		</span>
+	</div>
 </div>
+
 
 <div class="layui-container">
   <div class="layui-row layui-col-space15">
@@ -145,6 +193,34 @@
 
 <script src="${pageContext.request.contextPath}/res/layui/layui.js"></script>
 <script>
+$(document).ready(function () {
+    var carousel = $("#carousel").waterwheelCarousel({
+      flankingItems: 3
+    });
+});
+$(document).ready(function(){
+	var promo=$("#carousel"),//获取最外层框架的名称
+	Number=promo.find("a");//获取按钮
+	var iNow=0; //iNow为正在展示的图片索引值，当用户打开网页时首先显示第一张图，即索引值为0
+	var timer=null; //定时器返回值，主要用于关闭定时器
+	
+	Number.on("click",function(){ 
+    var index=$(this).index(); //获取哪个按钮被点击，也就是找到被点击按钮的索引值
+	//alert(index);
+	iNow=index;
+		$("#carousel1_span1").animate({
+		"marginTop":-50*iNow, 
+		});
+  	});
+	timer=setInterval(function(){ //打开定时器
+		if(iNow>Number.length-1){ 
+			iNow=0;
+		}
+	});
+
+});
+
+
 
 layui.config({
   version: "3.0.0"
