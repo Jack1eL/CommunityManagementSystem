@@ -5,7 +5,7 @@
 <html>
   <head>
     
-    <title>404 - pp社区</title>
+    <title>tip</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -13,7 +13,6 @@
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<meta charset="utf-8">
-  <title>404 - pp社区</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="keywords" content="pp,layui,前端社区">
   <meta name="description" content="pp社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
@@ -64,11 +63,9 @@
 	          <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
 	        </a>
 	        <dl class="layui-nav-child">
-	          <dd><a href="../user/set.html"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
-	          <dd><a href="../user/message.html"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
-	          <dd><a href="../user/home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
-	          <hr style="margin: 5px 0;">
-	          <dd><a href="${pageContext.request.contextPath}/logoutStudent.action" style="text-align: center;">退出</a></dd>
+	          <dd><a href="${pageContext.request.contextPath}/html/student-info.jsp?studentId=${sessionScope.Student.studentId}">修改信息</a></dd>
+			  <dd><a href="${pageContext.request.contextPath}/html/update-password.jsp?studentId=${sessionScope.Student.studentId}">安全管理</a></dd>
+			  <dd><a href="${pageContext.request.contextPath}/logoutStudent.action">退了</a></dd>
 	        </dl>
 	      </li>
       </c:if>
