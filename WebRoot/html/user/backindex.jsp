@@ -178,12 +178,12 @@
   </p>
 </div>
 
-<script src="../../res/layui/layui.js"></script>
+<script src="${pageContext.request.contextPath}/res/layui/layui.js"></script>
 <script>
 
 layui.config({
   version: "3.0.0"
-  ,base: '../../res/mods/'
+  ,base: '${pageContext.request.contextPath}/res/mods/'
 }).extend({
   pp: 'index'
 }).use('pp');
@@ -290,7 +290,7 @@ function ajaxAssociation(curPage,statusId){
 				if(data.associationList[i].status.statusId==1 || data.associationList[i].status.statusId==3){
 					$("#backAssociation").append('<tr><td>'+data.associationList[i].name+'</td><td title="'+data.associationList[i].explains+'">' +str+ '</td><td><button class="layui-btn layui-btn-xs" id="del'+i+'" onClick="caonima(' +data.associationList[i].associationId+ ')">删除</button></td><td>'+data.associationList[i].status.statusName+'</td></tr>');
 				}else{
-					$("#backAssociation").append('<tr><td>'+data.associationList[i].name+'</td><td title="'+data.associationList[i].explains+'">' +str+ '</td><td><button class="layui-btn layui-btn-xs">通过</button><button class="layui-btn layui-btn-xs">拒绝</button><button class="layui-btn layui-btn-xs" id="del'+i+'" onClick="caonima(' +data.associationList[i].associationId+ ')">删除</button></td><td>'+data.associationList[i].status.statusName+'</td></tr>');
+					$("#backAssociation").append('<tr><td>'+data.associationList[i].name+'</td><td title="'+data.associationList[i].explains+'">' +str+ '</td><td><button class="layui-btn layui-btn-xs" onClick="window.location.href=\'${pageContext.request.contextPath}/passAssociation.action?associationId='+data.associationList[i].associationId+'\'">通过</button><button class="layui-btn layui-btn-xs" onClick="window.location.href=\'${pageContext.request.contextPath}/refuseAssociation.action?associationId='+data.associationList[i].associationId+'&studentId='+data.associationList[i].students[i].studentId+'\'">拒绝</button><button class="layui-btn layui-btn-xs" id="del'+i+'" onClick="caonima(' +data.associationList[i].associationId+ ')">删除</button></td><td>'+data.associationList[i].status.statusName+'</td></tr>');
 				}
 			}
 			if(count==0){
