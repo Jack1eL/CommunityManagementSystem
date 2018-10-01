@@ -8,6 +8,7 @@ import org.hibernate.Query;
 import org.junit.Test;
 
 import com.peterpig.cms.bean.AssociationActivity;
+import com.peterpig.cms.bean.AuditStatus;
 import com.peterpig.cms.dao.AssociationActivityDAO;
 import com.peterpig.cms.util.OpenTransactionUtils;
 /**
@@ -223,6 +224,26 @@ public class AssociationActivityDAOImpl extends OpenTransactionUtils implements
 		//AssociationActivity aa=new AssociationActivity();
 		//aa.setActivityName("篮球社常规训练");
 		//findByBean(aa);
+	}
+
+	@Override
+	public boolean changeStatus(Integer activityId, Integer statusId) {
+		boolean flag=false;
+		super.openTransaction();
+		try {
+			AuditStatus status=(AuditStatus) session.get(AuditStatus.class, statusId);
+			AssociationActivity a=(AssociationActivity) session.get(AssociationActivity.class, activityId);
+			a.setStatus(status);
+			
+			session.save(a);
+			transaction.commit();
+			flag=true;
+		} catch (Exception e) {
+			System.out.println("--------daoimpl出现异常---------");
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		return flag;
 	}
 
 
