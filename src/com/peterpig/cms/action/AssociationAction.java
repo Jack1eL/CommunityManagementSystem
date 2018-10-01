@@ -224,4 +224,34 @@ public class AssociationAction extends ActionSupport implements
 			return ERROR;
 		}
 	}
+	
+	/**
+	 * 通过某个社团
+	 * @return
+	 */
+	public String passAssociation(){
+		flag=this.biz.passAssociation(association.getAssociationId());
+		if(flag){
+			message="通过成功!";
+			return SUCCESS;
+		}else{
+			message="当前业务繁忙!";
+			return ERROR;
+		}
+	}
+	
+	/**
+	 * 拒绝某个社团
+	 * @return
+	 */
+	public String refuseAssociation(){
+		flag=this.biz.refuseAssociation(association.getAssociationId(), studentId);
+		if(flag){
+			message="拒绝成功!";
+			return SUCCESS;
+		}else{
+			message="当前业务繁忙!";
+			return ERROR;
+		}
+	}
 }
