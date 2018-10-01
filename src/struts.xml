@@ -139,5 +139,11 @@
 		<action name="logoutStudent" class="com.peterpig.cms.action.StudentAction" method="logout">
 			<result name="logoutOK" type="redirect">/html/index.jsp</result>
 		</action>
+		<action name="findStudentById" class="com.peterpig.cms.action.StudentAction" method="findById">
+			<result name="findbyidOK" type="json">
+				<param name="root">action</param>
+			</result>
+			<result name="findbyidFAIL" type="dispatcher">/html/error.jsp</result>
+		</action>
 	</package>
 </struts>
