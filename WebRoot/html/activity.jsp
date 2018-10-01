@@ -133,7 +133,7 @@
       <div class="pp-panel">
         <div class="pp-panel-title pp-filter">
           <a>活动列表</a>
-          <c:if test="${sessionScope.Student.position.positionId==1}">
+          <c:if test="${sessionScope.Student.position.positionId==1 && sessionScope.Student.association.associationId==param.associationId}">
           	<a class="layui-btn" style="color:white;float:right; margin-top:5px;" href="${pageContext.request.contextPath}/html/add-activity.jsp?associationId=${param.associationId}">增加活动</a>
           </c:if>
         </div>
