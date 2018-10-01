@@ -57,4 +57,19 @@ public interface AssociationBiz {
 	 * @return 返回长整型整数
 	 */
 	public Long getPages(Integer associationId,String keyWord);
+	
+	/**
+	 * 通过某个社团的申请
+	 * @param associationId 社团的id 
+	 * @return 通过成功返回true，通过失败返回false
+	 */
+	public boolean passAssociation(Integer associationId);
+	
+	/**
+	 * 拒绝某个社团的申请
+	 * @param associationId 社团的id
+	 * @param studentId 学生的id
+	 * @return 拒绝成功返回true，拒绝失败返回false
+	 */
+	public boolean refuseAssociation(Integer associationId,Integer studentId);
 }
