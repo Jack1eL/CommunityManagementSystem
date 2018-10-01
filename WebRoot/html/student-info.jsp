@@ -49,10 +49,10 @@
 		      <!-- 登入后的状态 -->
 		      <li class="layui-nav-item">
 			    <a href="javascript:;"><img src="//t.cn/RCzsdCq" class="layui-nav-img">${sessionScope.Student.studentInfo.name}</a>
-			    <dl class="layui-nav-child">
+		    	<dl class="layui-nav-child">
 			      <dd><a href="${pageContext.request.contextPath}/html/student-info.jsp?studentId=${sessionScope.Student.studentId}">修改信息</a></dd>
-			      <dd><a href="">安全管理</a></dd>
-			      <dd><a href="">退了</a></dd>
+			      <dd><a href="${pageContext.request.contextPath}/html/update-password.jsp?studentId=${sessionScope.Student.studentId}">安全管理</a></dd>
+			      <dd><a href="${pageContext.request.contextPath}/logoutStudent.action">退了</a></dd>
 			    </dl>
 			  </li>
 	      </c:if>
@@ -61,65 +61,64 @@
 	</div>
 	
 	<div class="pp-home pp-panel" style="background-image: url();">
-		<form class="layui-form" style="margin: 0 auto;width:400px; text-align: center;" >
+		<form class="layui-form" style="margin: 0 auto;width:400px; text-align: left;" >
 			<div class="layui-form-item" >
 				<label class="layui-form-label">姓名</label>
-				<div id="" style="width: 200px; height: 40px; line-height: 40px;">
-					12121
+				<div id="name" style="width: 250px; height: 40px; line-height: 40px;margin-left:240px;">
+					
 				</div>
 	  		</div>
 			<div class="layui-form-item" >
 				<label class="layui-form-label">性别</label>
-				<div id="" class="layui-input-block">
-				  <h1 style="width: 100px;"><i class="iconfont icon-nan">男</i></h1>
-				  <h1 style="width: 100px;"><i class="iconfont icon-nv">女</i></h1>
+				<div id="gender" class="layui-input-block" style="margin-left:240px;">
+				  
 				</div>
 	  		</div>
 			<div class="layui-form-item" >
 				<label class="layui-form-label">学号</label>
-				<div id="" style="width: 200px; height: 40px; line-height: 40px;">
-					12121
+				<div id="username" style="width: 250px; height: 40px; line-height: 40px;margin-left:240px;">
+					
 				</div>
 	  		</div>
 			<div class="layui-form-item" >
 				<label class="layui-form-label">所在系部</label>
-				<div id="" style="width: 200px; height: 40px; line-height: 40px;">
-					12121
+				<div id="department" style="width: 250px; height: 40px; line-height: 40px;margin-left:240px;">
+					
 				</div>
 				<label class="layui-form-label">所在班级</label>
-				<div id="" style="width: 200px; height: 40px; line-height: 40px;">
-					12121
+				<div id="clazz" style="width: 250px; height: 40px; line-height: 40px;margin-left:240px;">
+					
 				</div>
 	  		</div>
 			<div class="layui-form-item">
 			<label class="layui-form-label">加入的社团</label>
-				<div id="" style="width: 200px; height: 40px; line-height: 40px;">
-					12121
+				<div id="association" style="width: 250px; height: 40px; line-height: 40px;margin-left:240px;">
+					
 				</div>
 	  		</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label">社团职务</label>
-				<div id="" style="width: 200px; height: 40px; line-height: 40px;">
-					12121
+				<div id="position" style="width: 250px; height: 40px; line-height: 40px;margin-left:240px;">
+					
 				</div>
 	 		</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label">家庭地址</label>
-				<div id="" style="width: 200px; height: 40px; line-height: 40px;">
-					12121
+				<div id="address" style="width: 250px; height: 40px; line-height: 40px;margin-left:240px;">
+					
 				</div>
 	 	 	</div>
 			<div class="layui-form-item layui-form-text">
 				<label class="layui-form-label">个人简介</label>
-				<div id="" style="width: 200px; height: 40px; line-height: 40px;">
-					12121
+				<div id="explain" style="width: 250px; height: 40px; line-height: 40px;margin-left:240px;">
+					
 				</div>
 	  		</div>
-			<div class="layui-form-item">
+			<!-- <div class="layui-form-item">
 				<div class="layui-input-block">
-				  <button class="layui-btn layui-btn-primary">返回</button>
+				  <button class="layui-btn layui-btn-primary" onclick="javascript:history.back()">返回</button>
 				</div>
-			</div>
+			</div> -->
 		</form>
 	</div>
 	
@@ -140,17 +139,39 @@
 		 
 	  </p>
 	</div>
-	
+	<script src="${pageContext.request.contextPath}/res/layui/layui.js"></script>
 	<script>
-		
+	layui.config({
+	  version: "3.0.0"
+	  ,base: '${pageContext.request.contextPath}/res/mods/'
+	}).extend({
+	  pp: 'index'
+	}).use('pp');
+	
+	
+	
+		ajaxStudentInfo();
 		
 		function ajaxStudentInfo(){
 			$.ajax({
 				type:"POST",
-				url:"${pageContext.request.contextPath}/removeAssociation.action?associationId="+associationId,
+				url:"${pageContext.request.contextPath}/findStudentById.action?studentId=${param.studentId}",
 				dataType:"json",
 				processData:false,
 				success:function(data){
+					$("#name").text(data.student.studentInfo.name);
+					if(data.student.studentInfo.sex=="男"){
+						$("#gender").html('<h1 style="width: 100px;"><i class="iconfont icon-nan">男</i></h1>');
+					}else{
+						$("#gender").html('<h1 style="width: 100px;"><i class="iconfont icon-nv">女</i></h1>');
+					}
+					$("#username").text(data.student.username);
+					$("#department").text(data.student.studentInfo.classes.major.department.departmentName);
+					$("#clazz").text(data.student.studentInfo.classes.major.grade+data.student.studentInfo.classes.major.majorName+data.student.studentInfo.classes.classNumber+"班");
+					$("#association").text(data.student.association.name);
+					$("#position").text(data.student.position.positionName);
+					$("#address").text(data.student.studentInfo.address);
+					$("#explain").text(data.student.studentInfo.explains);
 					
 				}
 			});	

@@ -51,8 +51,8 @@
 		    <a href="javascript:;"><img src="//t.cn/RCzsdCq" class="layui-nav-img">${sessionScope.Student.studentInfo.name}</a>
 		    <dl class="layui-nav-child">
 		      <dd><a href="${pageContext.request.contextPath}/html/student-info.jsp?studentId=${sessionScope.Student.studentId}">修改信息</a></dd>
-		      <dd><a href="">安全管理</a></dd>
-		      <dd><a href="">退了</a></dd>
+			  <dd><a href="${pageContext.request.contextPath}/html/update-password.jsp?studentId=${sessionScope.Student.studentId}">安全管理</a></dd>
+			  <dd><a href="${pageContext.request.contextPath}/logoutStudent.action">退了</a></dd>
 		    </dl>
 		  </li>
       </c:if>

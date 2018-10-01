@@ -37,14 +37,16 @@
     </a>
     <ul class="layui-nav pp-nav layui-hide-xs">
       <li class="layui-nav-item layui-this"> 
-		  <a href="${pageContext.request.contextPath}/html/index.jsp"><i class="iconfont icon-jiaoliu"></i>主页</a> 
+		  <a href="${pageContext.request.contextPath}/html/index.jsp"><i class="iconfont icon-jiaoliu"></i>主页 </a> 
 	  </li>
+	  
 	  <c:if test="${not empty sessionScope.Student}">
 	  	<c:if test="${not empty sessionScope.Student.association}">
 	      <li class="layui-nav-item ">
 	        <a href="${pageContext.request.contextPath}/html/activity.jsp?associationId=${sessionScope.Student.association.associationId}"><i class="iconfont icon-iconmingxinganli"></i>我的社团</a>
 	      </li>
 	    </c:if>
+	   
 	    <c:if test="${empty sessionScope.Student.association}">
 	      <li class="layui-nav-item ">
 	        你还没有加入社团
@@ -70,8 +72,8 @@
 		    <a href="javascript:;"><img src="//t.cn/RCzsdCq" class="layui-nav-img">${sessionScope.Student.studentInfo.name}</a>
 		    <dl class="layui-nav-child">
 		      <dd><a href="${pageContext.request.contextPath}/html/student-info.jsp?studentId=${sessionScope.Student.studentId}">修改信息</a></dd>
-		      <dd><a href="">安全管理</a></dd>
-		      <dd><a href="">退了</a></dd>
+			  <dd><a href="${pageContext.request.contextPath}/html/update-password.jsp?studentId=${sessionScope.Student.studentId}">安全管理</a></dd>
+			  <dd><a href="${pageContext.request.contextPath}/logoutStudent.action">退了</a></dd>
 		    </dl>
 		  </li>
       </c:if>
