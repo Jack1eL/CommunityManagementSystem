@@ -282,8 +282,8 @@ function ajaxAssociation(curPage,statusId){
 					count++;
 				}
 				var str="";
-				if(data.associationList[i].explains.length>=5){
-					str=data.associationList[i].explains.substring(0,4)+"...";
+				if(data.associationList[i].explains.length>=15){
+					str=data.associationList[i].explains.substring(0,14)+"...";
 				}else{
 					str=data.associationList[i].explains.substring(0,data.associationList[i].explains.length);
 				}
