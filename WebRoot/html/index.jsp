@@ -84,8 +84,8 @@
 <div class="pp-case-header" >
  	<div class="layui-carousel" id="promo" style=" position: absolute; left:50%;top:50%;transform: translate(-50%, -50%);">
   	<div class="promo-list"  carousel-item="">
-    	<div><img src="../res/images/avatar/0.jpg" ></div>
-    	<div><img src="../res/images/avatar/6.jpg" ></div>
+    	<div><a href="${pageContext.request.contextPath}/html/basket.jsp"><img src="../res/images/avatar/0.jpg" ></a></div>
+    	<div><a href="${pageContext.request.contextPath}/html/basket.jsp"><img src="../res/images/avatar/6.jpg" ></a></div>
   	</div>
 </div>
 </div>

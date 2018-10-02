@@ -79,22 +79,22 @@
 <div style="text-align:center;">社团篮子</div>
 <div style="width: 100%; height: 300px;">
 	<div id="carousel" style="position: relative; display: block;">
-		<a href="#">
+		<a href="">
 			<img id="item-1" class="carousel-center" src="../res/images/avatar/0.jpg">
 		</a>
-		<a href="#">
+		<a href="">
 			<img id="item-2" src="../res/images/avatar/1.jpg">
 		</a>
-		<a href="#">
+		<a href="">
 			<img id="item-3" src="../res/images/avatar/2.jpg">
 		</a>
-		<a href="#">
+		<a href="">
 			<img id="item-4" src="../res/images/avatar/3.jpg">
 		</a>
-		<a href="#">
+		<a href="">
 			<img id="item-5" src="../res/images/avatar/4.jpg">
 		</a>
-		<a href="#">
+		<a href="">
 			<img id="item-6" src="../res/images/avatar/5.jpg">
 		</a>
 	</div>
