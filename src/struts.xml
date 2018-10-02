@@ -139,6 +139,12 @@
 		<action name="logoutStudent" class="com.peterpig.cms.action.StudentAction" method="logout">
 			<result name="logoutOK" type="redirect">/html/index.jsp</result>
 		</action>
+		<action name="deleteStudent" class="com.peterpig.cms.action.StudentAction" method="remove">
+			<result name="removeOK" type="json">
+				<param name="root">action</param>
+			</result>
+			<result name="removeFAIL" type="dispatcher">/html/error.jsp</result>
+		</action>
 		
 		<action name="findAllStudent" class="com.peterpig.cms.action.StudentAction" method="findAll">
 			<param name="pageSize">6</param>
@@ -159,7 +165,6 @@
 				<param name="root">action</param>
 			</result>
 		</action>
-	
 	</package>
 	
 	<package name="AssociatinGroup" namespace="/" extends="json-default,comm">
