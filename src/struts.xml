@@ -145,5 +145,19 @@
 			</result>
 			<result name="findbyidFAIL" type="dispatcher">/html/error.jsp</result>
 		</action>
+		<action name="getGroupStudent" class="com.peterpig.cms.action.StudentAction" method="getGroupStudent">
+			<result name="success" type="json">
+				<param name="root">action</param>
+			</result>
+		</action>
+	
+	</package>
+	
+	<package name="AssociatinGroup" namespace="/" extends="json-default,comm">
+		<action name="findGroupCountById" class="com.peterpig.cms.action.AssociationGroupAction" method="findGroupCountById">
+			<result name="success" type="json">
+				<param name="root">action</param>
+			</result>
+		</action>
 	</package>
 </struts>
