@@ -234,11 +234,11 @@ ajaxFindAssociationById(${param.associationId});
 
 //根据用户在搜索框中输入的信息搜索社团活动
 $("#seletAssociationActivity").click(function(){
-	ajaxAssociationActivity($("#keyWord").val(),1,"desc","activityName",${param.associationId},1);
+	ajaxAssociationActivity($("#keyWord").val(),1,"asc","activityName",${param.associationId},1);
 });
 
 //进入时请求所有的社团活动列表
-ajaxAssociationActivity("",1,"desc","activityName",${param.associationId},1);
+ajaxAssociationActivity("",1,"asc","activityName",${param.associationId},1);
 //点击首页
 $("#first").click(function(){
 	ajaxAssociationActivity("",1,$("#orderType").val(),$("#orderField").val(),${param.associationId},1);
