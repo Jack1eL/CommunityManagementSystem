@@ -2,8 +2,10 @@ package com.peterpig.cms.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
+import org.hibernate.transform.Transformers;
 import org.junit.Test;
 
 import com.peterpig.cms.bean.Student;
@@ -161,15 +163,11 @@ public class StudentDAOImpl extends OpenTransactionUtils implements StudentDAO {
 		List<Student> studentList=null;
 		super.openTransaction();
 		try{
-			String hql="select new Student(s.studentId as studentId,ag.groupId as groupId,si.name as name) from Student s"
-						+" left join s.group ag"
-						+" with s.association.associationId=ag.association.associationId"
-						+" left join s.studentInfo si"
-						+" with s.studentId=si.studentId"
-						+" where s.association.associationId=?"
-						+" group by studentId";
+			String hql="select new Student(s.studentId as studentId,ag.groupId as groupId,si.name as name) from Student s,AssociationGroup ag,StudentInfo si"
+						+" where s.group.groupId=ag.groupId and s.studentId=si.studentId and s.association.associationId=?"
+						+" group by s.studentId";
 			Query query=session.createQuery(hql);
-			query.setInteger(0,associationId);
+			query.setInteger(0, associationId);
 			studentList=query.list();
 			transaction.commit();
 		}catch(Exception e){

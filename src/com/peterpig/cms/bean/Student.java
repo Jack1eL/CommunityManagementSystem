@@ -20,21 +20,44 @@ public class Student {
 	/** 学生信息 */
 	private StudentInfo studentInfo;
 	
+	/**
+	 * 仅在查询组成员时作用
+	 */
+	private Integer groupId;
+	private String name;
+	
 	public Student(){
 		super();
 	}
 	
 	public Student(Integer studentId,Integer groupId,String name){
 		this.studentId=studentId;
-		this.group.setGroupId(groupId);
-		this.studentInfo.setName(name);
+		this.groupId=groupId;
+		this.name=name;
 	}
 	
 	/*----------------------------------GETTER AND SETTER------------------------------------------*/
 	
+	
 	public Integer getStudentId() {
 		return studentId;
 	}
+	public Integer getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(Integer groupId) {
+		this.groupId = groupId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public void setStudentId(Integer studentId) {
 		this.studentId = studentId;
 	}
