@@ -70,67 +70,12 @@
   <div class="layui-row layui-col-space15">
     <div class="layui-col-md12">
       <div class="pp-panel">
-        <div class="pp-panel-title pp-filter">
+      	<div class="pp-panel-title pp-filter">
           <a>成员列表</a>
         </div>
-		<div class="layui-collapse" lay-accordion="">
-  			<div class="layui-colla-item">
-    			<h2 class="layui-colla-title">一组成员</h2>
-    			<div class="layui-colla-content layui-show">
-      				<div class="layui-card">
-       					<div class="layui-card-body">
-							<ul>
-								<li><img src="../res/images/avatar/1.jpg">默默无闻的群员1</li>
-								<li><img src="../res/images/avatar/1.jpg">默默无闻的群员1</li>
-								<li><img src="../res/images/avatar/1.jpg">默默无闻的群员1</li>
-							</ul>
-        				</div>
-		  			</div>
-    			</div>
-  			</div>
-  			<div class="layui-colla-item">
-    			<h2 class="layui-colla-title">二组成员</h2>
-    			<div class="layui-colla-content">
-      				<div class="layui-card">
-       					<div class="layui-card-body">
-							<ul>
-								<li><img src="../res/images/avatar/1.jpg">默默无闻的群员1</li>
-								<li><img src="../res/images/avatar/1.jpg">默默无闻的群员1</li>
-								<li><img src="../res/images/avatar/1.jpg">默默无闻的群员1</li>
-							</ul>
-        				</div>
-      	  			</div>
-    			</div>
-  			</div>
-  			<div class="layui-colla-item">
-    			<h2 class="layui-colla-title">三组成员</h2>
-    			<div class="layui-colla-content">
-      				<div class="layui-card">
-       					<div class="layui-card-body">
-							<ul>
-								<li><img src="../res/images/avatar/1.jpg">默默无闻的群员1</li>
-								<li><img src="../res/images/avatar/1.jpg">默默无闻的群员1</li>
-								<li><img src="../res/images/avatar/1.jpg">默默无闻的群员1</li>
-							</ul>
-        				</div>
-      	  			</div>
-    			</div>
-  			</div>
-  			<div class="layui-colla-item">
-    			<h2 class="layui-colla-title">四组成员</h2>
-    			<div class="layui-colla-content">
-      				<div class="layui-card">
-       					<div class="layui-card-body">
-							<ul>
-								<li><img src="../res/images/avatar/1.jpg">默默无闻的群员1</li>
-								<li><img src="../res/images/avatar/1.jpg">默默无闻的群员1</li>
-								<li><img src="../res/images/avatar/1.jpg">默默无闻的群员1</li>
-							</ul>
-        				</div>
-      	  			</div>
-    			</div>
-  			</div>
-		</div>
+		<div class="layui-collapse" lay-accordion=""  id="showGroup">
+
+      	</div>
 	</div>
   </div>
 </div>
@@ -175,6 +120,45 @@ layui.use(['element', 'layer'], function(){
     layer.msg('展开状态：'+ data.show);
   });
 });
+var groupCount;    //因为我们要查询出学生在某个组，首先我们先记住这个社团的组数，在student中进行循环嵌套
+
+//ajaxAssociationGroup(${param.associationId});
+ajaxStudent(${param.associationId});
+//异步获取社团组的信息
+/*function ajaxAssociationGroup(associationId){
+	$.ajax({
+		type:"POST",
+		url:"${pageContext.request.contextPath}/findGroupCountById.action?association.associationId="+associationId,
+		dataType:"json",
+		processData:false,
+		success:function(data){
+			
+			for(var i=0;i<data.totalPage;i++){
+				$("#showGroup").append('<div class="layui-colla-item"><h2 class="layui-colla-title">'+(i+1)+'组成员</h2><div class="layui-colla-content layui-show"><div class="layui-card"><div class="layui-card-body"><ul name="showStudent"></ul></div></div></div></div>');
+			}
+			groupCount=data.totalPage;
+		}
+	});
+
+}*/
+
+//异步获取此社团的学生
+function ajaxStudent(associationId){
+	$.ajax({
+		type:"POST",
+		url:"${pageContext.request.contextPath}/getGroupStudent.action?association.associationId="+associationId,
+		dataType:"json",
+		processData:false,
+		success:function(data){
+			
+				$("[name='showStudent']").append('1');
+				
+			
+		}
+	});
+}
+
+
 </script>
 </body>
 </html>
