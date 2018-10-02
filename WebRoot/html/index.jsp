@@ -232,7 +232,11 @@ function ajaxAssociation(keyWord,curPage,orderType,orderField,statusId){
 			$("#orderField").val(data.orderField);
 			var code = '';
 			for(var i=0;i<data.associationList.length;i++){
-				code+='<li><a class="act-img" href="${pageContext.request.contextPath}/html/activity.jsp?associationId='+data.associationList[i].associationId+'"><img src="${pageContext.request.contextPath}/res/images/main.jpg"/><span class="act-num">'+"已有"+'<strong class="act-img-t">'+"n"+'</strong>'+"人关注"+'</span><span class="act-number">'+"##人"+'</span></a><div class="act-inner"><h4  href="activity.html" title="">'+data.associationList[i].name+'</h4><span style="color:#01aaed">'+data.associationList[i].explains+'</span><p></p></div></li>';
+				var img=data.associationList[i].image;
+				if(img==null){
+					img="main.jpg";
+				}
+				code+='<li><a class="act-img" href="${pageContext.request.contextPath}/html/activity.jsp?associationId='+data.associationList[i].associationId+'"><img src="${pageContext.request.contextPath}/res/images/association/'+img+'"/><span class="act-num">'+"已有"+'<strong class="act-img-t">'+"n"+'</strong>'+"人关注"+'</span><span class="act-number">'+"##人"+'</span></a><div class="act-inner"><h4  href="activity.html" title="">'+data.associationList[i].name+'</h4><span style="color:#01aaed">'+data.associationList[i].explains+'</span><p></p></div></li>';
 				$("#act-list").html(code);
 			}
 		}

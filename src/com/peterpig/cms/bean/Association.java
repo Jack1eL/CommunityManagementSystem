@@ -14,6 +14,8 @@ public class Association {
 	private String name;
 	/** 社团简介 */
 	private String explains;
+	
+	private String image;
 	private Set<AssociationGroup> associationGroup=new HashSet<AssociationGroup>();
 	/** 社团内的学生 */
 	private Set<Student> students=new HashSet<Student>();
@@ -57,6 +59,12 @@ public class Association {
 	}
 	public void setAssociationGroup(Set<AssociationGroup> associationGroup) {
 		this.associationGroup = associationGroup;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 	

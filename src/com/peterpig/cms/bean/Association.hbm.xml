@@ -34,6 +34,7 @@
 		</id>
 		<property name="name" column="name" type="string" />
 		<property name="explains" column="explains" type="string" />
+		<property name="image" column="image" type="string" />
 		<set name="students" table="student">
 			<key column="association_id" />
 			<one-to-many class="Student" />
