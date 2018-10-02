@@ -81,5 +81,16 @@ public class AssociationGroupBizImpl implements AssociationGroupBiz {
 		}
 		return count;
 	}
+	@Override
+	public Long getGroupCount(Integer associationId) {
+		Long count=0L;
+		try{
+			count=this.dao.findGroupCount(associationId);
+		}catch(Exception e){
+			System.out.println("------------biz层报错!-------------");
+			e.printStackTrace();
+		}
+		return count;
+	}
 
 }

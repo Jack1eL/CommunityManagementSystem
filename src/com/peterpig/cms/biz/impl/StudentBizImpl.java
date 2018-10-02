@@ -90,5 +90,15 @@ public class StudentBizImpl implements StudentBiz {
 		}
 		return student;
 	}
+	@Override
+	public List<Student> getGroupStudent(Integer associationId) {
+		List<Student> studentList=null;
+		try{
+			studentList=this.dao.findStudentByGroupId(associationId);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return studentList;
+	}
 
 }
