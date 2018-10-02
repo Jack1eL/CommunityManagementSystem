@@ -58,7 +58,7 @@
   </div>
 </div>
 
-<div class="layui-container pp-marginTop pp-user-main">
+<div class="layui-container pp-marginTop pp-user-main" style="width:80%;">
   <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
     <li class="layui-nav-item">
       <a href="${pageContext.request.contextPath}/html/user/home.jsp">
@@ -90,20 +90,21 @@
       <ul class="layui-tab-title" id="LAY_mine">
         <li class="layui-this">社团管理（<span id="assManage"></span>）<span id="redDot1" class="layui-badge-dot"></span></li>
         <li>活动审核（<span id="actManage"></span>）<span id="redDot2" class="layui-badge-dot"></span></li>
+        <li>学生管理</li>
       </ul>
       <div class="layui-tab-content" style="padding: 20px 0;">
         <div class="layui-tab-item layui-show">
           <!-- <ul class="mine-view jie-row" id="backAssociation">
             
           </ul> -->
-          <table class="layui-table" lay-skin="line">
+          <table class="layui-table">
 			  
 			  <thead>
 			    <tr>
-			      <th>社团名</th>
-			      <th>社团简介</th>
-			      <th>操作</th>
-			      <th>状态</th>
+			      <th width="15%" style="min-width:100px;">社团名</th>
+			      <th width="55%">社团简介</th>
+			      <th width="20%" style="min-width:100px;">操作</th>
+			      <th width="10%" style="min-width:100px;">状态</th>
 			    </tr> 
 			  </thead>
 			  <tbody id="backAssociation">
@@ -130,17 +131,17 @@
 		  <!-- <ul class="mine-view jie-row" id="activityList">
           	
           </ul> -->
-          <table class="layui-table" lay-skin="line">
+          <table class="layui-table">
 			  
 			  <thead>
 			    <tr>
-			      <th>活动名</th>
-			      <th>活动简介</th>
-			      <th>所属社团</th>
-			      <th>开始时间</th>
-			      <th>结束时间</th>
-			      <th>操作</th>
-			      <th>状态</th>
+			      <th width="15%" style="min-width:100px;">活动名</th>
+			      <th width="15%">活动简介</th>
+			      <th width="15%" style="min-width:100px;">所属社团</th>
+			      <th width="15%" style="min-width:100px;">开始时间</th>
+			      <th width="15%" style="min-width:100px;">结束时间</th>
+			      <th width="15%" style="min-width:100px;">操作</th>
+			      <th width="10%" style="min-width:100px;">状态</th>
 			    </tr> 
 			  </thead>
 			  <tbody id="actList">
@@ -159,6 +160,41 @@
 			  </div>
 			</div>
           <div id="LAY_page1"></div>
+        </div>
+        
+        <div class="layui-tab-item">
+        	<table class="layui-table">
+			  
+			  <thead>
+			    <tr>
+			      <th width="15%" style="min-width:100px;">学号</th>
+			      <th width="10%" style="min-width:100px;">姓名</th>
+			      <th width="5%" style="min-width:20px;">性别</th>
+			      <th width="15%" style="min-width:100px;">系部</th>
+			      <th width="15%" style="min-width:100px;">专业</th>
+			      <th width="5%" style="min-width:50px;">班级</th>
+			      <th width="15%" style="min-width:100px;">社团</th>
+			      <th width="10%" style="min-width:100px;">社团职务</th>
+			      <th width="10%" style="min-width:100px;">操作</th>
+			    </tr> 
+			  </thead>
+			  <tbody id="studentList">
+			  
+			  </tbody>
+		  </table>
+        	
+        	<!-- 分页区 -->
+			<div style="text-align: center;">
+			  <div class="laypage-main">
+			    <button id="first2">首页</button>
+			    <button id="prev2">上一页</button>
+			    <div class="layui-bg-green">第<span id="cur2"></span>页</div>
+			    <div class="layui-bg-green">共<span id="tot2"></span>页</div>
+			    <button id="next2">下一页</button>
+			    <button id="last2">尾页</button>
+			  </div>
+			</div>
+            <div id="LAY_page1"></div>
         </div>
       </div>
     </div>
@@ -187,6 +223,25 @@ layui.config({
 }).extend({
   pp: 'index'
 }).use('pp');
+
+//----------------学生列表相关
+ajaxStudent(1);
+//点击首页
+$("#first2").click(function(){
+	ajaxStudent(1);
+});
+//点击上一页
+$("#prev2").click(function(){
+	ajaxStudent(parseInt($("#cur2").text())-1);
+});
+//点击下一页
+$("#next2").click(function(){
+	ajaxStudent(parseInt($("#cur2").text())+1);
+});
+//点击尾页
+$("#last2").click(function(){
+	ajaxStudent($("#tot2").text());
+});
 
 //----------------社团活动列表相关
 //进入页面时异步请求第一页的社团活动列表
@@ -275,15 +330,15 @@ function ajaxAssociation(curPage,statusId){
 		success:function(data){
 			$("#backAssociation").empty();
 			$("#cur").text(data.curPage);		
-			$("#tot").text(data.totalPage);		
+			$("#tot").text(data.totalPage);
 			var count=0;
 			for(var i=0;i<data.associationList.length;i++){
 				if(data.associationList[i].status.statusId==2){
 					count++;
 				}
 				var str="";
-				if(data.associationList[i].explains.length>=15){
-					str=data.associationList[i].explains.substring(0,14)+"...";
+				if(data.associationList[i].explains.length>=35){
+					str=data.associationList[i].explains.substring(0,34)+"...";
 				}else{
 					str=data.associationList[i].explains.substring(0,data.associationList[i].explains.length);
 				}
@@ -348,6 +403,7 @@ function ajaxAssociationActivity(curPage){
 			$("#tot1").text(data.totalPage);
 			var count=0;
 			for(var i=0;i<data.list.length;i++){
+				
 				if(data.list[i].status.statusId==2){
 					count++;
 				}
@@ -402,6 +458,48 @@ function ajaxAssociationActivity(curPage){
 			
 		}
 	});	
+}
+
+
+function ajaxStudent(curPage){
+	$.ajax({
+		type:"POST",
+		url:"${pageContext.request.contextPath}/findAllStudent.action?keyWord="+""+"&curPage="+curPage+"&orderType=asc&orderField=username",
+		dataType:"json",
+		processData:false,
+		success:function(data){
+			$("#studentList").empty();
+			$("#cur2").text(data.curPage);		
+			$("#tot2").text(data.totalPage);
+			for(var i=0;i<data.list.length;i++){
+				var s=data.list[i];
+				var username=s.username!=null?s.username:"无";
+				var name=s.studentInfo.name!=null?s.studentInfo.name:"无";
+				var sex=s.studentInfo.sex!=null?s.studentInfo.sex:"无";
+				var depName=s.studentInfo.classes.major.department.departmentName!=null?s.studentInfo.classes.major.department.departmentName:"无";
+				var grade=s.studentInfo.classes.major.grade;
+				var majorName=s.studentInfo.classes.major.majorName!=null?s.studentInfo.classes.major.majorName:"无";
+				var classNum=s.studentInfo.classes.classNumber!=null?s.studentInfo.classes.classNumber:"无";
+				var associationName=s.association!=null?s.association.name:"无";
+				var positionName=s.position!=null?s.position.positionName:"无";
+				
+				$("#studentList").append(
+				'<tr>'+
+				'<td>'+username+'</td>'+
+				'<td>'+name+'</td>'+
+				'<td>'+sex+'</td>'+
+				'<td>'+depName+'</td>'+
+				'<td>'+grade+majorName+'</td>'+
+				'<td>'+classNum+'</td>'+
+				'<td>'+associationName+'</td>'+
+				'<td>'+positionName+'</td>'+
+				'<td><button class="layui-btn layui-btn-xs">编辑</button><button class="layui-btn layui-btn-xs">删除</button></td>'+
+				'</tr>');
+				
+			}
+		}
+		
+	});
 }
 
 </script>
