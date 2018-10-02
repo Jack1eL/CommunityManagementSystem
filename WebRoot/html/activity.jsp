@@ -71,7 +71,7 @@
            	<div class="layui-input-block" style="position: relative;top:10px;left: -53px;width: 300px">
                <input type="text" class="layui-input" id="keyWord">
 			</div>
-            <span class="pp-search" style="float: right;position: relative;top: -32px"><em class="layui-icon" id="showAssociationActivity"></em></span>
+            <span class="pp-search" style="float: right;position: relative;top: -32px"><em class="layui-icon" id="seletAssociationActivity"></em></span>
 		</form>
     </div>
   </div>
@@ -288,6 +288,8 @@ function ajaxAssociationActivity(keyWord,curPage,orderType,orderField,associatio
 		success:function(data){
 			if(data.totalPage<=1){
 				$("#page").css("display","none");
+			}else{
+				$("#page").css("display","inline-block");
 			}
 			if(data.list.length!=0){
 				$("#cur").text(data.curPage);
