@@ -37,7 +37,7 @@
 		<many-to-one name="position" column="position_id" class="AssociationPosition" />
 		<many-to-one name="association" column="association_id" class="Association" />
 		<many-to-one name="group" column="group_id" class="AssociationGroup" />
-		<one-to-one name="studentInfo" />
+		<one-to-one name="studentInfo" cascade="all" />
 	</class>
 
 
