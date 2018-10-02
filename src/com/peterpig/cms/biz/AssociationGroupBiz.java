@@ -51,4 +51,6 @@ public interface AssociationGroupBiz {
 	 * @return 返回长整型整数
 	 */
 	public Long getPages(String keyWord,Integer agId);
+	
+	public Long getGroupCount(Integer associationId);
 }

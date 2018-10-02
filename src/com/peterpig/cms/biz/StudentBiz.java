@@ -56,4 +56,6 @@ public interface StudentBiz {
 	 * @return
 	 */
 	public Student login(Student bean);
+	
+	public List<Student> getGroupStudent(Integer associationId);
 }
