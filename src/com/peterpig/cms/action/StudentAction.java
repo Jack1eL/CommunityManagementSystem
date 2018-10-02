@@ -159,7 +159,8 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
 		return result;
 	}
 	public String findAll(){
-		totalPage=(int)(Math.ceil(((double)studentBiz.getAllCount(keyWord, student.getStudentId()))/pageSize));
+		System.out.println(pageSize);
+		totalPage=(int)(Math.ceil(((double)studentBiz.getAllCount(keyWord, null))/pageSize));
 		if(curPage==null || curPage<1){
 			curPage=1;
 		}
@@ -171,7 +172,7 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
 		}
 		if(orderType=="asc" || orderType=="")
 			orderType="desc";
-		list = (ArrayList<Student>) studentBiz.findAllStudent(keyWord, curPage, pageSize, orderType, orderField, student.getStudentId());
+		list = (ArrayList<Student>) studentBiz.findAllStudent(keyWord, curPage, pageSize, orderType, orderField, null);
 		if(list != null)
 			result="findbyjspOK";
 		else
@@ -192,7 +193,7 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
 	 * 获取某个社团组成员
 	 * @return
 	 */
-	public String getGroupStudent(){
+	public String findGroupStudent(){
 		list=(ArrayList<Student>) this.studentBiz.getGroupStudent(student.getAssociation().getAssociationId());
 		if(list!=null){
 			message="查询成功!";
