@@ -187,4 +187,19 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
 		}
 		return result;
 	}
+	
+	/**
+	 * 获取某个社团组成员
+	 * @return
+	 */
+	public String getGroupStudent(){
+		list=(ArrayList<Student>) this.studentBiz.getGroupStudent(student.getAssociation().getAssociationId());
+		if(list!=null){
+			message="查询成功!";
+			return SUCCESS;
+		}else{
+			message="业务繁忙!";
+			return ERROR;
+		}
+	}
 }

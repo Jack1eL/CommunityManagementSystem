@@ -192,5 +192,20 @@ public class AssociationGroupAction extends ActionSupport implements
 		}	
 	}
 	
-
+	/**
+	 * 获取社团的组数
+	 * @return
+	 */
+	public String findGroupCountById(){
+		/** 获取查询出的总记录条数  */
+		totalPage=(int)(Math.ceil((double)this.biz.getGroupCount(ag.getAssociation().getAssociationId())));
+		if(totalPage!=null){
+			System.out.println(totalPage);
+			message="查询成功!";
+			return SUCCESS;
+		}else{
+			message="业务繁忙!";
+			return ERROR;
+		}
+	}
 }
