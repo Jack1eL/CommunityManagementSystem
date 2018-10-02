@@ -20,6 +20,16 @@ public class Student {
 	/** 学生信息 */
 	private StudentInfo studentInfo;
 	
+	public Student(){
+		super();
+	}
+	
+	public Student(Integer studentId,Integer groupId,String name){
+		this.studentId=studentId;
+		this.group.setGroupId(groupId);
+		this.studentInfo.setName(name);
+	}
+	
 	/*----------------------------------GETTER AND SETTER------------------------------------------*/
 	
 	public Integer getStudentId() {
