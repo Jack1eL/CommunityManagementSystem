@@ -7,5 +7,5 @@ import com.peterpig.cms.bean.AssociationGroup;
  *
  */
 public interface AssociationGroupDAO extends baseDAO<AssociationGroup, Integer> {
-
+	public Long findGroupCount(Integer associationId);
 }
