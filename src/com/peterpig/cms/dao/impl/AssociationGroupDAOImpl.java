@@ -129,5 +129,24 @@ public class AssociationGroupDAOImpl extends OpenTransactionUtils implements Ass
 		return null;
 	}
 
+	@Override
+	public Long findGroupCount(Integer associationId) {
+		Long count=0L;
+		super.openTransaction();
+		try{
+			String hql="select count(association_id) from AssociationGroup where association_id=?";
+			Query query=session.createQuery(hql);
+			query.setInteger(0, associationId);
+			
+			count=(Long) query.uniqueResult(); 
+			transaction.commit();
+		}catch(Exception e){
+			System.out.println("---------------daoImpl出现问题！--------------");
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		return count;
+	}
+
 
 }

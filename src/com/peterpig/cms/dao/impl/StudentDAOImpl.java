@@ -3,9 +3,9 @@ package com.peterpig.cms.dao.impl;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.junit.Test;
 
-import com.peterpig.cms.bean.Admin;
 import com.peterpig.cms.bean.Student;
 import com.peterpig.cms.dao.StudentDAO;
 import com.peterpig.cms.util.OpenTransactionUtils;
@@ -154,6 +154,24 @@ public class StudentDAOImpl extends OpenTransactionUtils implements StudentDAO {
 			e.printStackTrace();
 		}
 		return student;
+	}
+
+	@Override
+	public List<Student> findStudentByGroupId(Integer associationId) {
+		List<Student> studentList=null;
+		super.openTransaction();
+		try{
+			String sql="select s.student_id,s.username,s.password,s.position_id,s.group_id,s.association_id from Student as s where s.association_id=1";
+			SQLQuery query=session.createSQLQuery(sql).addEntity(Student.class);
+			//query.setInteger(0,associationId);
+			studentList=query.list();
+			transaction.commit();
+		}catch(Exception e){
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		return studentList;
+	
 	}
 
 }
