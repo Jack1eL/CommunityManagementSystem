@@ -69,9 +69,9 @@
     <div class="pp-column-right layui-hide-xs"> 
 		<form>
            	<div class="layui-input-block" style="position: relative;top:10px;left: -53px;width: 300px">
-               <input type="text" class="layui-input">
+               <input type="text" class="layui-input" id="keyWord">
 			</div>
-            <span class="pp-search" style="float: right;position: relative;top: -32px"><em class="layui-icon"></em></span>
+            <span class="pp-search" style="float: right;position: relative;top: -32px"><em class="layui-icon" id="showAssociationActivity"></em></span>
 		</form>
     </div>
   </div>
@@ -231,6 +231,11 @@ layui.config({
 
  
 ajaxFindAssociationById(${param.associationId});
+
+//根据用户在搜索框中输入的信息搜索社团活动
+$("#seletAssociationActivity").click(function(){
+	ajaxAssociationActivity($("#keyWord").val(),1,"desc","activityName",${param.associationId},1);
+});
 
 //进入时请求所有的社团活动列表
 ajaxAssociationActivity("",1,"desc","activityName",${param.associationId},1);
