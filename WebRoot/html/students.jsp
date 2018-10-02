@@ -122,25 +122,24 @@ layui.use(['element', 'layer'], function(){
 });
 var groupCount;    //因为我们要查询出学生在某个组，首先我们先记住这个社团的组数，在student中进行循环嵌套
 
-//ajaxAssociationGroup(${param.associationId});
+ajaxAssociationGroup(${param.associationId});
 ajaxStudent(${param.associationId});
 //异步获取社团组的信息
-/*function ajaxAssociationGroup(associationId){
+function ajaxAssociationGroup(associationId){
 	$.ajax({
 		type:"POST",
+		async: false,
 		url:"${pageContext.request.contextPath}/findGroupCountById.action?association.associationId="+associationId,
 		dataType:"json",
 		processData:false,
 		success:function(data){
-			
-			for(var i=0;i<data.totalPage;i++){
-				$("#showGroup").append('<div class="layui-colla-item"><h2 class="layui-colla-title">'+(i+1)+'组成员</h2><div class="layui-colla-content layui-show"><div class="layui-card"><div class="layui-card-body"><ul name="showStudent"></ul></div></div></div></div>');
-			}
+			for(var i=0;i<data.totalPage;i++)
+				$("#showGroup").append('<div class="layui-colla-item"><h2 class="layui-colla-title">'+(i+1)+'组成员</h2><div class="layui-colla-content layui-show"><div class="layui-card"><div class="layui-card-body"><ul id="showStudent'+(i+1)+'"></ul></div></div></div></div>');
 			groupCount=data.totalPage;
 		}
 	});
 
-}*/
+}
 
 //异步获取此社团的学生
 function ajaxStudent(associationId){
@@ -150,10 +149,12 @@ function ajaxStudent(associationId){
 		dataType:"json",
 		processData:false,
 		success:function(data){
-			
-				$("[name='showStudent']").append('1');
-				
-			
+			for(var i=0;i<groupCount;i++){
+				for(var j=0;j<data.list.length;j++){
+					if(data.list[j].groupId==(i+1))
+						$("#showStudent"+(i+1)).append('<li><img src="${pageContext.request.contextPath}/res/images/avatar/1.jpg">'+data.list[j].name+'</li>');
+				}
+			}
 		}
 	});
 }
