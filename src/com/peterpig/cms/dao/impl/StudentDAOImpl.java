@@ -66,14 +66,14 @@ public class StudentDAOImpl extends OpenTransactionUtils implements StudentDAO {
 		List<Student> list = null;
 		super.openTransaction();
 		try{
-			String hql = "from Student where username like ? and association.associationId like ? order by "+orderField+" "+orderType;
+			String hql = "from Student where username like ? order by "+orderField+" "+orderType;
 			Query query=session.createQuery(hql);
 			query.setString(0, "%"+keyWord+"%");
-			if(beanId==null){
-				query.setString(1, "");
-			}else{
-				query.setInteger(1, beanId);
-			}
+//			if(beanId==null){
+//				query.setString(1, "%%");
+//			}else{
+//				query.setInteger(1, beanId);
+//			}
 			query.setFirstResult((curPage-1)*pageSize);
 			query.setMaxResults(pageSize);
 			
@@ -105,14 +105,14 @@ public class StudentDAOImpl extends OpenTransactionUtils implements StudentDAO {
 		Long count = 0L;
 		super.openTransaction();
 		try{
-			String hql = "select count(studentId) from Student where username like ? and association.associationId like ? ";
+			String hql = "select count(studentId) from Student where username like ?";
 			Query query =  session.createQuery(hql);
-			query.setString(0,"#"+keyWord+"#" );
-			if(beanId==null){
-				query.setString(1, "");
-			}else{
-				query.setInteger(1, beanId);
-			}
+			query.setString(0,"%"+keyWord+"%" );
+//			if(beanId==null){
+//				query.setString(1, "%%");
+//			}else{
+//				query.setInteger(1, beanId);
+//			}
 			count=(Long)query.uniqueResult();
 		}catch(Exception e){
 			e.printStackTrace();
