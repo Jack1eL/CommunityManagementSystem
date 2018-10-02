@@ -161,9 +161,15 @@ public class StudentDAOImpl extends OpenTransactionUtils implements StudentDAO {
 		List<Student> studentList=null;
 		super.openTransaction();
 		try{
-			String sql="select s.student_id,s.username,s.password,s.position_id,s.group_id,s.association_id from Student as s where s.association_id=1";
-			SQLQuery query=session.createSQLQuery(sql).addEntity(Student.class);
-			//query.setInteger(0,associationId);
+			String hql="select new Student(s.studentId as studentId,ag.groupId as groupId,si.name as name) from Student s"
+						+" left join s.group ag"
+						+" with s.association.associationId=ag.association.associationId"
+						+" left join s.studentInfo si"
+						+" with s.studentId=si.studentId"
+						+" where s.association.associationId=?"
+						+" group by studentId";
+			Query query=session.createQuery(hql);
+			query.setInteger(0,associationId);
 			studentList=query.list();
 			transaction.commit();
 		}catch(Exception e){
