@@ -320,6 +320,21 @@ function ajaxDeleteActivity(activityId){
 	});	
 }
 
+//异步删除社团
+function ajaxDeleteStudent(studentId){
+	$.ajax({
+		type:"POST",
+		url:"${pageContext.request.contextPath}/deleteStudent.action?studentId="+studentId,
+		dataType:"json",
+		processData:false,
+		success:function(data){
+			setTimeout(function(){
+				window.location.reload();
+			}, 1000);
+		}
+	});	
+}
+
 //异步请求社团列表，进行分页查询
 function ajaxAssociation(curPage,statusId){
 	$.ajax({
@@ -343,9 +358,22 @@ function ajaxAssociation(curPage,statusId){
 					str=data.associationList[i].explains.substring(0,data.associationList[i].explains.length);
 				}
 				if(data.associationList[i].status.statusId==1 || data.associationList[i].status.statusId==3){
-					$("#backAssociation").append('<tr><td>'+data.associationList[i].name+'</td><td title="'+data.associationList[i].explains+'">' +str+ '</td><td><button class="layui-btn layui-btn-xs" id="del'+i+'" onClick="caonima(' +data.associationList[i].associationId+ ')">删除</button></td><td>'+data.associationList[i].status.statusName+'</td></tr>');
+					$("#backAssociation").append('<tr>'+
+				'<td>'+data.associationList[i].name+'</td>'+
+				'<td title="'+data.associationList[i].explains+'">' +str+ '</td>'+
+				'<td><button class="layui-btn layui-btn-xs" id="del'+i+'" onClick="caonima(' +data.associationList[i].associationId+ ')">删除</button></td>'+
+				'<td>'+data.associationList[i].status.statusName+'</td>'+
+				'</tr>');
 				}else{
-					$("#backAssociation").append('<tr><td>'+data.associationList[i].name+'</td><td title="'+data.associationList[i].explains+'">' +str+ '</td><td><button class="layui-btn layui-btn-xs" onClick="window.location.href=\'${pageContext.request.contextPath}/passAssociation.action?associationId='+data.associationList[i].associationId+'\'">通过</button><button class="layui-btn layui-btn-xs" onClick="window.location.href=\'${pageContext.request.contextPath}/refuseAssociation.action?associationId='+data.associationList[i].associationId+'&studentId='+data.associationList[i].students[i].studentId+'\'">拒绝</button><button class="layui-btn layui-btn-xs" id="del'+i+'" onClick="caonima(' +data.associationList[i].associationId+ ')">删除</button></td><td>'+data.associationList[i].status.statusName+'</td></tr>');
+					$("#backAssociation").append('<tr>'+
+					'<td>'+data.associationList[i].name+'</td>'+
+					'<td title="'+data.associationList[i].explains+'">' +str+ '</td>'+
+					'<td>'+
+					'<button class="layui-btn layui-btn-xs" onClick="window.location.href=\'${pageContext.request.contextPath}/passAssociation.action?associationId='+data.associationList[i].associationId+'\'">通过</button>'+
+					'<button class="layui-btn layui-btn-xs" onClick="window.location.href=\'${pageContext.request.contextPath}/refuseAssociation.action?associationId='+data.associationList[i].associationId+'&studentId='+data.associationList[i].students[i].studentId+'\'">拒绝</button>'+
+					'<button class="layui-btn layui-btn-xs" id="del'+i+'" onClick="caonima(' +data.associationList[i].associationId+ ')">删除</button></td>'+
+					'<td>'+data.associationList[i].status.statusName+'</td>'+
+					'</tr>');
 				}
 			}
 			if(count==0){
@@ -414,9 +442,28 @@ function ajaxAssociationActivity(curPage){
 					str=data.list[i].explains.substring(0,data.list[i].explains.length);
 				}
 				if(data.list[i].status.statusId==1 || data.list[i].status.statusId==3){
-					$("#actList").append('<tr><td>'+data.list[i].activityName+'</td><td title="'+data.list[i].explains+'">' +str+ '</td><td>'+data.list[i].association.name+'</td><td>' +data.list[i].activityBegin+ '</td><td>' +data.list[i].activityEnd+ '</td><td><button class="layui-btn layui-btn-xs" id="delA'+i+'" onClick="caonima(' +data.list[i].activityId+ ')">删除</button></td><td>'+data.list[i].status.statusName+'</td></tr>');
+					$("#actList").append('<tr>'+
+					'<td>'+data.list[i].activityName+'</td>'+
+					'<td title="'+data.list[i].explains+'">' +str+ '</td>'+
+					'<td>'+data.list[i].association.name+'</td>'+
+					'<td>' +data.list[i].activityBegin+ '</td>'+
+					'<td>' +data.list[i].activityEnd+ '</td>'+
+					'<td><button class="layui-btn layui-btn-xs" id="delA'+i+'" onClick="caonima(' +data.list[i].activityId+ ')">删除</button></td>'+
+					'<td>'+data.list[i].status.statusName+'</td>'+
+					'</tr>');
 				}else{
-					$("#actList").append('<tr><td>'+data.list[i].activityName+'</td><td title="'+data.list[i].explains+'">' +str+ '</td><td>'+data.list[i].association.name+'</td><td>' +data.list[i].activityBegin+ '</td><td>' +data.list[i].activityEnd+ '</td><td><button class="layui-btn layui-btn-xs" onClick="window.location.href=\'${pageContext.request.contextPath}/changeStatus.action?activityId='+data.list[i].activityId+'&status.statusId=1\'">通过</button><button class="layui-btn layui-btn-xs" onClick="window.location.href=\'${pageContext.request.contextPath}/changeStatus.action?activityId='+data.list[i].activityId+'&status.statusId=3\'">拒绝</button><button class="layui-btn layui-btn-xs" id="delA'+i+'" onClick="caonima(' +data.list[i].activityId+ ')">删除</button></td><td>'+data.list[i].status.statusName+'</td></tr>');
+					$("#actList").append('<tr>'+
+					'<td>'+data.list[i].activityName+'</td>'+
+					'<td title="'+data.list[i].explains+'">' +str+ '</td>'+
+					'<td>'+data.list[i].association.name+'</td>'+
+					'<td>' +data.list[i].activityBegin+ '</td>'+
+					'<td>' +data.list[i].activityEnd+ '</td>'+
+					'<td>'+
+					'<button class="layui-btn layui-btn-xs" onClick="window.location.href=\'${pageContext.request.contextPath}/changeStatus.action?activityId='+data.list[i].activityId+'&status.statusId=1\'">通过</button>'+
+					'<button class="layui-btn layui-btn-xs" onClick="window.location.href=\'${pageContext.request.contextPath}/changeStatus.action?activityId='+data.list[i].activityId+'&status.statusId=3\'">拒绝</button>'+
+					'<button class="layui-btn layui-btn-xs" id="delA'+i+'" onClick="caonima(' +data.list[i].activityId+ ')">删除</button></td>'+
+					'<td>'+data.list[i].status.statusName+'</td>'+
+					'</tr>');
 				}
 			}
 			if(count==0){
@@ -474,28 +521,91 @@ function ajaxStudent(curPage){
 			for(var i=0;i<data.list.length;i++){
 				var s=data.list[i];
 				var username=s.username!=null?s.username:"无";
-				var name=s.studentInfo.name!=null?s.studentInfo.name:"无";
-				var sex=s.studentInfo.sex!=null?s.studentInfo.sex:"无";
-				var depName=s.studentInfo.classes.major.department.departmentName!=null?s.studentInfo.classes.major.department.departmentName:"无";
-				var grade=s.studentInfo.classes.major.grade;
-				var majorName=s.studentInfo.classes.major.majorName!=null?s.studentInfo.classes.major.majorName:"无";
-				var classNum=s.studentInfo.classes.classNumber!=null?s.studentInfo.classes.classNumber:"无";
+				
+				var name;
+				var sex;
+				var depName;
+				var grade;
+				var majorName;
+				var classNum;
+				if(s.studentInfo!=null){
+					name=s.studentInfo.name!=null?s.studentInfo.name:"无";
+					sex=s.studentInfo.sex!=null?s.studentInfo.sex:"无";
+					if(s.studentInfo.classes!=null){
+						classNum=s.studentInfo.classes.classNumber!=null?s.studentInfo.classes.classNumber:"无";
+						if(s.studentInfo.classes.major!=null){
+							grade=s.studentInfo.classes.major.grade!=null?s.studentInfo.classes.major.grade:"无";
+							majorName=s.studentInfo.classes.major.majorName!=null?s.studentInfo.classes.major.majorName:"无";
+							if(s.studentInfo.classes.major.department!=null){
+								depName=s.studentInfo.classes.major.department.departmentName!=null?s.studentInfo.classes.major.department.departmentName:"无";
+							}
+						}else{
+							depName="无";
+						}
+					}else{
+						depName="无";
+						grade="无";
+						majorName="无";
+						classNum="无";
+					}
+				}else{
+					name="无";
+					sex="无";
+					depName="无";
+					grade="无";
+					majorName="无";
+					classNum="无";
+				}
 				var associationName=s.association!=null?s.association.name:"无";
 				var positionName=s.position!=null?s.position.positionName:"无";
+				var gradeAndMajorName=grade+majorName;
+				if(grade=="无" && majorName=="无")
+					gradeAndMajorName="无";
 				
-				$("#studentList").append(
-				'<tr>'+
-				'<td>'+username+'</td>'+
-				'<td>'+name+'</td>'+
-				'<td>'+sex+'</td>'+
-				'<td>'+depName+'</td>'+
-				'<td>'+grade+majorName+'</td>'+
-				'<td>'+classNum+'</td>'+
-				'<td>'+associationName+'</td>'+
-				'<td>'+positionName+'</td>'+
-				'<td><button class="layui-btn layui-btn-xs">编辑</button><button class="layui-btn layui-btn-xs">删除</button></td>'+
-				'</tr>');
+					$("#studentList").append(
+					'<tr>'+
+					'<td>'+username+'</td>'+
+					'<td>'+name+'</td>'+
+					'<td>'+sex+'</td>'+
+					'<td>'+depName+'</td>'+
+					'<td>'+gradeAndMajorName+'</td>'+
+					'<td>'+classNum+'</td>'+
+					'<td>'+associationName+'</td>'+
+					'<td>'+positionName+'</td>'+
+					'<td><a href="${pageContext.request.contextPath}" class="layui-btn layui-btn-xs">编辑</a>'+
+					'<button id="delB'+i+'" onClick="caonima(' +data.list[i].studentId+ ')" class="layui-btn layui-btn-xs">删除</button></td>'+
+					'</tr>');
 				
+			}
+			
+			//删除按钮的jqeury样式
+			for(var i=0;i<data.list.length;i++){
+			  $("#delB"+i).bind('click', function(){
+			    layer.open({
+			      type: 1,
+			      title:[''],
+			      content:'<div style="text-align:center;margin-top:40px;font-size:18px;">是否确认删除</div>',
+			      area: ['350px', '200px'],
+				  anim: 6,
+			      shadeClose: true, 
+				  btnAlign: 'c',
+			  	  btn: ['确认', '取消',]
+			  	  ,yes: function(index, layero){
+			    	ajaxDeleteStudent(getI);
+			    	layer.closeAll();
+					layer.msg("删除成功");
+			  	  }
+			  	  ,btn2: function(index, layero){
+			    	//按钮【按钮二】的回调
+			    
+			    	//return false 开启该代码可禁止点击该按钮关闭
+			  	  }
+			  	  ,cancel: function(){ 
+			    	//右上角关闭回调
+			    	//return false 开启该代码可禁止点击该按钮关闭
+			  	  }
+			    });
+			  });
 			}
 		}
 		
