@@ -8,6 +8,7 @@ import org.hibernate.SQLQuery;
 import org.hibernate.transform.Transformers;
 import org.junit.Test;
 
+import com.peterpig.cms.bean.Association;
 import com.peterpig.cms.bean.Student;
 import com.peterpig.cms.dao.StudentDAO;
 import com.peterpig.cms.util.OpenTransactionUtils;
@@ -176,6 +177,26 @@ public class StudentDAOImpl extends OpenTransactionUtils implements StudentDAO {
 		}
 		return studentList;
 	
+	}
+
+	@Override
+	public Student joinAssociation(Integer aid,Integer sid) {
+		Student ss=null;
+		super.openTransaction();
+		try {
+			Student s=(Student) session.get(Student.class, sid);
+			Association a=(Association) session.get(Association.class, aid);
+			s.setAssociation(a);
+			session.save(s);
+			session.save(a);
+			
+			transaction.commit();
+			ss=s;
+		} catch (Exception e) {
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		return ss;
 	}
 
 }
