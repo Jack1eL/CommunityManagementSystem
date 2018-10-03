@@ -170,11 +170,16 @@
         <div class="pp-panel-title"><h1>社团简介</h1></div>
 	  <div class="layui-col-md12">
       	<div class="layui-card">
-        	<div id="ass-explains" class="layui-card-body" style="margin-top:-20px;">
-          		
-        	</div>
+        	<div id="ass-explains" class="layui-card-body" style="margin-top:-20px;"></div>
       	</div>
+  	  	<div style="clear:both"></div>
+  	  	<c:if test="${sessionScope.Student!=null}">
+	  	  	<c:if test="${sessionScope.Student.association==null}">
+	      		<a href="${pageContext.request.contextPath}/joinAssociation.action?sid=${sessionScope.Student.studentId}&aid=${param.associationId}" class="layui-btn" style="background-color: #5FB878;">加入社团</a>
+	      	</c:if>
+      	</c:if>
   	  </div>
+  	  <div style="clear:both"></div>
       </div>
 	  <div class="pp-panel-main">
           <a href="${pageContext.request.contextPath}/html/students.jsp?associationId=${param.associationId}" class="pp-zanzhu layui-bg-green">查看所有成员</a>
