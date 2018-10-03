@@ -174,4 +174,14 @@
 			</result>
 		</action>
 	</package>
+	
+	<package name="Department" namespace="/" extends="json-default,comm">
+		<action name="findAllDepartment" class="com.peterpig.cms.action.DepartmentAction" method="findAll">
+			<param name="pageSize">9999</param>
+			<result name="findbyjspOK" type="json">
+				<param name="root">action</param>
+			</result>
+			<result name="findbyjspFAIL" type="dispatcher">/html/error.jsp</result>
+		</action>
+	</package>
 </struts>
