@@ -8,4 +8,6 @@ public interface StudentDAO extends baseDAO<Student, Integer> {
 	public Student findAllInfo(Student bean);
 	
 	public List<Student> findStudentByGroupId(Integer associationId);
+	
+	public Student joinAssociation(Integer aid,Integer sid);
 }
