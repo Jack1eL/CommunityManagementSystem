@@ -28,9 +28,18 @@
       <li class="layui-nav-item layui-this">
         <a href="${pageContext.request.contextPath}/html/index.jsp"><i class="iconfont icon-jiaoliu"></i>主页</a>
       </li>
-      <li class="layui-nav-item">
-        <a href=""><i class="iconfont icon-iconmingxinganli"></i>我的社团</a>
-      </li>
+      <c:if test="${not empty sessionScope.Student}">
+		  	<c:if test="${not empty sessionScope.Student.association}">
+		      <li class="layui-nav-item ">
+		        <a href="${pageContext.request.contextPath}/html/activity.jsp?associationId=${sessionScope.Student.association.associationId}"><i class="iconfont icon-iconmingxinganli"></i>我的社团</a>
+		      </li>
+		    </c:if>
+		    <c:if test="${empty sessionScope.Student.association}">
+		      <li class="layui-nav-item ">
+		        你还没有加入社团
+		      </li>
+		    </c:if>
+	      </c:if>
     </ul>
     
     <ul class="layui-nav pp-nav-user">
@@ -49,9 +58,9 @@
 	      <li class="layui-nav-item">
 		    <a href="javascript:;"><img src="//t.cn/RCzsdCq" class="layui-nav-img">${sessionScope.Student.studentInfo.name}</a>
 		    <dl class="layui-nav-child">
-		      <dd><a href="">修改信息</a></dd>
-		      <dd><a href="">安全管理</a></dd>
-		      <dd><a href="">退了</a></dd>
+		      <dd><a href="${pageContext.request.contextPath}/html/student-info.jsp?studentId=${sessionScope.Student.studentId}">修改信息</a></dd>
+				  <dd><a href="${pageContext.request.contextPath}/html/update-password.jsp?studentId=${sessionScope.Student.studentId}">安全管理</a></dd>
+				  <dd><a href="${pageContext.request.contextPath}/logoutStudent.action">退了</a></dd>
 		    </dl>
 		  </li>
       </c:if>
@@ -80,35 +89,31 @@
   <div class="layui-row layui-col-space15">
     <div class="layui-col-md8 content detail">
       <div class="pp-panel detail-box">
-        <h1 id="activityName"></h1>
+        <h1 id="activityName"></h1><button class="layui-btn" type="submit">立即添加</button>
         <div class="pp-detail-info">
-          <!-- <span class="layui-badge">审核中</span>
-          <div class="pp-admin-box" data-id="123">
-            <span class="layui-btn layui-btn-xs jie-admin" type="del">删除</span>
-            
-            <!-- <span class="layui-btn layui-btn-xs jie-admin" type="set" field="stick" rank="1">置顶</span>  -->
-            <!-- <span class="layui-btn layui-btn-xs jie-admin" type="set" field="stick" rank="0" style="background-color:#ccc;">取消置顶</span> -->
-            
+          
           </div>
         </div>
         <div class="detail-about">
           <a class="pp-avatar" href="${pageContext.request.contextPath}/user/home.html">
-            <img src="头像" alt="">
+            <img src="//t.cn/RCzsdCq" alt="">
           </a>
           <div class="pp-detail-user">
             <a href="${pageContext.request.contextPath}/user/home.html" class="pp-link">
-              <cite>用户名</cite>
+              <cite id="leader"></cite>
             </a>
-            <span id="time"></span>
           </div>
           <div class="detail-hits" id="LAY_jieAdmin" data-id="123">
-            <span class="layui-btn layui-btn-xs jie-admin" type="edit"><a href="add.html">编辑此贴</a></span>
+            <span id="time" class="layui-btn layui-btn-xs jie-admin"></span>
           </div>
+          
         </div>
+        
         <div class="detail-body photos">
           <p id="explains"></p>
+          
           <p>
-            <img src="${pageContext.request.contextPath}/res/images/fly.jpg" alt="##">
+            <%-- <img src="${pageContext.request.contextPath}/res/images/fly.jpg" alt="##"> --%>
           </p>
         </div>
       </div>
@@ -154,8 +159,12 @@ function ajaxActivity(activityId){
 			$("#activityName").text(data.associationActivity.activityName);
 			$("#explains").text(data.associationActivity.explains);
 			$("#asso").text(data.associationActivity.association.name);
-			$("#").text();
-			$("#").text();
+			for(var i=0;i<data.associationActivity.association.students.length;i++){
+				if(data.associationActivity.association.students[i].position.positionId==1){
+					$("#leader").text(data.associationActivity.association.students[i].studentInfo.name);
+				}
+			}
+			$("#time").text(data.associationActivity.activityBegin+"-"+data.associationActivity.activityEnd);
 		}
 	});
 	
