@@ -163,6 +163,7 @@
         </div>
         
         <div class="layui-tab-item">
+        	<a href="${pageContext.request.contextPath}/html/user/add-student.jsp" class="layui-btn">添加学生</a>
         	<table class="layui-table">
 			  
 			  <thead>
