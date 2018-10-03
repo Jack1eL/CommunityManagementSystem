@@ -33,6 +33,10 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
 	private String orderField;
 	/** 结果 */
 	private String result;
+	
+	private Integer sid;
+	
+	private Integer aid;
 	@Override
 	public Student getModel() {
 		// TODO Auto-generated method stub
@@ -104,7 +108,18 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
 	public void setResult(String result) {
 		this.result = result;
 	}
-	
+	public Integer getSid() {
+		return sid;
+	}
+	public void setSid(Integer sid) {
+		this.sid = sid;
+	}
+	public Integer getAid() {
+		return aid;
+	}
+	public void setAid(Integer aid) {
+		this.aid = aid;
+	}
 	
 	public String login(){
 		student = studentBiz.login(student); 
@@ -201,6 +216,21 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
 		}else{
 			message="业务繁忙!";
 			return ERROR;
+		}
+	}
+	
+	
+	public String joinAssociation(){
+		Student s=this.studentBiz.joinAssociation(aid, sid);
+		if(s!=null){
+			message="加入成功!";
+			Map<String,Object> session = ActionContext.getContext().getSession();
+			ActionContext.getContext().getValueStack().push(s);
+			session.put("Student", s);
+			return SUCCESS;
+		}else{
+			message="加入失败!";
+			return INPUT;
 		}
 	}
 }
