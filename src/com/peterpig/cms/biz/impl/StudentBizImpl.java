@@ -100,5 +100,16 @@ public class StudentBizImpl implements StudentBiz {
 		}
 		return studentList;
 	}
+	@Override
+	public Student joinAssociation(Integer aid, Integer sid) {
+		Student s=null;
+		try {
+			s=this.dao.joinAssociation(aid, sid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return s;
+	}
 
 }
