@@ -146,6 +146,11 @@
 			<result name="removeFAIL" type="dispatcher">/html/error.jsp</result>
 		</action>
 		
+		<action name="joinAssociation" class="com.peterpig.cms.action.StudentAction" method="joinAssociation">
+			<result name="success" type="redirect">/html/index.jsp</result>
+			<result name="input" type="dispatcher">/html/error.jsp</result>
+		</action>
+		
 		<action name="findAllStudent" class="com.peterpig.cms.action.StudentAction" method="findAll">
 			<param name="pageSize">6</param>
 			<result name="findbyjspOK" type="json">
