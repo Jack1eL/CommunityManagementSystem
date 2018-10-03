@@ -28,9 +28,19 @@
       <li class="layui-nav-item">
         <a href="${pageContext.request.contextPath}/html/index.jsp"><i class="iconfont icon-jiaoliu"></i>主页</a>
       </li>
-      <li class="layui-nav-item layui-this">
-        <a href="${pageContext.request.contextPath}/html/activity.jsp?associationId=${sessionScope.Student.association.associationId}"><i class="iconfont icon-iconmingxinganli"></i>我的社团</a>
-      </li>
+      <c:if test="${not empty sessionScope.Student}">
+	  	<c:if test="${not empty sessionScope.Student.association}">
+	      <li class="layui-nav-item ">
+	        <a href="${pageContext.request.contextPath}/html/activity.jsp?associationId=${sessionScope.Student.association.associationId}"><i class="iconfont icon-iconmingxinganli"></i>我的社团</a>
+	      </li>
+	    </c:if>
+	   
+	    <c:if test="${empty sessionScope.Student.association}">
+	      <li class="layui-nav-item ">
+	        你还没有加入社团
+	      </li>
+	    </c:if>
+      </c:if>
     </ul>
     
     <ul class="layui-nav pp-nav-user">

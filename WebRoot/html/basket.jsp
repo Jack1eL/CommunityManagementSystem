@@ -27,7 +27,7 @@
   .header{border-bottom: 1px solid #404553; border-right: 1px solid #404553;}
   </style>
 </head>
-<body class="pp-full" style="background-color:rgba(0,0,0,0.00)">
+<body class="pp-full" style="background-image:url(${pageContext.request.contextPath}/res/images/basket-bg.jpg);min-height:900px;">
 
 <div class="pp-header layui-bg-black">
   <div class="layui-container">
@@ -86,22 +86,27 @@
 		        <ul class="sortable__nav nav">
 		          <li>
 		            <a data-sjslink="all" class="nav__link">
-		              All
+		              	全部
 		            </a>
 		          </li>
 		          <li>
-		            <a data-sjslink="flatty" class="nav__link">
-		              Flatty
+		            <a data-sjslink="image" class="nav__link">
+		              	图片
 		            </a>
 		          </li>
 		          <li>
-		            <a data-sjslink="funny" class="nav__link">
-		              Funny
+		            <a data-sjslink="article" class="nav__link">
+		              	文章
+		            </a>
+		          </li>
+		          <li>
+		            <a data-sjslink="video" class="nav__link">
+		              	视频
 		            </a>
 		          </li>
 		        </ul>
 		        <div id="sortable" class="sjs-default">
-		          <div data-sjsel="flatty">
+		          <div data-sjsel="image">
 		            <div class="card">
 		              <img class="card__picture" src="${pageContext.request.contextPath}/res/images/gallery-1.jpg" alt="">
 		              <div class="card-infos">
@@ -112,7 +117,7 @@
 		              </div>
 		            </div>
 		          </div>
-		          <div data-sjsel="flatty">
+		          <div data-sjsel="image">
 		            <div class="card">
 		              <img class="card__picture" src="${pageContext.request.contextPath}/res/images/gallery-2.jpg" alt="">
 		              <div class="card-infos">
@@ -134,7 +139,7 @@
 		              </div>
 		            </div>
 		          </div>
-		          <div data-sjsel="flatty">
+		          <div data-sjsel="image">
 		            <div class="card">
 		              <img class="card__picture" src="${pageContext.request.contextPath}/res/images/avatar/0.jpg" alt="">
 		              <div class="card-infos">
@@ -145,7 +150,7 @@
 		              </div>
 		            </div>
 		          </div>
-		          <div data-sjsel="flatty">
+		          <div data-sjsel="image">
 		            <div class="card">
 		              <img class="card__picture" src="${pageContext.request.contextPath}/res/images/gallery-5.jpg" alt="">
 		              <div class="card-infos">
@@ -156,7 +161,7 @@
 		              </div>
 		            </div>
 		          </div>
-		          <div data-sjsel="funny">
+		          <div data-sjsel="image">
 		            <div class="card">
 		              <img class="card__picture" src="${pageContext.request.contextPath}/res/images/gallery-6.jpg" alt="">
 		              <div class="card-infos">
@@ -167,7 +172,7 @@
 		              </div>
 		            </div>
 		          </div>
-		          <div data-sjsel="flatty">
+		          <div data-sjsel="article">
 		            <div class="card">
 		              <img class="card__picture" src="${pageContext.request.contextPath}/res/images/gallery-7.jpg" alt="">
 		              <div class="card-infos">
@@ -178,7 +183,7 @@
 		              </div>
 		            </div>
 		          </div>
-		          <div data-sjsel="flatty">
+		          <div data-sjsel="video">
 		            <div class="card">
 		              <img class="card__picture" src="${pageContext.request.contextPath}/res/images/gallery-8.jpg" alt="">
 		              <div class="card-infos">
@@ -189,7 +194,7 @@
 		              </div>
 		            </div>
 		          </div>
-		          <div data-sjsel="funny">
+		          <div data-sjsel="article">
 		            <div class="card">
 		              <img class="card__picture" src="${pageContext.request.contextPath}/res/images/gallery-9.jpg" alt="">
 		              <div class="card-infos">
@@ -200,7 +205,7 @@
 		              </div>
 		            </div>
 		          </div>
-				  <div data-sjsel="funny">
+				  <div data-sjsel="article">
 		            <div class="card">
 		              <img class="card__picture" src="${pageContext.request.contextPath}/res/images/" alt="">
 		              <div class="card-infos">
