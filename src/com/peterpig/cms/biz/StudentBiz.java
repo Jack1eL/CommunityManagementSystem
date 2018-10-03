@@ -58,4 +58,6 @@ public interface StudentBiz {
 	public Student login(Student bean);
 	
 	public List<Student> getGroupStudent(Integer associationId);
+	
+	public Student joinAssociation(Integer aid,Integer sid);
 }
