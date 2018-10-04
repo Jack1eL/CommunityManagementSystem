@@ -130,7 +130,7 @@
 		          </div>
 		          <div data-sjsel="video">
 		            <div class="card">
-		              <video>vi</video>
+		              <video src="${pageContext.request.contextPath}/res/video/esports.mp4" controls="controls" style="max-height:200px"></video>
 		              <div class="card-infos">
 		                <h2 class="card__title">电竞社</h2>
 		                <p class="card__text">
