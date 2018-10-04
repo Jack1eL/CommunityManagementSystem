@@ -573,7 +573,7 @@ function ajaxStudent(curPage){
 					'<td>'+classNum+'</td>'+
 					'<td>'+associationName+'</td>'+
 					'<td>'+positionName+'</td>'+
-					'<td><a href="${pageContext.request.contextPath}" class="layui-btn layui-btn-xs">编辑</a>'+
+					'<td><a href="${pageContext.request.contextPath}/html/user/update-student.jsp?studentId='+s.studentId+'" class="layui-btn layui-btn-xs">编辑</a>'+
 					'<button id="delB'+i+'" onClick="caonima(' +data.list[i].studentId+ ')" class="layui-btn layui-btn-xs">删除</button></td>'+
 					'</tr>');
 				
