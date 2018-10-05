@@ -84,8 +84,8 @@
 <div class="pp-case-header" >
  	<div class="layui-carousel" id="promo" style=" position: absolute; left:50%;top:50%;transform: translate(-50%, -50%);">
   	<div class="promo-list"  carousel-item="">
-    	<div><a href="${pageContext.request.contextPath}/html/basket.jsp"><img src="../res/images/activity/basketball-act.jpg" ></a></div>
-    	<div><a href="${pageContext.request.contextPath}/html/basket.jsp"><img src="../res/images/activity/football-act.jpg" ></a></div>
+    	<div><a href="${pageContext.request.contextPath}/html/basket.jsp"><img src="${pageContext.request.contextPath}/res/images/activity/dance-act.jpg" ></a></div>
+    	<div><a href="${pageContext.request.contextPath}/html/basket.jsp"><img src="${pageContext.request.contextPath}/res/images/activity/football-act.jpg" ></a></div>
   	</div>
 </div>
 </div>
@@ -236,7 +236,7 @@ function ajaxAssociation(keyWord,curPage,orderType,orderField,statusId){
 				if(img==null){
 					img="main.jpg";
 				}
-				code+='<li><a class="act-img" href="${pageContext.request.contextPath}/html/activity.jsp?associationId='+data.associationList[i].associationId+'"><img src="${pageContext.request.contextPath}/res/images/association/'+img+'"/><span class="act-num">'+"已有"+'<strong class="act-img-t">'+"n"+'</strong>'+"人关注"+'</span><span class="act-number">'+"##人"+'</span></a><div class="act-inner"><h4  href="activity.html" title="">'+data.associationList[i].name+'</h4><span style="color:#01aaed">'+data.associationList[i].explains+'</span><p></p></div></li>';
+				code+='<li><a class="act-img" href="${pageContext.request.contextPath}/html/activity.jsp?associationId='+data.associationList[i].associationId+'"><img src="${pageContext.request.contextPath}/res/images/association/'+img+'"/><span class="act-number">'+Math.ceil(Math.random()*200)+'</span></a><div class="act-inner"><h4  href="activity.html" title="">'+data.associationList[i].name+'</h4><span style="color:#01aaed">'+data.associationList[i].explains+'</span><p></p></div></li>';
 				$("#act-list").html(code);
 			}
 		}

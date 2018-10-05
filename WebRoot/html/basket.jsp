@@ -117,17 +117,6 @@
 		              </div>
 		            </div>
 		          </div>
-		          <div data-sjsel="image">
-		            <div class="card">
-		              <img class="card__picture" src="${pageContext.request.contextPath}/res/images/activity/basketball-act.jpg" alt="">
-		              <div class="card-infos">
-		                <h2 class="card__title">篮球社</h2>
-		                <p class="card__text">
-		                  晚间的精彩SOLO赛，来自信工系和机电系的2位高手...
-		                </p>
-		              </div>
-		            </div>
-		          </div>
 		          <div data-sjsel="video">
 		            <div class="card">
 		              <video src="${pageContext.request.contextPath}/res/video/esports.mp4" controls="controls" style="max-height:200px"></video>
@@ -139,6 +128,18 @@
 		              </div>
 		            </div>
 		          </div>
+		          <div data-sjsel="image">
+		            <div class="card">
+		              <img class="card__picture" src="${pageContext.request.contextPath}/res/images/activity/basketball-act.jpg" alt="">
+		              <div class="card-infos">
+		                <h2 class="card__title">篮球社</h2>
+		                <p class="card__text">
+		                  晚间的精彩SOLO赛，来自信工系和机电系的2位高手...
+		                </p>
+		              </div>
+		            </div>
+		          </div>
+		          
 		          <div data-sjsel="image">
 		            <div class="card">
 		              <img class="card__picture" src="${pageContext.request.contextPath}/res/images/activity/java-act.jpg" alt="">
@@ -165,9 +166,9 @@
 		            <div class="card">
 		              <img class="card__picture" src="${pageContext.request.contextPath}/res/images/gallery-6.jpg" alt="">
 		              <div class="card-infos">
-		                <h2 class="card__title">Example 6</h2>
+		                <h2 class="card__title">摄影社</h2>
 		                <p class="card__text">
-		                  
+		                  略
 		                </p>
 		              </div>
 		            </div>
@@ -220,17 +221,6 @@
 　　 不知不觉，我也喜欢上了孤独。我的孤独和风月无关，和苦闷无关，有着浓浓的烟火气息，只是一种一个人独处时的欢喜。
 
 　　 我喜欢孤独，不与任何人说话，在一份静谧中安然地做自己喜欢的事。任身心徜徉，暂...
-		                </p>
-		              </div>
-		            </div>
-		          </div>
-				  <div data-sjsel="video">
-		            <div class="card">
-		              <video></video>
-		              <div class="card-infos">
-		                <h2 class="card__title">Example 9</h2>
-		                <p class="card__text">
-		                  
 		                </p>
 		              </div>
 		            </div>
