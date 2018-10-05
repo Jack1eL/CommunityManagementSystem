@@ -86,54 +86,23 @@
     </div>
   </div>
 </div>
-<div style="text-align:center;">社团篮子</div>
+<div style="text-align:center;"><h1>社团篮子</h1></div>
 <div style="width: 100%; height: 300px;">
 	<div id="carousel" style="position: relative; display: block;">
-		<a href="">
-			<img id="item-1" class="carousel-center" src="../res/images/avatar/0.jpg">
+		<a href="${pageContext.request.contextPath}/html/basket.jsp">
+			<img id="item-1" width="300" height="120" class="carousel-center" src="../res/images/activity/basketball-act.jpg">
 		</a>
-		<a href="">
-			<img id="item-2" src="../res/images/avatar/1.jpg">
+		<a href="${pageContext.request.contextPath}/html/basket.jsp">
+			<img id="item-2" width="300" height="120" src="../res/images/activity/basketball-act.jpg">
 		</a>
-		<a href="">
-			<img id="item-3" src="../res/images/avatar/2.jpg">
+		<a href="${pageContext.request.contextPath}/html/basket.jsp">
+			<img id="item-3" width="300" height="120" src="../res/images/activity/basketball-act.jpg">
 		</a>
-		<a href="">
-			<img id="item-4" src="../res/images/avatar/3.jpg">
-		</a>
-		<a href="">
-			<img id="item-5" src="../res/images/avatar/4.jpg">
-		</a>
-		<a href="">
-			<img id="item-6" src="../res/images/avatar/5.jpg">
+		<a href="${pageContext.request.contextPath}/html/basket.jsp">
+			<img id="item-4" width="300" height="120" src="../res/images/activity/basketball-act.jpg">
 		</a>
 	</div>
-	<div id="carousel1">
-		<span id="carousel1_span1">
-			<i>1这个项目很棒</i>
-			<p>12121</p>
-		</span>
-		<span>
-			<i>2这个项目很棒</i>
-			<p>12121</p>
-		</span>
-		<span>
-			<i>3这个项目很棒</i>
-			<p>12121</p>
-		</span>
-		<span>
-			<i>4这个项目很棒</i>
-			<p>12121</p>
-		</span>
-		<span>
-			<i>5这个项目很棒</i>
-			<p>12121</p>
-		</span>
-		<span>
-			<i>6这个项目很棒</i>
-			<p>12121</p>
-		</span>
-	</div>
+	
 </div>
 
 
@@ -183,10 +152,6 @@
       </div>
 	  <div class="pp-panel-main">
           <a href="${pageContext.request.contextPath}/html/students.jsp?associationId=${param.associationId}" class="pp-zanzhu layui-bg-green">查看所有成员</a>
-      </div>
-      <div class="pp-panel" style="padding: 20px 0; text-align: center;">
-        <img src="#群二维码#" style="max-width: 100%;" alt="QQ二维码">
-        <p style="position: relative; color: #666;">QQ扫码加群</p>
       </div>
     </div>
 	  

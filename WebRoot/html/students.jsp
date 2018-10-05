@@ -72,7 +72,7 @@
 <div class="pp-panel pp-column">
   <div class="layui-container">
     <ul class="layui-clear">
-      <li class="layui-hide-xs layui-this"><a href="/">###社团成员</a></li> 
+      <li class="layui-hide-xs layui-this"><a href="/">社团成员</a></li> 
     </ul>
   </div>
 </div>
